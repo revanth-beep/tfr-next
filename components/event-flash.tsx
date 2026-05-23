@@ -91,7 +91,6 @@ export function EventFlash({ event }: Props) {
             href={`/events/${event.slug}`}
             className="hidden sm:inline-flex items-center gap-1.5 text-[10px] font-bold tracking-[0.18em] uppercase px-3 py-1.5 transition-opacity hover:opacity-80"
             style={{ background: '#08080F', color: '#C8A84B' }}
-            onClick={dismiss}
           >
             Reserve Seat →
           </Link>
@@ -99,7 +98,6 @@ export function EventFlash({ event }: Props) {
             href={`/events/${event.slug}`}
             className="sm:hidden text-[11px] font-bold"
             style={{ color: 'rgba(8,8,15,0.65)' }}
-            onClick={dismiss}
           >
             Register →
           </Link>
