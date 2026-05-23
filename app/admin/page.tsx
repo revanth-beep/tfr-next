@@ -1,7 +1,8 @@
 import { prisma } from '@/lib/db'
 import { formatDateShort } from '@/lib/utils'
 import Link from 'next/link'
-import { deleteEvent, adminLogout } from '@/app/actions/admin'
+import { adminLogout } from '@/app/actions/admin'
+import { DeleteEventButton } from '@/components/admin/delete-event-button'
 
 export default async function AdminDashboard() {
   const events = await prisma.event.findMany({
@@ -189,20 +190,7 @@ export default async function AdminDashboard() {
                     >
                       Edit
                     </Link>
-                    <form action={deleteEvent.bind(null, event.id)}>
-                      <button
-                        type="submit"
-                        className="text-[11px] tracking-[0.1em] uppercase"
-                        style={{ color: 'rgba(255,100,100,0.5)' }}
-                        onClick={e => {
-                          if (!confirm(`Delete "${event.title}"? This cannot be undone.`)) {
-                            e.preventDefault()
-                          }
-                        }}
-                      >
-                        Delete
-                      </button>
-                    </form>
+                    <DeleteEventButton eventId={event.id} eventTitle={event.title} />
                   </div>
                 </div>
               )
