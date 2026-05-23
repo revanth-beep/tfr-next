@@ -5,6 +5,7 @@ import { EventFlash } from '@/components/event-flash'
 import { Footer } from '@/components/footer'
 import { Providers } from '@/components/providers'
 import { Loader } from '@/components/loader'
+import { PageTransition } from '@/components/page-transition'
 import { prisma } from '@/lib/db'
 
 export const metadata: Metadata = {
@@ -42,7 +43,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Providers>
           <Nav upcomingEvent={upcomingEvent} />
           <EventFlash event={upcomingEvent} />
-          <main>{children}</main>
+          <main>
+            <PageTransition>{children}</PageTransition>
+          </main>
           <Footer />
         </Providers>
         <script dangerouslySetInnerHTML={{ __html: PROGRESS_SCRIPT }} />
