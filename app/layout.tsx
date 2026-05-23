@@ -41,8 +41,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Loader />
         <div id="pb" aria-hidden="true" />
         <Providers>
-          <Nav upcomingEvent={upcomingEvent} />
-          <EventFlash event={upcomingEvent} />
+          {/* Fixed chrome: banner stacks above nav naturally */}
+          <div className="fixed top-0 left-0 right-0 z-50">
+            <EventFlash event={upcomingEvent} />
+            <Nav upcomingEvent={upcomingEvent} />
+          </div>
           <main>
             <PageTransition>{children}</PageTransition>
           </main>

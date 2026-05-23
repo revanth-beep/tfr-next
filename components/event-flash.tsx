@@ -30,17 +30,6 @@ export function EventFlash({ event }: Props) {
     return () => clearTimeout(t)
   }, [])
 
-  // Update CSS variable so Nav can offset itself
-  useEffect(() => {
-    document.documentElement.style.setProperty(
-      '--banner-h',
-      visible && !leaving ? `${BANNER_H}px` : '0px'
-    )
-    return () => {
-      document.documentElement.style.setProperty('--banner-h', '0px')
-    }
-  }, [visible, leaving])
-
   function dismiss() {
     setLeaving(true)
     sessionStorage.setItem('tfr-banner-dismissed', '1')
@@ -53,21 +42,19 @@ export function EventFlash({ event }: Props) {
     <div
       aria-label="Upcoming session announcement"
       style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
         height: `${BANNER_H}px`,
-        zIndex: 60,
         background: '#C8A84B',
         display: 'flex',
         alignItems: 'center',
+        overflow: 'hidden',
         animation: !visible
           ? 'none'
           : leaving
             ? 'bannerOut 0.38s cubic-bezier(0.4,0,1,1) forwards'
             : 'bannerIn 0.55s cubic-bezier(0.16,1,0.3,1) forwards',
         transform: visible ? undefined : 'translateY(-100%)',
+        // collapse height when not visible so it takes no space in the stack
+        maxHeight: visible && !leaving ? `${BANNER_H}px` : dismissed ? '0' : undefined,
       }}
     >
       <div className="container flex items-center justify-between gap-3" style={{ height: '100%' }}>

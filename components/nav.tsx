@@ -30,7 +30,7 @@ export function Nav({ upcomingEvent: _ }: NavProps) {
   }, [])
 
   return (
-    <header className="fixed left-0 right-0 z-50" style={{ top: 'var(--banner-h, 0px)' }}>
+    <header>
       <div
         className="transition-all duration-500 px-5 md:px-10"
         style={{
