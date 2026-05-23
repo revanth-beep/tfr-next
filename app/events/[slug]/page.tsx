@@ -263,8 +263,8 @@ export default async function EventPage({ params }: Props) {
               )}
             </div>
 
-            {/* Right — registration sidebar */}
-            <div className="lg:col-span-1">
+            {/* Right — registration sidebar (first on mobile, right column on desktop) */}
+            <div className="lg:col-span-1 order-first lg:order-none">
               <div className="sticky top-28">
                 <div
                   className="border p-8 flex flex-col gap-8"
