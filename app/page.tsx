@@ -141,16 +141,16 @@ export default async function HomePage() {
                       {eventDay}
                     </span>
                     <div>
-                      <p className="text-[11px] font-bold tracking-[0.28em] uppercase" style={{ color: 'rgba(8,8,15,0.75)' }}>{eventMonth}</p>
-                      <p className="text-[11px] tracking-[0.18em] mt-0.5" style={{ color: 'rgba(8,8,15,0.6)' }}>{eventYear}</p>
+                      <p className="text-[13px] font-bold tracking-[0.22em] uppercase" style={{ color: 'rgba(8,8,15,0.75)' }}>{eventMonth}</p>
+                      <p className="text-[12px] tracking-[0.14em] mt-0.5" style={{ color: 'rgba(8,8,15,0.6)' }}>{eventYear}</p>
                     </div>
                   </div>
                   {/* Desktop: vertical column */}
                   <div className="hidden md:flex flex-col items-center justify-center text-center px-10"
                     style={{ minWidth: 184, minHeight: 260 }}>
-                    <p className="text-[10px] font-bold tracking-[0.32em] uppercase mb-3" style={{ color: 'rgba(8,8,15,0.75)' }}>{eventMonth}</p>
+                    <p className="text-[12px] font-bold tracking-[0.26em] uppercase mb-3" style={{ color: 'rgba(8,8,15,0.75)' }}>{eventMonth}</p>
                     <p className="font-display font-bold" style={{ fontSize: '80px', lineHeight: 0.88, color: '#08080F' }}>{eventDay}</p>
-                    <p className="text-[10px] tracking-[0.2em] mt-3" style={{ color: 'rgba(8,8,15,0.6)' }}>{eventYear}</p>
+                    <p className="text-[12px] tracking-[0.16em] mt-3" style={{ color: 'rgba(8,8,15,0.6)' }}>{eventYear}</p>
                   </div>
                 </div>
 

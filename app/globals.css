@@ -81,18 +81,6 @@ body::before {
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: #C8A84B;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.kicker::before {
-  content: '';
-  width: 28px;
-  height: 1.5px;
-  background: #C8A84B;
-  opacity: 0.7;
-  flex-shrink: 0;
 }
 
 /* ─── Buttons ───────────────────────────────────────────────────────────────── */
