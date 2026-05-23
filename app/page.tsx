@@ -7,7 +7,7 @@ import { GoogleRegisterButton } from '@/components/google-register-button'
 async function getFeaturedEvent() {
   try {
     return await prisma.event.findFirst({
-      where: { isPublished: true, isFeatured: true },
+      where: { isPublished: true, isFeatured: true, date: { gte: new Date() } },
       include: { _count: { select: { registrations: true } } },
       orderBy: { date: 'asc' },
     })

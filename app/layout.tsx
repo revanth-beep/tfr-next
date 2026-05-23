@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 async function getUpcomingEvent() {
   try {
     const event = await prisma.event.findFirst({
-      where: { isPublished: true, isFeatured: true },
+      where: { isPublished: true, isFeatured: true, date: { gte: new Date() } },
       select: { title: true, slug: true, date: true },
       orderBy: { date: 'asc' },
     })
