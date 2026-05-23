@@ -82,9 +82,16 @@ export default async function EventsPage() {
       {/* ── Upcoming events ────────────────────────────────── */}
       <section className="section-pad">
         <div className="container">
-          <p className="kicker mb-10">
-            {upcoming.length > 0 ? `${upcoming.length} upcoming` : 'Upcoming sessions'}
-          </p>
+          <div className="flex items-baseline gap-4 mb-10">
+            <h2 className="heading-section" style={{ fontSize: 'clamp(24px, 3vw, 36px)', color: '#F2EFE8' }}>
+              Upcoming
+            </h2>
+            {upcoming.length > 0 && (
+              <span className="text-[11px] tracking-[0.12em] uppercase" style={{ color: 'rgba(242,239,232,0.3)' }}>
+                {upcoming.length} session{upcoming.length !== 1 ? 's' : ''}
+              </span>
+            )}
+          </div>
 
           {upcoming.length > 0 ? (
             <div className="flex flex-col gap-5">
@@ -189,9 +196,14 @@ export default async function EventsPage() {
       {past.length > 0 && (
         <section className="section-pad" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
           <div className="container">
-            <p className="kicker mb-10">
-              {past.length} past {past.length === 1 ? 'session' : 'sessions'}
-            </p>
+            <div className="flex items-baseline gap-4 mb-10">
+              <h2 className="heading-section" style={{ fontSize: 'clamp(24px, 3vw, 36px)', color: '#F2EFE8' }}>
+                Past Sessions
+              </h2>
+              <span className="text-[11px] tracking-[0.12em] uppercase" style={{ color: 'rgba(242,239,232,0.3)' }}>
+                {past.length} session{past.length !== 1 ? 's' : ''}
+              </span>
+            </div>
 
             <div className="flex flex-col gap-4">
               {past.map(event => (
