@@ -111,16 +111,6 @@ export function EventForm({ event }: EventFormProps) {
         </div>
 
         <div>
-          <label htmlFor="recordingUrl" className="admin-label">Instagram recap URL (after the event)</label>
-          <input
-            id="recordingUrl" name="recordingUrl" type="url"
-            defaultValue={(event as any)?.recordingUrl ?? ''}
-            className="admin-input"
-            placeholder="https://instagram.com/p/..."
-          />
-        </div>
-
-        <div>
           <label htmlFor="topic" className="admin-label">Topic / Track</label>
           <input
             id="topic" name="topic" type="text"
@@ -271,6 +261,27 @@ export function EventForm({ event }: EventFormProps) {
       </div>
 
       {/* Visibility */}
+      <div
+        className="border p-6 flex flex-col gap-4"
+        style={{ borderColor: 'rgba(255,255,255,0.08)' }}
+      >
+        <h3 className="text-[11px] tracking-[0.2em] uppercase" style={{ color: '#C8A84B' }}>
+          Post-session
+        </h3>
+        <p className="text-[12px]" style={{ color: 'rgba(242,239,232,0.4)' }}>
+          Add the recording link once the session is completed. Attendees on the event page will see a "Watch recording" button instead of the registration form.
+        </p>
+        <div>
+          <label htmlFor="recordingUrl" className="admin-label">Recording / Watch link</label>
+          <input
+            id="recordingUrl" name="recordingUrl" type="url"
+            defaultValue={(event as any)?.recordingUrl ?? ''}
+            className="admin-input"
+            placeholder="https://youtube.com/watch?v=… or https://vimeo.com/…"
+          />
+        </div>
+      </div>
+
       <div
         className="border p-6 flex flex-col gap-4"
         style={{ borderColor: 'rgba(255,255,255,0.08)' }}

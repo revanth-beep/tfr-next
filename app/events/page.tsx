@@ -202,6 +202,11 @@ export default async function EventsPage() {
                               <span>{seats === 0 ? 'Join waitlist' : 'Explore The Event'}</span>
                               <span>→</span>
                             </span>
+                          ) : event.recordingUrl ? (
+                            <span className="btn btn-ghost text-[10px]" style={{ pointerEvents: 'none' }}>
+                              <span>Watch recording</span>
+                              <span>↗</span>
+                            </span>
                           ) : (
                             <span className="text-[10px] tracking-[0.16em] uppercase"
                               style={{ color: 'rgba(242,239,232,0.25)' }}>

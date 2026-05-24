@@ -38,13 +38,14 @@ export default async function EventPage({ params }: Props) {
 
   const descParas = event.description.split('\n\n').filter(Boolean)
 
+  const isPast     = new Date(event.date) < new Date()
   const registered = event._count.registrations
   const seatsLeft  = getSeatsRemaining(event.totalSeats, registered)
   const full       = seatsLeft <= 0
   const pct        = Math.round((registered / event.totalSeats) * 100)
 
   let isRegistered = false
-  if (session?.user?.id) {
+  if (!isPast && session?.user?.id) {
     const reg = await prisma.registration.findUnique({
       where: { eventId_userId: { eventId: event.id, userId: session.user.id } },
     })
@@ -93,7 +94,7 @@ export default async function EventPage({ params }: Props) {
               { icon: '🕐', label: `${formatTime(new Date(event.date))} IST` },
               { icon: '💻', label: event.format },
               { icon: '⏱',  label: `${event.duration} min` },
-              { icon: '💺', label: full ? 'Full' : `${seatsLeft} seats left` },
+              ...(!isPast ? [{ icon: '💺', label: full ? 'Full' : `${seatsLeft} seats left` }] : [{ icon: '👥', label: `${registered} attended` }]),
             ].map(({ icon, label }) => (
               <div key={label} className="flex items-center gap-2">
                 <span style={{ fontSize: '13px' }}>{icon}</span>
@@ -315,83 +316,93 @@ export default async function EventPage({ params }: Props) {
               )}
             </div>
 
-            {/* Right — registration sidebar (first on mobile, right column on desktop) */}
+            {/* Right — sidebar */}
             <div className="lg:col-span-1 order-first lg:order-none">
               <div className="sticky top-28">
-                <div
-                  className="border p-8 flex flex-col gap-8"
-                  style={{
-                    borderColor: 'rgba(200,168,75,0.2)',
-                    background: 'rgba(200,168,75,0.03)',
-                  }}
-                >
-                  <div>
-                    <p
-                      className="text-[10px] tracking-[0.22em] uppercase mb-3"
-                      style={{ color: '#C8A84B' }}
-                    >
-                      Reserve your seat
-                    </p>
 
-                    {/* Seat bar */}
-                    <div className="mb-4">
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-[13px]" style={{ color: 'rgba(242,239,232,0.55)' }}>
-                          {seatsLeft} of {event.totalSeats} seats remaining
-                        </span>
-                        {seatsLeft <= 5 && seatsLeft > 0 && (
-                          <span
-                            className="text-[9px] tracking-[0.18em] uppercase px-2 py-0.5"
-                            style={{
-                              background: 'rgba(200,168,75,0.12)',
-                              color: '#C8A84B',
-                              border: '1px solid rgba(200,168,75,0.25)',
-                            }}
-                          >
-                            Almost full
-                          </span>
-                        )}
-                      </div>
-                      <div
-                        className="h-1 w-full rounded-full overflow-hidden"
-                        style={{ background: 'rgba(255,255,255,0.07)' }}
-                      >
-                        <div
-                          className="h-full"
-                          style={{
-                            width: `${pct}%`,
-                            background: pct > 80 ? '#C84B4B' : '#C8A84B',
-                          }}
-                        />
-                      </div>
+                {isPast ? (
+                  /* ── Completed: recording panel */
+                  <div
+                    className="border p-8 flex flex-col gap-6"
+                    style={{ borderColor: 'rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.02)' }}
+                  >
+                    <div>
+                      <span className="text-[9px] tracking-[0.24em] uppercase px-2.5 py-1 mb-4 inline-block"
+                        style={{ color: 'rgba(242,239,232,0.35)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                        Session concluded
+                      </span>
+                      <p className="text-[13px] leading-relaxed mt-3" style={{ color: 'rgba(242,239,232,0.4)' }}>
+                        {formatDate(new Date(event.date))} · {event.duration} min · {registered} attended
+                      </p>
                     </div>
 
-                    <div className="flex items-center gap-2 flex-wrap mb-1">
-                      <span className="text-[12px]" style={{ color: 'rgba(242,239,232,0.45)' }}>
-                        {formatDate(new Date(event.date))} at {formatTime(new Date(event.date))} IST
+                    {event.recordingUrl ? (
+                      <a
+                        href={event.recordingUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-ghost w-full justify-center"
+                      >
+                        <span>Watch recording</span>
+                        <span>↗</span>
+                      </a>
+                    ) : (
+                      <p className="text-[12px] font-serif italic" style={{ color: 'rgba(242,239,232,0.28)' }}>
+                        Recording not available.
+                      </p>
+                    )}
+                  </div>
+                ) : (
+                  /* ── Upcoming: registration sidebar */
+                  <div
+                    className="border p-8 flex flex-col gap-8"
+                    style={{ borderColor: 'rgba(200,168,75,0.2)', background: 'rgba(200,168,75,0.03)' }}
+                  >
+                    <div>
+                      <p className="text-[10px] tracking-[0.22em] uppercase mb-3" style={{ color: '#C8A84B' }}>
+                        Reserve your seat
+                      </p>
+
+                      <div className="mb-4">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-[13px]" style={{ color: 'rgba(242,239,232,0.55)' }}>
+                            {seatsLeft} of {event.totalSeats} seats remaining
+                          </span>
+                          {seatsLeft <= 5 && seatsLeft > 0 && (
+                            <span className="text-[9px] tracking-[0.18em] uppercase px-2 py-0.5"
+                              style={{ background: 'rgba(200,168,75,0.12)', color: '#C8A84B', border: '1px solid rgba(200,168,75,0.25)' }}>
+                              Almost full
+                            </span>
+                          )}
+                        </div>
+                        <div className="h-1 w-full rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.07)' }}>
+                          <div className="h-full" style={{ width: `${pct}%`, background: pct > 80 ? '#C84B4B' : '#C8A84B' }} />
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 flex-wrap mb-1">
+                        <span className="text-[12px]" style={{ color: 'rgba(242,239,232,0.45)' }}>
+                          {formatDate(new Date(event.date))} at {formatTime(new Date(event.date))} IST
+                        </span>
+                      </div>
+                      <span className="inline-block text-[11px] tracking-[0.14em] uppercase px-2 py-1"
+                        style={{ background: 'rgba(255,255,255,0.05)', color: 'rgba(242,239,232,0.5)' }}>
+                        {event.format} · {event.duration} min
                       </span>
                     </div>
-                    <span
-                      className="inline-block text-[11px] tracking-[0.14em] uppercase px-2 py-1"
-                      style={{
-                        background: 'rgba(255,255,255,0.05)',
-                        color: 'rgba(242,239,232,0.5)',
-                      }}
-                    >
-                      {event.format} · {event.duration} min
-                    </span>
-                  </div>
 
-                  <RegistrationForm
-                    eventId={event.id}
-                    isLoggedIn={!!session}
-                    isRegistered={isRegistered}
-                    isFull={full}
-                    tracks={event.tracks ? event.tracks.split(',').map(t => t.trim()).filter(Boolean) : []}
-                    userName={session?.user?.name ?? undefined}
-                    userEmail={session?.user?.email ?? undefined}
-                  />
-                </div>
+                    <RegistrationForm
+                      eventId={event.id}
+                      isLoggedIn={!!session}
+                      isRegistered={isRegistered}
+                      isFull={full}
+                      tracks={event.tracks ? event.tracks.split(',').map(t => t.trim()).filter(Boolean) : []}
+                      userName={session?.user?.name ?? undefined}
+                      userEmail={session?.user?.email ?? undefined}
+                    />
+                  </div>
+                )}
+
               </div>
             </div>
           </div>
