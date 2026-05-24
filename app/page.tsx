@@ -32,7 +32,7 @@ export default async function HomePage() {
       <section className="relative overflow-hidden" style={{ background: '#09162A' }}>
 
         {/* ── Hero copy */}
-        <div className="container relative z-10 pt-8 pb-28 md:pt-16 md:pb-24">
+        <div className="container relative z-10 pt-14 pb-28 md:pt-24 md:pb-24">
           <div className="flex flex-col gap-5 md:gap-8">
             <p className="kicker">Live Sessions · By Application Only</p>
 

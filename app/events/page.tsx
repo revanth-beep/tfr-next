@@ -42,7 +42,7 @@ export default async function EventsPage() {
           background: 'radial-gradient(ellipse 60% 60% at 50% 0%, rgba(200,168,75,0.07) 0%, transparent 70%)',
         }} />
 
-        <div className="container relative z-10 pt-36 pb-20 md:pt-44 md:pb-24">
+        <div className="container relative z-10 pt-14 pb-20 md:pt-24 md:pb-24">
           <p className="kicker mb-6">The Insider Series</p>
           <h1 className="heading-display mb-5" style={{ fontSize: 'clamp(40px,6vw,80px)', color: '#F2EFE8' }}>
             Sessions
@@ -55,7 +55,7 @@ export default async function EventsPage() {
       </section>
 
       {/* ── Upcoming sessions ─────────────────────────────────── */}
-      <section style={{ paddingTop: '80px', paddingBottom: upcoming.length ? '80px' : '0' }}>
+      <section style={{ paddingTop: 'clamp(40px, 8vw, 80px)', paddingBottom: upcoming.length ? 'clamp(40px, 8vw, 80px)' : '0' }}>
         <div className="container">
 
           {upcoming.length === 0 && past.length === 0 ? (
@@ -167,14 +167,14 @@ export default async function EventsPage() {
           style={{
             borderTop: '1px solid rgba(124,185,217,0.15)',
             background: 'rgba(10,18,40,0.6)',
-            paddingTop: '72px',
-            paddingBottom: '100px',
+            paddingTop: 'clamp(40px, 8vw, 72px)',
+            paddingBottom: 'clamp(48px, 10vw, 100px)',
           }}
         >
           <div className="container">
 
             {/* Section header */}
-            <div className="flex items-end justify-between mb-10 pb-6"
+            <div className="flex items-end justify-between mb-6 md:mb-10 pb-5 md:pb-6"
               style={{ borderBottom: '1px solid rgba(124,185,217,0.15)' }}>
               <div>
                 <h2 className="font-display font-bold"
