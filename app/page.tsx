@@ -36,22 +36,15 @@ export default async function HomePage() {
             <p className="kicker">Live Sessions · By Application Only</p>
 
             <h1 className="heading-display" style={{ fontSize: 'clamp(44px,8vw,108px)', color: '#F2EFE8' }}>
-              <span className="block">The room you</span>
-              <span className="block">were never</span>
-              <span className="block" style={{ color: '#C8A84B' }}>told about.</span>
+              <span className="block">Practitioner-led.</span>
+              <span className="block">Community-driven.</span>
+              <span className="block" style={{ color: '#C8A84B' }}>Built for serious finance careers.</span>
             </h1>
 
             <p className="font-serif italic" style={{
               fontSize: 'clamp(15px,1.7vw,20px)', color: 'rgba(242,239,232,0.6)', lineHeight: 1.65,
             }}>
-              Practitioner-led. Community-driven.<br />
-              Built for serious finance careers.
-            </p>
-
-            <p style={{ fontSize: 'clamp(13px,1.2vw,15px)', color: 'rgba(242,239,232,0.45)', lineHeight: 1.8, maxWidth: '420px' }}>
-              The most valuable knowledge in finance is never written down.
-              It lives inside people. It moves through proximity.
-              It rarely reaches most people.
+              The room you were never told about. Now open.
             </p>
 
             <div className="flex flex-wrap gap-3 md:gap-4">
@@ -166,6 +159,28 @@ export default async function HomePage() {
               </p>
             </div>
           )}
+        </div>
+      </section>
+
+      {/* ═══ WHO IT IS FOR ═════════════════════════════════════════════════════ */}
+      <section className="section-pad" style={{ background: '#0F1E37', borderTop: '1px solid rgba(200,168,75,0.1)', borderBottom: '1px solid rgba(200,168,75,0.07)' }}>
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-start">
+            <div>
+              <p className="kicker mb-8">Who it is for</p>
+              <h2 className="heading-section" style={{ fontSize: 'clamp(26px,4.5vw,58px)', color: '#F2EFE8', lineHeight: 1.05 }}>
+                For those who have done the work — and are ready for{' '}
+                <em className="font-serif font-normal italic" style={{ color: '#C8A84B' }}>
+                  what the work doesn't teach.
+                </em>
+              </h2>
+            </div>
+            <div style={{ paddingTop: '8px' }}>
+              <p style={{ fontSize: 'clamp(14px,1.4vw,17px)', color: 'rgba(242,239,232,0.55)', lineHeight: 1.85 }}>
+                If you have ever felt the gap between what finance looks like on paper and how it actually moves — you already understand why The Finance Room exists. This is not for those beginning to learn finance. It is for those who know enough to know what they are still missing.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

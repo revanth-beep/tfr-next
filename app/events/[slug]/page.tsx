@@ -32,9 +32,11 @@ export default async function EventPage({ params }: Props) {
 
   const practitioner = event.practitioner
     ? JSON.parse(event.practitioner as string) as {
-        name?: string; title?: string; company?: string; experience?: string; bio?: string
+        name?: string; title?: string; company?: string; experience?: string; bio?: string; attributes?: string[]
       }
     : null
+
+  const descParas = event.description.split('\n\n').filter(Boolean)
 
   const registered = event._count.registrations
   const seatsLeft  = getSeatsRemaining(event.totalSeats, registered)
@@ -130,27 +132,63 @@ export default async function EventPage({ params }: Props) {
                 </blockquote>
               )}
 
-              {/* Description */}
-              <div>
-                <h2
-                  className="font-display font-bold mb-5 text-[11px] tracking-[0.22em] uppercase"
-                  style={{ color: '#C8A84B' }}
-                >
-                  About this session
-                </h2>
+              {/* Two-column: What this session covers / Who should be in the room */}
+              {descParas.length >= 2 && (
                 <div
-                  className="prose"
-                  style={{
-                    fontSize: 'clamp(14px, 1.3vw, 16px)',
-                    color: 'rgba(242,239,232,0.62)',
-                    lineHeight: 1.85,
-                  }}
+                  className="grid grid-cols-1 sm:grid-cols-2 border-t"
+                  style={{ borderColor: 'rgba(255,255,255,0.07)' }}
                 >
-                  {event.description.split('\n\n').map((para, i) => (
-                    <p key={i} className="mb-4">{para}</p>
+                  {[
+                    { label: 'What this session covers', para: descParas[0] },
+                    { label: 'Who should be in the room', para: descParas[1] },
+                  ].map(({ label, para }) => (
+                    <div
+                      key={label}
+                      className="py-8 sm:pr-8 sm:border-r last:border-r-0 last:pl-0 sm:last:pl-8 sm:last:pr-0"
+                      style={{ borderColor: 'rgba(255,255,255,0.07)' }}
+                    >
+                      <h2
+                        className="text-[9px] tracking-[0.28em] uppercase mb-4"
+                        style={{ color: '#C8A84B' }}
+                      >
+                        {label}
+                      </h2>
+                      <p style={{ fontSize: 'clamp(13px,1.2vw,15px)', color: 'rgba(242,239,232,0.62)', lineHeight: 1.85 }}>
+                        {para}
+                      </p>
+                    </div>
                   ))}
                 </div>
-              </div>
+              )}
+
+              {/* Remaining description paragraphs */}
+              {descParas.length > 2 && (
+                <div
+                  className="border-t pt-8"
+                  style={{ borderColor: 'rgba(255,255,255,0.07)' }}
+                >
+                  <div style={{ fontSize: 'clamp(14px,1.3vw,16px)', color: 'rgba(242,239,232,0.62)', lineHeight: 1.85 }}>
+                    {descParas.slice(2).map((para, i) => (
+                      <p key={i} className="mb-4">{para}</p>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Single-paragraph fallback */}
+              {descParas.length === 1 && (
+                <div>
+                  <h2
+                    className="text-[11px] tracking-[0.22em] uppercase mb-5"
+                    style={{ color: '#C8A84B' }}
+                  >
+                    About this session
+                  </h2>
+                  <p style={{ fontSize: 'clamp(14px,1.3vw,16px)', color: 'rgba(242,239,232,0.62)', lineHeight: 1.85 }}>
+                    {descParas[0]}
+                  </p>
+                </div>
+              )}
 
               {/* Format breakdown */}
               <div
@@ -253,9 +291,23 @@ export default async function EventPage({ params }: Props) {
                         </p>
                       )}
                       {practitioner.bio && (
-                        <p className="text-[13.5px]" style={{ color: 'rgba(242,239,232,0.52)', lineHeight: 1.72 }}>
+                        <p className="text-[13.5px] mb-5" style={{ color: 'rgba(242,239,232,0.52)', lineHeight: 1.72 }}>
                           {practitioner.bio}
                         </p>
+                      )}
+                      {practitioner.attributes && practitioner.attributes.length > 0 && (
+                        <div className="flex flex-col border-t" style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
+                          {practitioner.attributes.map((attr, i) => (
+                            <div
+                              key={i}
+                              className="flex items-start gap-3 py-3 border-b text-[13px]"
+                              style={{ borderColor: 'rgba(255,255,255,0.07)', color: 'rgba(242,239,232,0.55)', lineHeight: 1.65 }}
+                            >
+                              <span style={{ color: '#C8A84B', flexShrink: 0 }}>—</span>
+                              <span>{attr}</span>
+                            </div>
+                          ))}
+                        </div>
                       )}
                     </div>
                   </div>
