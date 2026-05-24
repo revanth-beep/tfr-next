@@ -6,6 +6,7 @@ import { Footer } from '@/components/footer'
 import { Providers } from '@/components/providers'
 import { Loader } from '@/components/loader'
 import { PageTransition } from '@/components/page-transition'
+import { ChromeOffset } from '@/components/chrome-offset'
 import { prisma } from '@/lib/db'
 
 export const metadata: Metadata = {
@@ -41,8 +42,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Loader />
         <div id="pb" aria-hidden="true" />
         <Providers>
+          <ChromeOffset />
           {/* Fixed chrome: banner stacks above nav naturally */}
-          <div className="fixed top-0 left-0 right-0 z-50">
+          <div id="site-chrome" className="fixed top-0 left-0 right-0 z-50">
             <EventFlash event={upcomingEvent} />
             <Nav upcomingEvent={upcomingEvent} />
           </div>

@@ -7,7 +7,8 @@
 /* ─── Base ─────────────────────────────────────────────────────────────────── */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 16px; scroll-behavior: smooth; }
+html { font-size: 16px; scroll-behavior: smooth; --chrome-h: 76px; }
+main { padding-top: var(--chrome-h); }
 
 body {
   font-family: 'DM Sans', sans-serif;
@@ -152,8 +153,8 @@ body::before {
 
 .section-pad { padding: 120px 0; }
 
-@media (max-width: 1024px) { .section-pad { padding: 80px 0; } }
-@media (max-width: 768px)  { .section-pad { padding: 64px 0; } }
+@media (max-width: 1024px) { .section-pad { padding: 72px 0; } }
+@media (max-width: 768px)  { .section-pad { padding: 48px 0; } }
 
 /* ─── Admin ─────────────────────────────────────────────────────────────────── */
 

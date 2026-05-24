@@ -56,7 +56,7 @@ export default async function EventPage({ params }: Props) {
     <>
       {/* Hero */}
       <section
-        className="relative pt-28 md:pt-36 pb-16 md:pb-20"
+        className="relative pt-10 md:pt-16 pb-16 md:pb-20"
         style={{ background: '#09162A' }}
       >
           <div className="container relative z-10">
@@ -88,7 +88,7 @@ export default async function EventPage({ params }: Props) {
           )}
 
           {/* Meta strip */}
-          <div className="flex flex-wrap gap-6">
+          <div className="flex flex-wrap gap-3 md:gap-6">
             {[
               { icon: '📅', label: formatDate(new Date(event.date)) },
               { icon: '🕐', label: `${formatTime(new Date(event.date))} IST` },
@@ -111,7 +111,7 @@ export default async function EventPage({ params }: Props) {
       </section>
 
       {/* Main content */}
-      <section style={{ background: '#09162A', paddingBottom: '120px' }}>
+      <section style={{ background: '#09162A', paddingBottom: 'clamp(60px, 10vw, 120px)' }}>
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
 
