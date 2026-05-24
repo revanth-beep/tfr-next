@@ -24,7 +24,7 @@ export default function AdminLoginPage({
   return (
     <div
       className="min-h-screen flex items-center justify-center"
-      style={{ background: '#08080F' }}
+      style={{ background: '#09162A' }}
     >
       <div
         className="w-full max-w-sm p-10 border"

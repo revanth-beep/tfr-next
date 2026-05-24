@@ -12,7 +12,7 @@ export default async function EditEventPage({ params }: Props) {
   if (!event) notFound()
 
   return (
-    <div className="min-h-screen" style={{ background: '#08080F' }}>
+    <div className="min-h-screen" style={{ background: '#09162A' }}>
       <div
         className="border-b px-12 py-5 flex items-center gap-4"
         style={{ background: '#0F0F1A', borderColor: 'rgba(255,255,255,0.08)' }}

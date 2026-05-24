@@ -33,12 +33,12 @@ export function Ticker() {
                 fontWeight: 500,
                 letterSpacing: '0.3em',
                 textTransform: 'uppercase',
-                color: '#08080F',
+                color: '#09162A',
               }}
             >
               {word}
             </span>
-            <span style={{ color: 'rgba(8,8,15,0.35)', fontSize: '9px' }}>·</span>
+            <span style={{ color: 'rgba(9,22,42,0.35)', fontSize: '9px' }}>·</span>
           </span>
         ))}
       </div>

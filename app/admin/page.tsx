@@ -11,7 +11,7 @@ export default async function AdminDashboard() {
   })
 
   return (
-    <div className="min-h-screen" style={{ background: '#08080F' }}>
+    <div className="min-h-screen" style={{ background: '#09162A' }}>
       {/* Admin header */}
       <div
         className="border-b px-12 py-5 flex items-center justify-between"

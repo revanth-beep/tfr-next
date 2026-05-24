@@ -63,12 +63,12 @@ export function EventFlash({ event }: Props) {
         <div className="flex items-center gap-2 shrink-0">
           <span className="relative flex shrink-0">
             <span className="animate-ping absolute inline-flex h-1.5 w-1.5 rounded-full opacity-50"
-              style={{ background: '#08080F' }} />
+              style={{ background: '#09162A' }} />
             <span className="relative inline-flex rounded-full h-1.5 w-1.5"
-              style={{ background: '#08080F' }} />
+              style={{ background: '#09162A' }} />
           </span>
           <span className="hidden sm:block text-[9px] font-bold tracking-[0.26em] uppercase"
-            style={{ color: 'rgba(8,8,15,0.5)' }}>
+            style={{ color: 'rgba(9,22,42,0.5)' }}>
             Registrations open
           </span>
         </div>
@@ -76,11 +76,11 @@ export function EventFlash({ event }: Props) {
         {/* Event info */}
         <div className="flex-1 flex items-center justify-center gap-2.5 min-w-0">
           <p className="font-display font-bold truncate"
-            style={{ fontSize: 'clamp(11px,2vw,13px)', color: '#08080F', letterSpacing: '-0.01em' }}>
+            style={{ fontSize: 'clamp(11px,2vw,13px)', color: '#09162A', letterSpacing: '-0.01em' }}>
             {event.title}
           </p>
-          <span className="hidden sm:block shrink-0" style={{ width: 3, height: 3, background: 'rgba(8,8,15,0.3)', borderRadius: '50%' }} />
-          <p className="hidden sm:block text-[11px] shrink-0" style={{ color: 'rgba(8,8,15,0.55)' }}>
+          <span className="hidden sm:block shrink-0" style={{ width: 3, height: 3, background: 'rgba(9,22,42,0.3)', borderRadius: '50%' }} />
+          <p className="hidden sm:block text-[11px] shrink-0" style={{ color: 'rgba(9,22,42,0.55)' }}>
             {fmt(event.date)} · Free
           </p>
         </div>
@@ -90,21 +90,21 @@ export function EventFlash({ event }: Props) {
           <Link
             href={`/events/${event.slug}`}
             className="hidden sm:inline-flex items-center gap-1.5 text-[10px] font-bold tracking-[0.18em] uppercase px-3 py-1.5 transition-opacity hover:opacity-80"
-            style={{ background: '#08080F', color: '#C8A84B' }}
+            style={{ background: '#09162A', color: '#C8A84B' }}
           >
             Reserve Seat →
           </Link>
           <Link
             href={`/events/${event.slug}`}
             className="sm:hidden text-[11px] font-bold"
-            style={{ color: 'rgba(8,8,15,0.65)' }}
+            style={{ color: 'rgba(9,22,42,0.65)' }}
           >
             Register →
           </Link>
           <button
             onClick={dismiss}
             className="text-[18px] leading-none transition-opacity hover:opacity-40 pl-1"
-            style={{ color: 'rgba(8,8,15,0.45)' }}
+            style={{ color: 'rgba(9,22,42,0.45)' }}
             aria-label="Dismiss"
           >
             ×

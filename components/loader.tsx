@@ -27,7 +27,7 @@ export function Loader() {
       {/* Top panel */}
       <div style={{
         position: 'absolute', left: 0, right: 0, top: 0, height: '51%',
-        background: '#08080F',
+        background: '#09162A',
         transform: opening ? 'translateY(-100%)' : 'translateY(0)',
         transition: opening ? 'transform 1.1s cubic-bezier(0.16,1,0.3,1)' : 'none',
         willChange: 'transform',
@@ -36,7 +36,7 @@ export function Loader() {
       {/* Bottom panel */}
       <div style={{
         position: 'absolute', left: 0, right: 0, bottom: 0, height: '51%',
-        background: '#08080F',
+        background: '#09162A',
         transform: opening ? 'translateY(100%)' : 'translateY(0)',
         transition: opening ? 'transform 1.1s cubic-bezier(0.16,1,0.3,1)' : 'none',
         willChange: 'transform',

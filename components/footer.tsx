@@ -5,7 +5,7 @@ export function Footer() {
     <footer
       className="border-t"
       style={{
-        background: '#040409',
+        background: '#09162A',
         borderColor: 'rgba(255,255,255,0.06)',
       }}
     >
@@ -28,8 +28,6 @@ export function Footer() {
             className="flex items-center gap-3 text-[11px] tracking-[0.14em] uppercase"
             style={{ color: 'rgba(242,239,232,0.3)' }}
           >
-            <span>Online</span>
-            <span className="w-1 h-1 rounded-full bg-current" />
             <span>Live sessions</span>
             <span className="w-1 h-1 rounded-full bg-current" />
             <span>By application only</span>
@@ -40,7 +38,6 @@ export function Footer() {
               href="https://instagram.com/thefinanceroom"
               target="_blank"
               rel="noopener noreferrer"
-              style={{  }}
               className="text-[11px] tracking-[0.1em] uppercase text-cream-dim hover:text-amber transition-colors"
             >
               Instagram
@@ -49,7 +46,6 @@ export function Footer() {
               href="https://linkedin.com/company/thefinanceroom"
               target="_blank"
               rel="noopener noreferrer"
-              style={{  }}
               className="text-[11px] tracking-[0.1em] uppercase text-cream-dim hover:text-amber transition-colors"
             >
               LinkedIn

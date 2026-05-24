@@ -54,7 +54,7 @@ export default async function EventPage({ params }: Props) {
       {/* Hero */}
       <section
         className="relative pt-28 md:pt-36 pb-16 md:pb-20"
-        style={{ background: '#08080F' }}
+        style={{ background: '#09162A' }}
       >
           <div className="container relative z-10">
           <Link
@@ -108,7 +108,7 @@ export default async function EventPage({ params }: Props) {
       </section>
 
       {/* Main content */}
-      <section style={{ background: '#08080F', paddingBottom: '120px' }}>
+      <section style={{ background: '#09162A', paddingBottom: '120px' }}>
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
 

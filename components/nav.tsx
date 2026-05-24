@@ -36,7 +36,7 @@ export function Nav({ upcomingEvent: _ }: NavProps) {
         style={{
           paddingTop: scrolled ? '13px' : '20px',
           paddingBottom: scrolled ? '13px' : '20px',
-          background: scrolled ? 'rgba(8,8,15,0.94)' : 'rgba(8,8,15,0.6)',
+          background: scrolled ? 'rgba(9,22,42,0.94)' : 'rgba(9,22,42,0.6)',
           backdropFilter: 'blur(20px) saturate(1.4)',
           borderBottom: `1px solid ${scrolled ? 'rgba(255,255,255,0.06)' : 'transparent'}`,
         }}
@@ -142,7 +142,7 @@ export function Nav({ upcomingEvent: _ }: NavProps) {
       {menuOpen && (
         <div
           className="md:hidden border-t"
-          style={{ background: 'rgba(8,8,15,0.98)', backdropFilter: 'blur(20px)', borderColor: 'rgba(255,255,255,0.06)' }}
+          style={{ background: 'rgba(9,22,42,0.98)', backdropFilter: 'blur(20px)', borderColor: 'rgba(255,255,255,0.06)' }}
         >
           <div className="px-6 py-8 flex flex-col gap-6">
             {[
