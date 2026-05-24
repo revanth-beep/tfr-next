@@ -32,8 +32,8 @@ export default async function HomePage() {
       <section className="relative overflow-hidden" style={{ background: '#09162A' }}>
 
         {/* ── Hero copy */}
-        <div className="container relative z-10 pt-36 pb-16 md:pt-44 md:pb-20">
-          <div className="flex flex-col gap-6 md:gap-8">
+        <div className="container relative z-10 pt-8 pb-28 md:pt-16 md:pb-24">
+          <div className="flex flex-col gap-5 md:gap-8">
             <p className="kicker">Live Sessions · By Application Only</p>
 
             <h1 className="heading-display" style={{ fontSize: 'clamp(44px,8vw,108px)', color: '#F2EFE8' }}>
@@ -48,7 +48,7 @@ export default async function HomePage() {
               The room you were never told about. Now open.
             </p>
 
-            <div className="flex flex-wrap gap-3 md:gap-4">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
               {event ? (
                 <Link href={`/events/${event.slug}`} className="btn btn-amber">
                   <span>Reserve Your Seat</span>
@@ -65,7 +65,7 @@ export default async function HomePage() {
         </div>
 
         {/* ── What we believe — four beliefs strip */}
-        <div className="border-t" style={{ borderColor: 'rgba(200,168,75,0.12)' }}>
+        <div className="border-t mt-2 md:mt-0" style={{ borderColor: 'rgba(200,168,75,0.12)' }}>
           <div className="container">
             <div className="grid grid-cols-2 md:grid-cols-4 border-l"
               style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
@@ -75,7 +75,7 @@ export default async function HomePage() {
                 { n: '03', text: 'Judgment cannot be modelled.' },
                 { n: '04', text: 'Access is the actual asset.' },
               ].map(({ n, text }) => (
-                <div key={n} className="group relative p-6 md:p-8 border-b border-r overflow-hidden transition-colors"
+                <div key={n} className="group relative p-5 md:p-8 border-b border-r overflow-hidden transition-colors"
                   style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                     style={{ background: 'rgba(200,168,75,0.03)' }} />
@@ -240,7 +240,7 @@ export default async function HomePage() {
               </h2>
             </div>
 
-            <div className="flex flex-col justify-end gap-6">
+            <div className="flex flex-col justify-end gap-6 pb-2 md:pb-0">
               <p style={{ fontSize: 'clamp(13px,1.3vw,16px)', color: 'rgba(242,239,232,0.5)', lineHeight: 1.85, maxWidth: '420px' }}>
                 Every significant financial decision has a room behind it — where conviction is tested, where deals live or die, and where judgment matters more than any model. The Insider Series is your way in.
               </p>
@@ -250,7 +250,7 @@ export default async function HomePage() {
                   <span>→</span>
                 </Link>
               </div>
-              <p className="text-[10px] tracking-[0.16em] uppercase" style={{ color: 'rgba(242,239,232,0.25)' }}>
+              <p className="text-[10px] tracking-[0.16em] uppercase mt-2 mb-4 md:mb-0" style={{ color: 'rgba(242,239,232,0.4)' }}>
                 Free to attend · Live sessions · By application only
               </p>
             </div>
@@ -277,7 +277,7 @@ export default async function HomePage() {
             ].map(({ n, title, body }) => (
               <div
                 key={n}
-                className="flex flex-col gap-3 py-8 md:py-10 px-0 md:px-8 border-b md:border-b-0 md:border-r last:border-r-0"
+                className="flex flex-col gap-3 py-8 md:py-10 px-0 md:px-8 border-b last:border-b-0 md:border-b-0 md:border-r last:border-r-0"
                 style={{ borderColor: 'rgba(255,255,255,0.07)' }}
               >
                 <span className="font-display font-bold block mb-1 text-[10px] tracking-[0.22em]"
