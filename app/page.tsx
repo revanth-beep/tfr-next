@@ -33,7 +33,7 @@ export default async function HomePage() {
 
         {/* ── Hero copy */}
         <div className="container relative z-10 pt-36 pb-16 md:pt-44 md:pb-20">
-          <div className="flex flex-col gap-6 md:gap-8 max-w-[720px]">
+          <div className="flex flex-col gap-6 md:gap-8">
             <p className="kicker">Live Sessions · By Application Only</p>
 
             <h1 className="heading-display" style={{ fontSize: 'clamp(44px,8vw,108px)', color: '#F2EFE8' }}>
@@ -43,7 +43,7 @@ export default async function HomePage() {
             </h1>
 
             <p className="font-serif italic" style={{
-              fontSize: 'clamp(15px,1.7vw,20px)', color: 'rgba(242,239,232,0.6)', lineHeight: 1.65,
+              fontSize: 'clamp(15px,1.7vw,20px)', color: 'rgba(242,239,232,0.6)', lineHeight: 1.65, maxWidth: '520px',
             }}>
               The room you were never told about. Now open.
             </p>
