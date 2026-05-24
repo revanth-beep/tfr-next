@@ -18,10 +18,8 @@ export default async function EventsPage() {
   const allEvents = await getAllEvents()
   const now = new Date()
 
-  // Upcoming ascending (nearest first), then past descending (most recent first)
   const upcoming = allEvents.filter(e => new Date(e.date) >= now)
   const past     = allEvents.filter(e => new Date(e.date) < now).reverse()
-  const sorted   = [...upcoming, ...past]
 
   return (
     <div style={{ background: '#09162A', minHeight: '100vh' }}>
@@ -56,11 +54,11 @@ export default async function EventsPage() {
         </div>
       </section>
 
-      {/* ── Unified session list ───────────────────────────────── */}
-      <section className="section-pad">
+      {/* ── Upcoming sessions ─────────────────────────────────── */}
+      <section style={{ paddingTop: '80px', paddingBottom: upcoming.length ? '80px' : '0' }}>
         <div className="container">
 
-          {sorted.length === 0 ? (
+          {upcoming.length === 0 && past.length === 0 ? (
             <div className="border p-12 md:p-16 text-center" style={{ borderColor: 'rgba(255,255,255,0.06)', borderStyle: 'dashed' }}>
               <p className="font-serif italic text-[18px] mb-3" style={{ color: 'rgba(242,239,232,0.3)' }}>
                 The next session is being curated.
@@ -69,162 +67,206 @@ export default async function EventsPage() {
                 Check back soon.
               </p>
             </div>
-          ) : (
+          ) : upcoming.length > 0 ? (
             <div className="flex flex-col">
-              {sorted.map((event, idx) => {
-                const isUpcoming  = new Date(event.date) >= now
-                const isFeatured  = event.isFeatured && isUpcoming
-                const seats       = Math.max(0, event.totalSeats - event._count.registrations)
-                const pct         = Math.round((event._count.registrations / event.totalSeats) * 100)
-                const isFirst     = idx === 0
-                const isLast      = idx === sorted.length - 1
-
-                // divider between upcoming and past
-                const showDivider = idx > 0 && isUpcoming === false && new Date(sorted[idx - 1].date) >= now
+              {upcoming.map((event, idx) => {
+                const isFeatured = event.isFeatured
+                const seats      = Math.max(0, event.totalSeats - event._count.registrations)
+                const pct        = Math.round((event._count.registrations / event.totalSeats) * 100)
+                const isFirst    = idx === 0
 
                 return (
-                  <div key={event.id}>
-                    {showDivider && (
-                      <div className="flex items-center gap-4 py-8">
-                        <div className="flex-1 h-px" style={{ background: 'rgba(255,255,255,0.06)' }} />
-                        <span className="text-[9px] tracking-[0.24em] uppercase" style={{ color: 'rgba(242,239,232,0.2)' }}>
-                          Past sessions
+                  <Link
+                    key={event.id}
+                    href={`/events/${event.slug}`}
+                    className="group block transition-all duration-300"
+                    style={{
+                      border: isFeatured
+                        ? '1px solid rgba(200,168,75,0.45)'
+                        : '1px solid rgba(255,255,255,0.12)',
+                      background: isFeatured ? '#0F1E2E' : '#0D1B2E',
+                      marginBottom: '10px',
+                    }}
+                  >
+                    <div className="p-8 md:p-10 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-center">
+
+                      <div className="flex flex-col gap-4">
+                        <div className="flex flex-wrap items-center gap-2">
+                          {isFeatured && (
+                            <span className="inline-flex items-center gap-1.5 text-[9px] tracking-[0.22em] uppercase px-2.5 py-1"
+                              style={{ background: 'rgba(200,168,75,0.18)', color: '#C8A84B', border: '1px solid rgba(200,168,75,0.4)' }}>
+                              <span className="relative flex">
+                                <span className="animate-ping absolute inline-flex h-1.5 w-1.5 rounded-full opacity-60" style={{ background: '#C8A84B' }} />
+                                <span className="relative inline-flex rounded-full h-1.5 w-1.5" style={{ background: '#C8A84B' }} />
+                              </span>
+                              Next up
+                            </span>
+                          )}
+                          {event.topic && (
+                            <span className="text-[9px] tracking-[0.2em] uppercase px-2.5 py-1"
+                              style={{ color: 'rgba(242,239,232,0.6)', background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.14)' }}>
+                              {event.topic}
+                            </span>
+                          )}
+                        </div>
+
+                        <h2
+                          className="font-display font-bold"
+                          style={{ fontSize: 'clamp(19px,2.4vw,26px)', color: '#F2EFE8', letterSpacing: '-0.01em' }}
+                        >
+                          {event.title}
+                        </h2>
+
+                        {event.subtitle && (
+                          <p className="font-serif italic text-[14px]" style={{ color: 'rgba(242,239,232,0.6)' }}>
+                            {event.subtitle}
+                          </p>
+                        )}
+
+                        <div className="flex flex-wrap items-center gap-3 text-[12px]"
+                          style={{ color: 'rgba(242,239,232,0.55)' }}>
+                          <span>{formatDate(new Date(event.date))}</span>
+                          <span style={{ opacity: 0.4 }}>·</span>
+                          <span>{formatTime(new Date(event.date))} IST</span>
+                          <span style={{ opacity: 0.4 }}>·</span>
+                          <span>{event.duration} min</span>
+                        </div>
+
+                        <div className="flex items-center gap-3">
+                          <div className="flex-1 max-w-[180px] h-1 overflow-hidden rounded-full" style={{ background: 'rgba(255,255,255,0.1)' }}>
+                            <div className="h-full rounded-full" style={{
+                              width: `${pct}%`,
+                              background: pct > 80 ? '#E05A5A' : '#C8A84B',
+                            }} />
+                          </div>
+                          <span className="text-[11px]" style={{ color: seats === 0 ? '#E05A5A' : 'rgba(242,239,232,0.6)' }}>
+                            {seats === 0 ? 'Full' : `${seats} seats left`}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="shrink-0">
+                        <span className="btn btn-amber text-[10px]" style={{ pointerEvents: 'none' }}>
+                          <span>{seats === 0 ? 'Join waitlist' : 'Explore The Event'}</span>
+                          <span>→</span>
                         </span>
-                        <div className="flex-1 h-px" style={{ background: 'rgba(255,255,255,0.06)' }} />
                       </div>
-                    )}
 
-                    <Link
-                      href={`/events/${event.slug}`}
-                      className="group block border-x border-b transition-all duration-300"
-                      style={{
-                        borderTopWidth: isFirst ? '1px' : '0',
-                        borderStyle: 'solid',
-                        borderColor: isFeatured
-                          ? 'rgba(200,168,75,0.35)'
-                          : isUpcoming
-                            ? 'rgba(255,255,255,0.1)'
-                            : 'rgba(255,255,255,0.06)',
-                        background: isFeatured
-                          ? 'rgba(200,168,75,0.03)'
-                          : 'transparent',
-                      }}
-                    >
-                      <div className="p-6 md:p-8 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 items-center">
-
-                        {/* ── Left: info */}
-                        <div className="flex flex-col gap-3">
-                          <div className="flex flex-wrap items-center gap-2">
-                            {isFeatured && (
-                              <span className="inline-flex items-center gap-1.5 text-[9px] tracking-[0.22em] uppercase px-2.5 py-1"
-                                style={{ background: 'rgba(200,168,75,0.15)', color: '#C8A84B', border: '1px solid rgba(200,168,75,0.3)' }}>
-                                <span className="relative flex">
-                                  <span className="animate-ping absolute inline-flex h-1.5 w-1.5 rounded-full opacity-60" style={{ background: '#C8A84B' }} />
-                                  <span className="relative inline-flex rounded-full h-1.5 w-1.5" style={{ background: '#C8A84B' }} />
-                                </span>
-                                Next up
-                              </span>
-                            )}
-                            {!isUpcoming && (
-                              <span className="text-[9px] tracking-[0.2em] uppercase px-2.5 py-1"
-                                style={{ color: 'rgba(242,239,232,0.3)', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                                Completed
-                              </span>
-                            )}
-                            {event.topic && (
-                              <span className="text-[9px] tracking-[0.2em] uppercase px-2.5 py-1"
-                                style={{
-                                  color: isUpcoming ? 'rgba(242,239,232,0.4)' : 'rgba(242,239,232,0.22)',
-                                  background: 'rgba(255,255,255,0.03)',
-                                  border: '1px solid rgba(255,255,255,0.06)',
-                                }}>
-                                {event.topic}
-                              </span>
-                            )}
-                          </div>
-
-                          <h2
-                            className="font-display font-bold"
-                            style={{
-                              fontSize: 'clamp(17px,2.2vw,24px)',
-                              color: isUpcoming ? '#F2EFE8' : 'rgba(242,239,232,0.5)',
-                              letterSpacing: '-0.01em',
-                            }}
-                          >
-                            {event.title}
-                          </h2>
-
-                          {event.subtitle && isUpcoming && (
-                            <p className="font-serif italic text-[13px]" style={{ color: 'rgba(242,239,232,0.45)' }}>
-                              {event.subtitle}
-                            </p>
-                          )}
-
-                          <div className="flex flex-wrap items-center gap-3 text-[11px]"
-                            style={{ color: isUpcoming ? 'rgba(242,239,232,0.4)' : 'rgba(242,239,232,0.25)' }}>
-                            <span>{formatDate(new Date(event.date))}</span>
-                            {isUpcoming && (
-                              <>
-                                <span style={{ opacity: 0.4 }}>·</span>
-                                <span>{formatTime(new Date(event.date))} IST</span>
-                                <span style={{ opacity: 0.4 }}>·</span>
-                                <span>{event.duration} min</span>
-                              </>
-                            )}
-                            {!isUpcoming && (
-                              <>
-                                <span style={{ opacity: 0.4 }}>·</span>
-                                <span>{event._count.registrations} attended</span>
-                              </>
-                            )}
-                          </div>
-
-                          {isUpcoming && (
-                            <div className="flex items-center gap-3 mt-1">
-                              <div className="flex-1 max-w-[180px] h-0.5 overflow-hidden" style={{ background: 'rgba(255,255,255,0.07)' }}>
-                                <div className="h-full" style={{
-                                  width: `${pct}%`,
-                                  background: pct > 80 ? 'rgba(255,100,80,0.7)' : '#C8A84B',
-                                  opacity: 0.7,
-                                }} />
-                              </div>
-                              <span className="text-[10px]" style={{ color: seats === 0 ? 'rgba(255,100,80,0.8)' : 'rgba(242,239,232,0.35)' }}>
-                                {seats === 0 ? 'Full' : `${seats} seats left`}
-                              </span>
-                            </div>
-                          )}
-                        </div>
-
-                        {/* ── Right: CTA */}
-                        <div className="shrink-0">
-                          {isUpcoming ? (
-                            <span className="btn btn-amber text-[10px]" style={{ pointerEvents: 'none' }}>
-                              <span>{seats === 0 ? 'Join waitlist' : 'Explore The Event'}</span>
-                              <span>→</span>
-                            </span>
-                          ) : event.recordingUrl ? (
-                            <span className="btn btn-ghost text-[10px]" style={{ pointerEvents: 'none' }}>
-                              <span>Watch recording</span>
-                              <span>↗</span>
-                            </span>
-                          ) : (
-                            <span className="text-[10px] tracking-[0.16em] uppercase"
-                              style={{ color: 'rgba(242,239,232,0.25)' }}>
-                              View session →
-                            </span>
-                          )}
-                        </div>
-
-                      </div>
-                    </Link>
-                  </div>
+                    </div>
+                  </Link>
                 )
               })}
             </div>
-          )}
-
+          ) : null}
         </div>
       </section>
+
+      {/* ── Past sessions ─────────────────────────────────────── */}
+      {past.length > 0 && (
+        <section
+          style={{
+            borderTop: '1px solid rgba(124,185,217,0.15)',
+            background: 'rgba(10,18,40,0.6)',
+            paddingTop: '72px',
+            paddingBottom: '100px',
+          }}
+        >
+          <div className="container">
+
+            {/* Section header */}
+            <div className="flex items-end justify-between mb-10 pb-6"
+              style={{ borderBottom: '1px solid rgba(124,185,217,0.15)' }}>
+              <div>
+                <h2 className="font-display font-bold"
+                  style={{ fontSize: 'clamp(22px,3vw,34px)', color: '#D6EAFA', letterSpacing: '-0.01em' }}>
+                  Past Sessions
+                </h2>
+              </div>
+              <span className="text-[11px] tracking-[0.16em] uppercase pb-1"
+                style={{ color: 'rgba(124,185,217,0.5)' }}>
+                {past.length} session{past.length !== 1 ? 's' : ''}
+              </span>
+            </div>
+
+            {/* Past event cards */}
+            <div className="flex flex-col gap-[10px]">
+              {past.map((event) => (
+                <div
+                  key={event.id}
+                  style={{
+                    border: '1px solid rgba(242,239,232,0.12)',
+                    background: '#0E1F38',
+                  }}
+                >
+                  <div className="p-7 md:p-9 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 items-center">
+
+                    <div className="flex flex-col gap-3">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="text-[9px] tracking-[0.2em] uppercase px-2.5 py-1"
+                          style={{ color: '#7CB9D9', background: 'rgba(124,185,217,0.15)', border: '1px solid rgba(124,185,217,0.45)' }}>
+                          Completed
+                        </span>
+                        {event.topic && (
+                          <span className="text-[9px] tracking-[0.2em] uppercase px-2.5 py-1"
+                            style={{ color: 'rgba(124,185,217,0.9)', background: 'rgba(124,185,217,0.1)', border: '1px solid rgba(124,185,217,0.3)' }}>
+                            {event.topic}
+                          </span>
+                        )}
+                      </div>
+
+                      <h2
+                        className="font-display font-bold"
+                        style={{ fontSize: 'clamp(17px,2.2vw,22px)', color: '#F2EFE8', letterSpacing: '-0.01em' }}
+                      >
+                        {event.title}
+                      </h2>
+
+                      {event.subtitle && (
+                        <p className="font-serif italic text-[13px]" style={{ color: 'rgba(242,239,232,0.55)' }}>
+                          {event.subtitle}
+                        </p>
+                      )}
+
+                      <div className="flex flex-wrap items-center gap-3 text-[11px]"
+                        style={{ color: 'rgba(124,185,217,0.8)' }}>
+                        <span>{formatDate(new Date(event.date))}</span>
+                        <span style={{ opacity: 0.5 }}>·</span>
+                        <span>{event._count.registrations} attended</span>
+                        <span style={{ opacity: 0.5 }}>·</span>
+                        <span>{event.duration} min</span>
+                      </div>
+                    </div>
+
+                    <div className="shrink-0 flex flex-col sm:flex-row gap-2">
+                      {event.recordingUrl && (
+                        <a
+                          href={event.recordingUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn btn-ghost text-[10px]"
+                        >
+                          <span>Watch recording</span>
+                          <span>↗</span>
+                        </a>
+                      )}
+                      <Link
+                        href={`/events/${event.slug}`}
+                        className="text-[10px] tracking-[0.16em] uppercase px-3 py-2 inline-flex items-center justify-center gap-2"
+                        style={{ color: '#F2EFE8', border: '1px solid rgba(242,239,232,0.3)', background: 'rgba(255,255,255,0.07)' }}
+                      >
+                        View Session Details →
+                      </Link>
+                    </div>
+
+                  </div>
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </section>
+      )}
+
     </div>
   )
 }

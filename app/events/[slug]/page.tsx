@@ -324,14 +324,14 @@ export default async function EventPage({ params }: Props) {
                   /* ── Completed: recording panel */
                   <div
                     className="border p-8 flex flex-col gap-6"
-                    style={{ borderColor: 'rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.02)' }}
+                    style={{ borderColor: 'rgba(124,185,217,0.35)', background: 'rgba(124,185,217,0.06)' }}
                   >
                     <div>
                       <span className="text-[9px] tracking-[0.24em] uppercase px-2.5 py-1 mb-4 inline-block"
-                        style={{ color: 'rgba(242,239,232,0.35)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                        style={{ color: '#F2EFE8', border: '1px solid rgba(242,239,232,0.3)', background: 'rgba(255,255,255,0.07)' }}>
                         Session concluded
                       </span>
-                      <p className="text-[13px] leading-relaxed mt-3" style={{ color: 'rgba(242,239,232,0.4)' }}>
+                      <p className="text-[13px] leading-relaxed mt-3" style={{ color: 'rgba(124,185,217,0.85)' }}>
                         {formatDate(new Date(event.date))} · {event.duration} min · {registered} attended
                       </p>
                     </div>
@@ -347,7 +347,7 @@ export default async function EventPage({ params }: Props) {
                         <span>↗</span>
                       </a>
                     ) : (
-                      <p className="text-[12px] font-serif italic" style={{ color: 'rgba(242,239,232,0.28)' }}>
+                      <p className="text-[12px] font-serif italic" style={{ color: 'rgba(124,185,217,0.6)' }}>
                         Recording not available.
                       </p>
                     )}
