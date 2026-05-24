@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { prisma } from '@/lib/db'
 import { formatTime } from '@/lib/utils'
-import { GoogleRegisterButton } from '@/components/google-register-button'
 
 async function getFeaturedEvent() {
   try {
@@ -29,9 +28,11 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* ═══ HERO ══════════════════════════════════════════════════════════════ */}
-      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden" style={{ background: '#09162A' }}>
-        <div className="container relative z-10 pt-24 pb-20 md:pt-28 md:pb-24">
+      {/* ═══ HERO + BELIEFS ════════════════════════════════════════════════════ */}
+      <section className="relative overflow-hidden" style={{ background: '#09162A' }}>
+
+        {/* ── Hero copy */}
+        <div className="container relative z-10 pt-36 pb-16 md:pt-44 md:pb-20">
           <div className="flex flex-col gap-6 md:gap-8 max-w-[720px]">
             <p className="kicker">Live Sessions · By Application Only</p>
 
@@ -62,10 +63,44 @@ export default async function HomePage() {
             </div>
           </div>
         </div>
+
+        {/* ── What we believe — four beliefs strip */}
+        <div className="border-t" style={{ borderColor: 'rgba(200,168,75,0.12)' }}>
+          <div className="container">
+            <div className="grid grid-cols-2 md:grid-cols-4 border-l"
+              style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
+              {[
+                { n: '01', text: 'Finance is not learned in classrooms.' },
+                { n: '02', text: 'The best network knows more than you.' },
+                { n: '03', text: 'Judgment cannot be modelled.' },
+                { n: '04', text: 'Access is the actual asset.' },
+              ].map(({ n, text }) => (
+                <div key={n} className="group relative p-6 md:p-8 border-b border-r overflow-hidden transition-colors"
+                  style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                    style={{ background: 'rgba(200,168,75,0.03)' }} />
+                  <div className="font-display font-bold select-none mb-3"
+                    style={{ fontSize: 'clamp(36px,5vw,64px)', color: 'rgba(242,239,232,0.04)', letterSpacing: '-0.04em', lineHeight: 0.9 }}>
+                    {n}
+                  </div>
+                  <p className="relative font-display" style={{
+                    fontSize: 'clamp(12px,1.3vw,15px)', fontWeight: 500,
+                    color: '#F2EFE8', lineHeight: 1.3, letterSpacing: '-0.01em',
+                  }}>
+                    {text}
+                  </p>
+                  <div className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full transition-all duration-500"
+                    style={{ background: '#C8A84B' }} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
       </section>
 
       {/* ═══ FEATURED EVENT ════════════════════════════════════════════════════ */}
-      <section id="events" className="section-pad" style={{ background: '#09162A' }}>
+      <section id="events" className="section-pad" style={{ background: '#09162A', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
         <div className="container">
           <p className="kicker mb-10">Upcoming Session</p>
 
@@ -260,62 +295,6 @@ export default async function HomePage() {
             ))}
           </div>
 
-        </div>
-      </section>
-
-      {/* ═══ FINAL CTA ═════════════════════════════════════════════════════════ */}
-      <section className="section-pad" style={{ background: '#0F1E37', borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-        <div className="container">
-          <div className="max-w-[640px] mx-auto text-center">
-
-            <h2 className="heading-section mb-12" style={{ fontSize: 'clamp(26px,4vw,52px)', color: '#F2EFE8' }}>
-              What we believe about{' '}
-              <em className="font-serif font-normal italic" style={{ color: '#C8A84B' }}>finance.</em>
-            </h2>
-
-            {/* Four principles */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 border-t border-l mb-12 text-left"
-              style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
-              {[
-                { n: '01', text: 'Finance is not learned in classrooms.' },
-                { n: '02', text: 'The best network knows more than you.' },
-                { n: '03', text: 'Judgment cannot be modelled.' },
-                { n: '04', text: 'Access is the actual asset.' },
-              ].map(({ n, text }) => (
-                <div key={n} className="group relative p-6 md:p-8 border-b border-r overflow-hidden transition-colors"
-                  style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                    style={{ background: 'rgba(200,168,75,0.03)' }} />
-                  <div className="font-display font-bold select-none mb-3"
-                    style={{ fontSize: 'clamp(40px,6vw,72px)', color: 'rgba(242,239,232,0.04)', letterSpacing: '-0.04em', lineHeight: 0.9 }}>
-                    {n}
-                  </div>
-                  <p className="relative font-display" style={{
-                    fontSize: 'clamp(14px,1.6vw,18px)', fontWeight: 500,
-                    color: '#F2EFE8', lineHeight: 1.3, letterSpacing: '-0.01em',
-                  }}>
-                    {text}
-                  </p>
-                  <div className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full transition-all duration-500"
-                    style={{ background: '#C8A84B' }} />
-                </div>
-              ))}
-            </div>
-
-            {event ? (
-              <GoogleRegisterButton eventSlug={event.slug} isFull={seatsLeft <= 0} size="large" label="Join Our Next Session" />
-            ) : (
-              <a
-                href="https://instagram.com/thefinanceroom"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-ghost"
-              >
-                <span>Follow for Updates</span>
-                <span>→</span>
-              </a>
-            )}
-          </div>
         </div>
       </section>
     </>
