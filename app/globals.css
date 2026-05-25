@@ -229,6 +229,19 @@ section[id] { scroll-margin-top: 80px; }
   to   { transform: translateY(-100%); }
 }
 
+/* ─── Hero reveal ───────────────────────────────────────────────────────────── */
+
+.hero-reveal > * {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.75s ease, transform 0.75s ease;
+}
+.hero-reveal[data-ready="true"] > *:nth-child(1) { opacity: 1; transform: none; transition-delay: 0s; }
+.hero-reveal[data-ready="true"] > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.14s; }
+.hero-reveal[data-ready="true"] > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.26s; }
+.hero-reveal[data-ready="true"] > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.38s; }
+.hero-reveal[data-ready="true"] > *:nth-child(5) { opacity: 1; transform: none; transition-delay: 0.48s; }
+
 /* ─── Loader ────────────────────────────────────────────────────────────────── */
 
 @keyframes ldSeam {

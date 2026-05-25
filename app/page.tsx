@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { prisma } from '@/lib/db'
 import { formatTime } from '@/lib/utils'
+import { HeroReveal } from '@/components/hero-reveal'
 
 async function getFeaturedEvent() {
   try {
@@ -33,7 +34,7 @@ export default async function HomePage() {
 
         {/* ── Hero copy */}
         <div className="container relative z-10 pt-14 pb-28 md:pt-24 md:pb-24">
-          <div className="flex flex-col gap-5 md:gap-8">
+          <HeroReveal>
             <p className="kicker">Live Sessions · By Application Only</p>
 
             <h1 className="heading-display" style={{ fontSize: 'clamp(44px,8vw,108px)', color: '#F2EFE8' }}>
@@ -61,7 +62,7 @@ export default async function HomePage() {
               )}
               <a href="#insider" className="btn btn-ghost"><span>The Insider Series</span></a>
             </div>
-          </div>
+          </HeroReveal>
         </div>
 
         {/* ── What we believe — four beliefs strip */}

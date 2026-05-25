@@ -16,27 +16,17 @@ function fmt(iso: string) {
 const BANNER_H = 44
 
 export function EventFlash({ event }: Props) {
-  const [visible, setVisible]     = useState(false)
-  const [leaving, setLeaving]     = useState(false)
-  const [dismissed, setDismissed] = useState(false)
+  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    if (sessionStorage.getItem('tfr-banner-dismissed')) {
-      setDismissed(true)
-      return
-    }
-    // Show after the loader finishes (~3.5s)
-    const t = setTimeout(() => setVisible(true), 3800)
+    if (!event) return
+    const alreadyLoaded = !!sessionStorage.getItem('tfr-loader-done')
+    const delay = alreadyLoaded ? 100 : 3800
+    const t = setTimeout(() => setVisible(true), delay)
     return () => clearTimeout(t)
-  }, [])
+  }, [event])
 
-  function dismiss() {
-    setLeaving(true)
-    sessionStorage.setItem('tfr-banner-dismissed', '1')
-    setTimeout(() => setDismissed(true), 380)
-  }
-
-  if (!event || dismissed) return null
+  if (!event) return null
 
   return (
     <div
@@ -47,14 +37,8 @@ export function EventFlash({ event }: Props) {
         display: 'flex',
         alignItems: 'center',
         overflow: 'hidden',
-        animation: !visible
-          ? 'none'
-          : leaving
-            ? 'bannerOut 0.38s cubic-bezier(0.4,0,1,1) forwards'
-            : 'bannerIn 0.55s cubic-bezier(0.16,1,0.3,1) forwards',
+        animation: visible ? 'bannerIn 0.55s cubic-bezier(0.16,1,0.3,1) forwards' : 'none',
         transform: visible ? undefined : 'translateY(-100%)',
-        // collapse height when not visible so it takes no space in the stack
-        maxHeight: visible && !leaving ? `${BANNER_H}px` : dismissed ? '0' : undefined,
       }}
     >
       <div className="container flex items-center justify-between gap-3" style={{ height: '100%' }}>
@@ -85,8 +69,8 @@ export function EventFlash({ event }: Props) {
           </p>
         </div>
 
-        {/* CTA + Dismiss */}
-        <div className="flex items-center gap-2.5 shrink-0">
+        {/* CTA */}
+        <div className="flex items-center shrink-0">
           <Link
             href={`/events/${event.slug}`}
             className="hidden sm:inline-flex items-center gap-1.5 text-[10px] font-bold tracking-[0.18em] uppercase px-3 py-1.5 transition-opacity hover:opacity-80"
@@ -101,14 +85,6 @@ export function EventFlash({ event }: Props) {
           >
             Register →
           </Link>
-          <button
-            onClick={dismiss}
-            className="text-[18px] leading-none transition-opacity hover:opacity-40 pl-1"
-            style={{ color: 'rgba(9,22,42,0.45)' }}
-            aria-label="Dismiss"
-          >
-            ×
-          </button>
         </div>
 
       </div>

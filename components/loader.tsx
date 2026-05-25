@@ -11,7 +11,10 @@ export function Loader() {
   useEffect(() => {
     setMounted(true)
     const t1 = setTimeout(() => setPhase('opening'), 2300)
-    const t2 = setTimeout(() => setPhase('done'), 3500)
+    const t2 = setTimeout(() => {
+      setPhase('done')
+      sessionStorage.setItem('tfr-loader-done', '1')
+    }, 3500)
     return () => { clearTimeout(t1); clearTimeout(t2) }
   }, [])
 
