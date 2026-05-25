@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { markLoaderDone } from './loader-state'
 
 type Phase = 'intro' | 'opening' | 'done'
 
@@ -10,10 +11,13 @@ export function Loader() {
 
   useEffect(() => {
     setMounted(true)
-    const t1 = setTimeout(() => setPhase('opening'), 2300)
+    const t1 = setTimeout(() => {
+      setPhase('opening')
+      window.dispatchEvent(new CustomEvent('tfr:hero-ready'))
+    }, 2300)
     const t2 = setTimeout(() => {
       setPhase('done')
-      sessionStorage.setItem('tfr-loader-done', '1')
+      markLoaderDone()
     }, 3500)
     return () => { clearTimeout(t1); clearTimeout(t2) }
   }, [])

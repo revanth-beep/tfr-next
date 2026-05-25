@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { loaderDone } from './loader-state'
 
 interface Props {
   event: { title: string; slug: string; date: string } | null
@@ -20,8 +21,7 @@ export function EventFlash({ event }: Props) {
 
   useEffect(() => {
     if (!event) return
-    const alreadyLoaded = !!sessionStorage.getItem('tfr-loader-done')
-    const delay = alreadyLoaded ? 100 : 3800
+    const delay = loaderDone ? 100 : 3800
     const t = setTimeout(() => setVisible(true), delay)
     return () => clearTimeout(t)
   }, [event])
