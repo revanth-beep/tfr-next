@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { prisma } from '@/lib/db'
 import { formatDate, formatTime } from '@/lib/utils'
+import { Reveal } from '@/components/reveal'
 
 async function getAllEvents() {
   try {
@@ -75,16 +76,15 @@ export default async function EventsPage() {
                 const pct        = Math.round((event._count.registrations / event.totalSeats) * 100)
 
                 return (
+                  <Reveal key={event.id} delay={idx * 0.1} style={{ marginBottom: '8px' }}>
                   <Link
-                    key={event.id}
                     href={`/events/${event.slug}`}
-                    className="reveal group block"
-                    style={{ transitionDelay: `${idx * 0.1}s`,
+                    className="group block"
+                    style={{
                       border: isFeatured
                         ? '1px solid rgba(200,168,75,0.45)'
                         : '1px solid rgba(255,255,255,0.12)',
                       background: isFeatured ? '#0F1E2E' : '#0D1B2E',
-                      marginBottom: '8px',
                     }}
                   >
                     <div className="p-5 md:p-7 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-5 md:gap-6 items-center">
@@ -153,6 +153,7 @@ export default async function EventsPage() {
 
                     </div>
                   </Link>
+                  </Reveal>
                 )
               })}
             </div>
@@ -173,7 +174,7 @@ export default async function EventsPage() {
           <div className="container">
 
             {/* Section header */}
-            <div className="reveal flex items-end justify-between mb-5 md:mb-7 pb-4"
+            <div className="flex items-end justify-between mb-5 md:mb-7 pb-4"
               style={{ borderBottom: '1px solid rgba(124,185,217,0.15)' }}>
               <h2 className="font-display"
                 style={{ fontSize: 'clamp(20px,2.5vw,30px)', color: '#D6EAFA', letterSpacing: '-0.01em' }}>
@@ -188,13 +189,12 @@ export default async function EventsPage() {
             {/* Past event cards */}
             <div className="flex flex-col gap-2">
               {past.map((event, idx) => (
-                <div
+                <Reveal
                   key={event.id}
-                  className="reveal"
+                  delay={idx * 0.08}
                   style={{
                     border: '1px solid rgba(242,239,232,0.1)',
                     background: '#0E1F38',
-                    transitionDelay: `${idx * 0.08}s`,
                   }}
                 >
                   <div className="p-5 md:p-6 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 items-center">
@@ -258,7 +258,7 @@ export default async function EventsPage() {
                     </div>
 
                   </div>
-                </div>
+                </Reveal>
               ))}
             </div>
 

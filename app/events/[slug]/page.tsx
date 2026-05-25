@@ -124,7 +124,7 @@ export default async function EventPage({ params }: Props) {
               {/* Cover note / pull quote */}
               {event.coverNote && (
                 <blockquote
-                  className="reveal pl-6 font-serif italic"
+                  className="pl-6 font-serif italic"
                   style={{
                     borderLeft: '2px solid rgba(200,168,75,0.4)',
                     fontSize: 'clamp(18px, 2vw, 24px)',
@@ -139,7 +139,7 @@ export default async function EventPage({ params }: Props) {
               {/* Two-column: What this session covers / Who should be in the room */}
               {descParas.length >= 2 && (
                 <div
-                  className="reveal grid grid-cols-1 sm:grid-cols-2 border-t"
+                  className="grid grid-cols-1 sm:grid-cols-2 border-t"
                   style={{ borderColor: 'rgba(255,255,255,0.07)' }}
                 >
                   {[
@@ -236,7 +236,7 @@ export default async function EventPage({ params }: Props) {
               {/* Practitioner */}
               {practitioner && (
                 <div
-                  className="reveal border-t pt-10"
+                  className="border-t pt-10"
                   style={{ borderColor: 'rgba(255,255,255,0.07)' }}
                 >
                   <h2
@@ -320,7 +320,7 @@ export default async function EventPage({ params }: Props) {
             </div>
 
             {/* Right — sidebar */}
-            <div className="reveal lg:col-span-1 order-first lg:order-none" style={{ transitionDelay: '0.18s' }}>
+            <div className="lg:col-span-1 order-first lg:order-none">
               <div className="sticky top-28">
 
                 {isPast ? (

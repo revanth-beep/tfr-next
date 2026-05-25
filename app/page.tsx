@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { prisma } from '@/lib/db'
 import { formatTime } from '@/lib/utils'
 import { HeroReveal } from '@/components/hero-reveal'
+import { Reveal } from '@/components/reveal'
 
 async function getFeaturedEvent() {
   try {
@@ -29,10 +30,8 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* ═══ HERO + BELIEFS ════════════════════════════════════════════════════ */}
+      {/* ═══ HERO ══════════════════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden" style={{ background: '#09162A' }}>
-
-        {/* ── Hero copy */}
         <div className="container relative z-10 pt-14 pb-28 md:pt-24 md:pb-24">
           <HeroReveal>
             <p className="kicker">Live Sessions · By Application Only</p>
@@ -64,11 +63,9 @@ export default async function HomePage() {
             </div>
           </HeroReveal>
         </div>
-
-  
       </section>
 
-      {/* ── What we believe — four beliefs strip (outside overflow:hidden section) */}
+      {/* ═══ BELIEFS STRIP ══════════════════════════════════════════════════════ */}
       <div style={{ background: '#09162A', borderTop: '1px solid rgba(200,168,75,0.12)' }}>
         <div className="container">
           <div className="grid grid-cols-2 md:grid-cols-4 border-l"
@@ -79,8 +76,9 @@ export default async function HomePage() {
               { n: '03', text: 'Judgment cannot be modelled.' },
               { n: '04', text: 'Access is the actual asset.' },
             ].map(({ n, text }, i) => (
-              <div key={n} className="reveal group relative p-5 md:p-8 border-b border-r overflow-hidden"
-                style={{ borderColor: 'rgba(255,255,255,0.07)', transitionDelay: `${i * 0.1}s` }}>
+              <Reveal key={n} delay={i * 0.1}
+                className="group relative p-5 md:p-8 border-b border-r overflow-hidden"
+                style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                   style={{ background: 'rgba(200,168,75,0.03)' }} />
                 <div className="select-none mb-5"
@@ -97,7 +95,7 @@ export default async function HomePage() {
                 </p>
                 <div className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full transition-all duration-500"
                   style={{ background: '#C8A84B' }} />
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -106,90 +104,92 @@ export default async function HomePage() {
       {/* ═══ FEATURED EVENT ════════════════════════════════════════════════════ */}
       <section id="events" className="section-pad" style={{ background: '#09162A', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
         <div className="container">
-          <p className="kicker mb-10 reveal">Upcoming Session</p>
+          <p className="kicker mb-10">Upcoming Session</p>
 
           {event ? (
-            <Link href={`/events/${event.slug}`} className="reveal block" style={{ textDecoration: 'none', transitionDelay: '0.14s' }}>
-              <div className="flex flex-col md:flex-row" style={{ border: '1px solid rgba(200,168,75,0.4)', overflow: 'hidden' }}>
+            <Reveal delay={0.1}>
+              <Link href={`/events/${event.slug}`} className="block" style={{ textDecoration: 'none' }}>
+                <div className="flex flex-col md:flex-row" style={{ border: '1px solid rgba(200,168,75,0.4)', overflow: 'hidden' }}>
 
-                {/* ── Date panel */}
-                <div className="shrink-0 border-b md:border-b-0 md:border-r"
-                  style={{ background: '#C8A84B', borderColor: 'rgba(9,22,42,0.15)' }}>
-                  <div className="flex items-center gap-5 px-8 py-5 md:hidden">
-                    <span className="font-display font-bold" style={{ fontSize: '52px', lineHeight: 1, color: '#09162A' }}>
-                      {eventDay}
-                    </span>
-                    <div>
-                      <p className="text-[13px] font-bold tracking-[0.22em] uppercase" style={{ color: 'rgba(9,22,42,0.75)' }}>{eventMonth}</p>
-                      <p className="text-[12px] tracking-[0.14em] mt-0.5" style={{ color: 'rgba(9,22,42,0.6)' }}>{eventYear}</p>
-                    </div>
-                  </div>
-                  <div className="hidden md:flex flex-col items-center justify-center text-center px-10"
-                    style={{ minWidth: 184, minHeight: 260 }}>
-                    <p className="text-[12px] font-bold tracking-[0.26em] uppercase mb-3" style={{ color: 'rgba(9,22,42,0.75)' }}>{eventMonth}</p>
-                    <p className="font-display font-bold" style={{ fontSize: '80px', lineHeight: 0.88, color: '#09162A' }}>{eventDay}</p>
-                    <p className="text-[12px] tracking-[0.16em] mt-3" style={{ color: 'rgba(9,22,42,0.6)' }}>{eventYear}</p>
-                  </div>
-                </div>
-
-                {/* ── Content panel */}
-                <div className="flex flex-1 flex-col p-6 md:p-10" style={{ background: '#0F1E37' }}>
-                  <div className="flex flex-wrap items-center justify-between gap-3 mb-7">
-                    <div className="flex items-center gap-2.5">
-                      <span className="relative flex shrink-0">
-                        <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full opacity-40" style={{ background: '#C8A84B' }} />
-                        <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: '#C8A84B' }} />
+                  {/* Date panel */}
+                  <div className="shrink-0 border-b md:border-b-0 md:border-r"
+                    style={{ background: '#C8A84B', borderColor: 'rgba(9,22,42,0.15)' }}>
+                    <div className="flex items-center gap-5 px-8 py-5 md:hidden">
+                      <span className="font-display font-bold" style={{ fontSize: '52px', lineHeight: 1, color: '#09162A' }}>
+                        {eventDay}
                       </span>
-                      <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#C8A84B' }}>
-                        Registrations Open
-                      </span>
+                      <div>
+                        <p className="text-[13px] font-bold tracking-[0.22em] uppercase" style={{ color: 'rgba(9,22,42,0.75)' }}>{eventMonth}</p>
+                        <p className="text-[12px] tracking-[0.14em] mt-0.5" style={{ color: 'rgba(9,22,42,0.6)' }}>{eventYear}</p>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span style={{ fontSize: '9px', letterSpacing: '0.18em', textTransform: 'uppercase', padding: '4px 10px', border: '1px solid rgba(200,168,75,0.35)', color: '#C8A84B' }}>Free</span>
-                      <span style={{ fontSize: '9px', letterSpacing: '0.18em', textTransform: 'uppercase', padding: '4px 10px', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(242,239,232,0.38)' }}>Live</span>
+                    <div className="hidden md:flex flex-col items-center justify-center text-center px-10"
+                      style={{ minWidth: 184, minHeight: 260 }}>
+                      <p className="text-[12px] font-bold tracking-[0.26em] uppercase mb-3" style={{ color: 'rgba(9,22,42,0.75)' }}>{eventMonth}</p>
+                      <p className="font-display font-bold" style={{ fontSize: '80px', lineHeight: 0.88, color: '#09162A' }}>{eventDay}</p>
+                      <p className="text-[12px] tracking-[0.16em] mt-3" style={{ color: 'rgba(9,22,42,0.6)' }}>{eventYear}</p>
+                    </div>
+                  </div>
+
+                  {/* Content panel */}
+                  <div className="flex flex-1 flex-col p-6 md:p-10" style={{ background: '#0F1E37' }}>
+                    <div className="flex flex-wrap items-center justify-between gap-3 mb-7">
+                      <div className="flex items-center gap-2.5">
+                        <span className="relative flex shrink-0">
+                          <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full opacity-40" style={{ background: '#C8A84B' }} />
+                          <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: '#C8A84B' }} />
+                        </span>
+                        <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#C8A84B' }}>
+                          Registrations Open
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span style={{ fontSize: '9px', letterSpacing: '0.18em', textTransform: 'uppercase', padding: '4px 10px', border: '1px solid rgba(200,168,75,0.35)', color: '#C8A84B' }}>Free</span>
+                        <span style={{ fontSize: '9px', letterSpacing: '0.18em', textTransform: 'uppercase', padding: '4px 10px', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(242,239,232,0.38)' }}>Live</span>
+                      </div>
+                    </div>
+
+                    <h2 className="heading-section mb-3" style={{ fontSize: 'clamp(22px,3.8vw,48px)', color: '#F2EFE8' }}>
+                      {event.title}
+                    </h2>
+                    {event.subtitle && (
+                      <p className="font-serif italic" style={{ fontSize: 'clamp(13px,1.4vw,17px)', color: 'rgba(242,239,232,0.48)', lineHeight: 1.65 }}>
+                        {event.subtitle}
+                      </p>
+                    )}
+
+                    <div className="flex-1 min-h-[32px]" />
+
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6"
+                      style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
+                      <div className="flex flex-wrap items-center gap-3" style={{ fontSize: '12px', color: 'rgba(242,239,232,0.45)' }}>
+                        <span>{formatTime(new Date(event.date))} IST</span>
+                        <span style={{ width: 3, height: 3, background: 'rgba(242,239,232,0.2)', borderRadius: '50%', display: 'inline-block' }} />
+                        <span>{event.duration} min</span>
+                        {seatsLeft > 0 && seatsLeft <= 10 ? (
+                          <>
+                            <span style={{ width: 3, height: 3, background: '#C8A84B', opacity: 0.7, borderRadius: '50%', display: 'inline-block' }} />
+                            <span style={{ color: '#C8A84B' }}>Only {seatsLeft} seats left</span>
+                          </>
+                        ) : seatsLeft > 10 ? (
+                          <>
+                            <span style={{ width: 3, height: 3, background: 'rgba(242,239,232,0.2)', borderRadius: '50%', display: 'inline-block' }} />
+                            <span>{seatsLeft} seats remaining</span>
+                          </>
+                        ) : null}
+                      </div>
+                      <div className="btn btn-amber shrink-0">
+                        <span>Reserve Your Seat</span>
+                        <span>→</span>
+                      </div>
                     </div>
                   </div>
 
-                  <h2 className="heading-section mb-3" style={{ fontSize: 'clamp(22px,3.8vw,48px)', color: '#F2EFE8' }}>
-                    {event.title}
-                  </h2>
-                  {event.subtitle && (
-                    <p className="font-serif italic" style={{ fontSize: 'clamp(13px,1.4vw,17px)', color: 'rgba(242,239,232,0.48)', lineHeight: 1.65 }}>
-                      {event.subtitle}
-                    </p>
-                  )}
-
-                  <div className="flex-1 min-h-[32px]" />
-
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6"
-                    style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-                    <div className="flex flex-wrap items-center gap-3" style={{ fontSize: '12px', color: 'rgba(242,239,232,0.45)' }}>
-                      <span>{formatTime(new Date(event.date))} IST</span>
-                      <span style={{ width: 3, height: 3, background: 'rgba(242,239,232,0.2)', borderRadius: '50%', display: 'inline-block' }} />
-                      <span>{event.duration} min</span>
-                      {seatsLeft > 0 && seatsLeft <= 10 ? (
-                        <>
-                          <span style={{ width: 3, height: 3, background: '#C8A84B', opacity: 0.7, borderRadius: '50%', display: 'inline-block' }} />
-                          <span style={{ color: '#C8A84B' }}>Only {seatsLeft} seats left</span>
-                        </>
-                      ) : seatsLeft > 10 ? (
-                        <>
-                          <span style={{ width: 3, height: 3, background: 'rgba(242,239,232,0.2)', borderRadius: '50%', display: 'inline-block' }} />
-                          <span>{seatsLeft} seats remaining</span>
-                        </>
-                      ) : null}
-                    </div>
-                    <div className="btn btn-amber shrink-0">
-                      <span>Reserve Your Seat</span>
-                      <span>→</span>
-                    </div>
-                  </div>
                 </div>
-
-              </div>
-            </Link>
+              </Link>
+            </Reveal>
           ) : (
-            <div className="reveal border p-12 md:p-16 text-center" style={{ borderColor: 'rgba(255,255,255,0.07)', borderStyle: 'dashed', transitionDelay: '0.14s' }}>
+            <div className="border p-12 md:p-16 text-center" style={{ borderColor: 'rgba(255,255,255,0.07)', borderStyle: 'dashed' }}>
               <p className="font-serif italic text-[20px] mb-3" style={{ color: 'rgba(242,239,232,0.35)' }}>
                 The next session is being curated.
               </p>
@@ -205,7 +205,7 @@ export default async function HomePage() {
       <section className="section-pad" style={{ background: '#0F1E37', borderTop: '1px solid rgba(200,168,75,0.1)', borderBottom: '1px solid rgba(200,168,75,0.07)' }}>
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-start">
-            <div className="reveal">
+            <Reveal>
               <p className="kicker mb-8">Who it is for</p>
               <h2 className="heading-section" style={{ fontSize: 'clamp(26px,4.5vw,52px)', color: '#F2EFE8', lineHeight: 1.12 }}>
                 For those who have done the work — and are ready for{' '}
@@ -213,12 +213,12 @@ export default async function HomePage() {
                   what the work doesn't teach.
                 </em>
               </h2>
-            </div>
-            <div className="reveal rv-d2" style={{ paddingTop: '8px' }}>
+            </Reveal>
+            <Reveal delay={0.22} style={{ paddingTop: '8px' }}>
               <p style={{ fontSize: 'clamp(14px,1.4vw,17px)', color: 'rgba(242,239,232,0.55)', lineHeight: 1.85 }}>
                 If you have ever felt the gap between what finance looks like on paper and how it actually moves — you already understand why The Finance Room exists. This is not for those beginning to learn finance. It is for those who know enough to know what they are still missing.
               </p>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -234,7 +234,7 @@ export default async function HomePage() {
         <div className="container relative">
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 mb-14 md:mb-16 items-end">
-            <div className="reveal">
+            <Reveal>
               <p className="kicker mb-8">The Insider Series</p>
               <h2 className="heading-section" style={{ fontSize: 'clamp(28px,5vw,60px)', color: '#F2EFE8' }}>
                 One practitioner.<br />One real decision.<br />
@@ -242,9 +242,9 @@ export default async function HomePage() {
                   No version for the classroom.
                 </em>
               </h2>
-            </div>
+            </Reveal>
 
-            <div className="reveal rv-d2 flex flex-col justify-end gap-6 pb-2 md:pb-0">
+            <Reveal delay={0.22} className="flex flex-col justify-end gap-6 pb-2 md:pb-0">
               <p style={{ fontSize: 'clamp(13px,1.3vw,16px)', color: 'rgba(242,239,232,0.5)', lineHeight: 1.85, maxWidth: '420px' }}>
                 Every significant financial decision has a room behind it — where conviction is tested, where deals live or die, and where judgment matters more than any model. The Insider Series is your way in.
               </p>
@@ -257,7 +257,7 @@ export default async function HomePage() {
               <p className="text-[10px] tracking-[0.16em] uppercase mt-2 mb-4 md:mb-0" style={{ color: 'rgba(242,239,232,0.4)' }}>
                 Free to attend · Live sessions · By application only
               </p>
-            </div>
+            </Reveal>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 border-t"
@@ -279,10 +279,11 @@ export default async function HomePage() {
                 body: 'One session is a perspective shift. A year of sessions is a different career trajectory.',
               },
             ].map(({ n, title, body }, i) => (
-              <div
+              <Reveal
                 key={n}
-                className="reveal flex flex-col gap-3 py-8 md:py-10 px-0 md:px-8 border-b last:border-b-0 md:border-b-0 md:border-r last:border-r-0"
-                style={{ borderColor: 'rgba(255,255,255,0.07)', transitionDelay: `${i * 0.12}s` }}
+                delay={i * 0.12}
+                className="flex flex-col gap-3 py-8 md:py-10 px-0 md:px-8 border-b last:border-b-0 md:border-b-0 md:border-r last:border-r-0"
+                style={{ borderColor: 'rgba(255,255,255,0.07)' }}
               >
                 <span className="block mb-4" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '48px', fontWeight: 300, color: 'rgba(200,168,75,0.12)', lineHeight: 1 }}>
                   {n}
@@ -293,7 +294,7 @@ export default async function HomePage() {
                 <p style={{ fontSize: '13px', color: 'rgba(242,239,232,0.48)', lineHeight: 1.78 }}>
                   {body}
                 </p>
-              </div>
+              </Reveal>
             ))}
           </div>
 
