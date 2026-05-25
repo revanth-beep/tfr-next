@@ -43,11 +43,11 @@ export default async function EventsPage() {
         }} />
 
         <div className="container relative z-10 pt-10 pb-12 md:pt-16 md:pb-16">
-          <p className="kicker mb-5">The Insider Series</p>
-          <h1 className="heading-display mb-4" style={{ fontSize: 'clamp(36px,5vw,68px)', color: '#F2EFE8' }}>
+          <p className="kicker mb-5 reveal">The Insider Series</p>
+          <h1 className="heading-display mb-4 reveal rv-d1" style={{ fontSize: 'clamp(36px,5vw,68px)', color: '#F2EFE8' }}>
             Sessions
           </h1>
-          <p style={{ fontSize: 'clamp(13px,1.3vw,16px)', color: 'rgba(242,239,232,0.5)', lineHeight: 1.7, maxWidth: '440px' }}>
+          <p className="reveal rv-d2" style={{ fontSize: 'clamp(13px,1.3vw,16px)', color: 'rgba(242,239,232,0.5)', lineHeight: 1.7, maxWidth: '440px' }}>
             One senior practitioner. One real decision. A small, vetted group who
             can engage at that level. No recordings. No version for the classroom.
           </p>
@@ -69,7 +69,7 @@ export default async function EventsPage() {
             </div>
           ) : upcoming.length > 0 ? (
             <div className="flex flex-col">
-              {upcoming.map((event) => {
+              {upcoming.map((event, idx) => {
                 const isFeatured = event.isFeatured
                 const seats      = Math.max(0, event.totalSeats - event._count.registrations)
                 const pct        = Math.round((event._count.registrations / event.totalSeats) * 100)
@@ -78,8 +78,8 @@ export default async function EventsPage() {
                   <Link
                     key={event.id}
                     href={`/events/${event.slug}`}
-                    className="group block transition-all duration-300"
-                    style={{
+                    className="reveal group block transition-all duration-300"
+                    style={{ transitionDelay: `${idx * 0.1}s`,
                       border: isFeatured
                         ? '1px solid rgba(200,168,75,0.45)'
                         : '1px solid rgba(255,255,255,0.12)',
@@ -173,7 +173,7 @@ export default async function EventsPage() {
           <div className="container">
 
             {/* Section header */}
-            <div className="flex items-end justify-between mb-5 md:mb-7 pb-4"
+            <div className="reveal flex items-end justify-between mb-5 md:mb-7 pb-4"
               style={{ borderBottom: '1px solid rgba(124,185,217,0.15)' }}>
               <h2 className="font-display"
                 style={{ fontSize: 'clamp(20px,2.5vw,30px)', color: '#D6EAFA', letterSpacing: '-0.01em' }}>
@@ -187,12 +187,14 @@ export default async function EventsPage() {
 
             {/* Past event cards */}
             <div className="flex flex-col gap-2">
-              {past.map((event) => (
+              {past.map((event, idx) => (
                 <div
                   key={event.id}
+                  className="reveal"
                   style={{
                     border: '1px solid rgba(242,239,232,0.1)',
                     background: '#0E1F38',
+                    transitionDelay: `${idx * 0.08}s`,
                   }}
                 >
                   <div className="p-5 md:p-6 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 items-center">

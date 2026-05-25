@@ -75,9 +75,9 @@ export default async function HomePage() {
                 { n: '02', text: 'The best network knows more than you.' },
                 { n: '03', text: 'Judgment cannot be modelled.' },
                 { n: '04', text: 'Access is the actual asset.' },
-              ].map(({ n, text }) => (
-                <div key={n} className="group relative p-5 md:p-8 border-b border-r overflow-hidden transition-colors"
-                  style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
+              ].map(({ n, text }, i) => (
+                <div key={n} className="reveal group relative p-5 md:p-8 border-b border-r overflow-hidden transition-colors"
+                  style={{ borderColor: 'rgba(255,255,255,0.07)', transitionDelay: `${i * 0.1}s` }}>
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                     style={{ background: 'rgba(200,168,75,0.03)' }} />
                   <div className="select-none mb-5"
@@ -105,10 +105,10 @@ export default async function HomePage() {
       {/* ═══ FEATURED EVENT ════════════════════════════════════════════════════ */}
       <section id="events" className="section-pad" style={{ background: '#09162A', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
         <div className="container">
-          <p className="kicker mb-10">Upcoming Session</p>
+          <p className="kicker mb-10 reveal">Upcoming Session</p>
 
           {event ? (
-            <Link href={`/events/${event.slug}`} className="block" style={{ textDecoration: 'none' }}>
+            <Link href={`/events/${event.slug}`} className="reveal block" style={{ textDecoration: 'none', transitionDelay: '0.14s' }}>
               <div className="flex flex-col md:flex-row" style={{ border: '1px solid rgba(200,168,75,0.4)', overflow: 'hidden' }}>
 
                 {/* ── Date panel */}
@@ -188,7 +188,7 @@ export default async function HomePage() {
               </div>
             </Link>
           ) : (
-            <div className="border p-12 md:p-16 text-center" style={{ borderColor: 'rgba(255,255,255,0.07)', borderStyle: 'dashed' }}>
+            <div className="reveal border p-12 md:p-16 text-center" style={{ borderColor: 'rgba(255,255,255,0.07)', borderStyle: 'dashed', transitionDelay: '0.14s' }}>
               <p className="font-serif italic text-[20px] mb-3" style={{ color: 'rgba(242,239,232,0.35)' }}>
                 The next session is being curated.
               </p>
@@ -204,7 +204,7 @@ export default async function HomePage() {
       <section className="section-pad" style={{ background: '#0F1E37', borderTop: '1px solid rgba(200,168,75,0.1)', borderBottom: '1px solid rgba(200,168,75,0.07)' }}>
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-start">
-            <div>
+            <div className="reveal">
               <p className="kicker mb-8">Who it is for</p>
               <h2 className="heading-section" style={{ fontSize: 'clamp(26px,4.5vw,52px)', color: '#F2EFE8', lineHeight: 1.12 }}>
                 For those who have done the work — and are ready for{' '}
@@ -213,7 +213,7 @@ export default async function HomePage() {
                 </em>
               </h2>
             </div>
-            <div style={{ paddingTop: '8px' }}>
+            <div className="reveal rv-d2" style={{ paddingTop: '8px' }}>
               <p style={{ fontSize: 'clamp(14px,1.4vw,17px)', color: 'rgba(242,239,232,0.55)', lineHeight: 1.85 }}>
                 If you have ever felt the gap between what finance looks like on paper and how it actually moves — you already understand why The Finance Room exists. This is not for those beginning to learn finance. It is for those who know enough to know what they are still missing.
               </p>
@@ -233,7 +233,7 @@ export default async function HomePage() {
         <div className="container relative">
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 mb-14 md:mb-16 items-end">
-            <div>
+            <div className="reveal">
               <p className="kicker mb-8">The Insider Series</p>
               <h2 className="heading-section" style={{ fontSize: 'clamp(28px,5vw,60px)', color: '#F2EFE8' }}>
                 One practitioner.<br />One real decision.<br />
@@ -243,7 +243,7 @@ export default async function HomePage() {
               </h2>
             </div>
 
-            <div className="flex flex-col justify-end gap-6 pb-2 md:pb-0">
+            <div className="reveal rv-d2 flex flex-col justify-end gap-6 pb-2 md:pb-0">
               <p style={{ fontSize: 'clamp(13px,1.3vw,16px)', color: 'rgba(242,239,232,0.5)', lineHeight: 1.85, maxWidth: '420px' }}>
                 Every significant financial decision has a room behind it — where conviction is tested, where deals live or die, and where judgment matters more than any model. The Insider Series is your way in.
               </p>
@@ -277,11 +277,11 @@ export default async function HomePage() {
                 title: 'Access that compounds',
                 body: 'One session is a perspective shift. A year of sessions is a different career trajectory.',
               },
-            ].map(({ n, title, body }) => (
+            ].map(({ n, title, body }, i) => (
               <div
                 key={n}
-                className="flex flex-col gap-3 py-8 md:py-10 px-0 md:px-8 border-b last:border-b-0 md:border-b-0 md:border-r last:border-r-0"
-                style={{ borderColor: 'rgba(255,255,255,0.07)' }}
+                className="reveal flex flex-col gap-3 py-8 md:py-10 px-0 md:px-8 border-b last:border-b-0 md:border-b-0 md:border-r last:border-r-0"
+                style={{ borderColor: 'rgba(255,255,255,0.07)', transitionDelay: `${i * 0.12}s` }}
               >
                 <span className="block mb-4" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '48px', fontWeight: 300, color: 'rgba(200,168,75,0.12)', lineHeight: 1 }}>
                   {n}

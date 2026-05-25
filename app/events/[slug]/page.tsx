@@ -4,6 +4,7 @@ import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/db'
 import { formatDate, formatTime, getSeatsRemaining } from '@/lib/utils'
 import { RegistrationForm } from '@/components/registration-form'
+import { HeroReveal } from '@/components/hero-reveal'
 import Link from 'next/link'
 
 interface Props {
@@ -60,35 +61,36 @@ export default async function EventPage({ params }: Props) {
         style={{ background: '#09162A' }}
       >
           <div className="container relative z-10">
-          <Link
-            href="/events"
-            className="event-back-link inline-flex items-center gap-2 mb-8 text-[11px] tracking-[0.16em] uppercase"
-          >
-            <span>←</span> All Events
-          </Link>
-
-          <h1
-            className="heading-section mb-4"
-            style={{ fontSize: 'clamp(32px, 5vw, 68px)', color: '#F2EFE8', maxWidth: '800px' }}
-          >
-            {event.title}
-          </h1>
-          {event.subtitle && (
-            <p
-              className="font-serif italic mb-8"
-              style={{
-                fontSize: 'clamp(16px, 2vw, 24px)',
-                color: 'rgba(242,239,232,0.55)',
-                lineHeight: 1.5,
-                maxWidth: '640px',
-              }}
+          <HeroReveal>
+            <Link
+              href="/events"
+              className="event-back-link inline-flex items-center gap-2 mb-8 text-[11px] tracking-[0.16em] uppercase"
             >
-              {event.subtitle}
-            </p>
-          )}
+              <span>←</span> All Events
+            </Link>
 
-          {/* Meta strip */}
-          <div className="flex flex-wrap gap-3 md:gap-6">
+            <h1
+              className="heading-section mb-4"
+              style={{ fontSize: 'clamp(32px, 5vw, 68px)', color: '#F2EFE8', maxWidth: '800px' }}
+            >
+              {event.title}
+            </h1>
+            {event.subtitle && (
+              <p
+                className="font-serif italic mb-8"
+                style={{
+                  fontSize: 'clamp(16px, 2vw, 24px)',
+                  color: 'rgba(242,239,232,0.55)',
+                  lineHeight: 1.5,
+                  maxWidth: '640px',
+                }}
+              >
+                {event.subtitle}
+              </p>
+            )}
+
+            {/* Meta strip */}
+            <div className="flex flex-wrap gap-3 md:gap-6">
             {[
               { icon: '📅', label: formatDate(new Date(event.date)) },
               { icon: '🕐', label: `${formatTime(new Date(event.date))} IST` },
@@ -106,7 +108,8 @@ export default async function EventPage({ params }: Props) {
                 </span>
               </div>
             ))}
-          </div>
+            </div>
+          </HeroReveal>
         </div>
       </section>
 
@@ -121,7 +124,7 @@ export default async function EventPage({ params }: Props) {
               {/* Cover note / pull quote */}
               {event.coverNote && (
                 <blockquote
-                  className="pl-6 font-serif italic"
+                  className="reveal pl-6 font-serif italic"
                   style={{
                     borderLeft: '2px solid rgba(200,168,75,0.4)',
                     fontSize: 'clamp(18px, 2vw, 24px)',
@@ -136,7 +139,7 @@ export default async function EventPage({ params }: Props) {
               {/* Two-column: What this session covers / Who should be in the room */}
               {descParas.length >= 2 && (
                 <div
-                  className="grid grid-cols-1 sm:grid-cols-2 border-t"
+                  className="reveal grid grid-cols-1 sm:grid-cols-2 border-t"
                   style={{ borderColor: 'rgba(255,255,255,0.07)' }}
                 >
                   {[
@@ -193,7 +196,7 @@ export default async function EventPage({ params }: Props) {
 
               {/* Format breakdown */}
               <div
-                className="border-t pt-10"
+                className="reveal border-t pt-10"
                 style={{ borderColor: 'rgba(255,255,255,0.07)' }}
               >
                 <h2
@@ -233,7 +236,7 @@ export default async function EventPage({ params }: Props) {
               {/* Practitioner */}
               {practitioner && (
                 <div
-                  className="border-t pt-10"
+                  className="reveal border-t pt-10"
                   style={{ borderColor: 'rgba(255,255,255,0.07)' }}
                 >
                   <h2
@@ -317,7 +320,7 @@ export default async function EventPage({ params }: Props) {
             </div>
 
             {/* Right — sidebar */}
-            <div className="lg:col-span-1 order-first lg:order-none">
+            <div className="reveal lg:col-span-1 order-first lg:order-none" style={{ transitionDelay: '0.18s' }}>
               <div className="sticky top-28">
 
                 {isPast ? (
