@@ -111,8 +111,8 @@ export default async function EventsPage() {
                         </div>
 
                         <h2
-                          className="font-display font-bold"
-                          style={{ fontSize: 'clamp(19px,2.4vw,26px)', color: '#F2EFE8', letterSpacing: '-0.01em' }}
+                          className="font-display"
+                          style={{ fontSize: 'clamp(20px,2.4vw,30px)', color: '#F2EFE8', letterSpacing: '-0.01em' }}
                         >
                           {event.title}
                         </h2>
@@ -177,7 +177,7 @@ export default async function EventsPage() {
             <div className="flex items-end justify-between mb-6 md:mb-10 pb-5 md:pb-6"
               style={{ borderBottom: '1px solid rgba(124,185,217,0.15)' }}>
               <div>
-                <h2 className="font-display font-bold"
+                <h2 className="font-display"
                   style={{ fontSize: 'clamp(22px,3vw,34px)', color: '#D6EAFA', letterSpacing: '-0.01em' }}>
                   Past Sessions
                 </h2>
@@ -215,8 +215,8 @@ export default async function EventsPage() {
                       </div>
 
                       <h2
-                        className="font-display font-bold"
-                        style={{ fontSize: 'clamp(17px,2.2vw,22px)', color: '#F2EFE8', letterSpacing: '-0.01em' }}
+                        className="font-display"
+                        style={{ fontSize: 'clamp(18px,2.2vw,26px)', color: '#F2EFE8', letterSpacing: '-0.01em' }}
                       >
                         {event.title}
                       </h2>

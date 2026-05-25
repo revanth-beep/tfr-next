@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700;12..96,800&family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -12,6 +12,7 @@ main { padding-top: var(--chrome-h); }
 
 body {
   font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
   background: #09162A;
   color: #F2EFE8;
   overflow-x: hidden;
@@ -62,26 +63,37 @@ body::before {
 /* ─── Typography ────────────────────────────────────────────────────────────── */
 
 .heading-display {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 800;
-  line-height: 0.94;
-  letter-spacing: -0.03em;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
 }
 
 .heading-section {
-  font-family: 'Bricolage Grotesque', sans-serif;
-  font-weight: 700;
-  line-height: 1.0;
-  letter-spacing: -0.025em;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
 }
 
 .kicker {
   font-family: 'DM Sans', sans-serif;
   font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
   color: #C8A84B;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.kicker::before {
+  content: '';
+  width: 24px;
+  height: 1px;
+  background: #C8A84B;
+  flex-shrink: 0;
 }
 
 /* ─── Buttons ───────────────────────────────────────────────────────────────── */

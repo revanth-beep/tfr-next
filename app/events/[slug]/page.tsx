@@ -272,7 +272,7 @@ export default async function EventPage({ params }: Props) {
                     </div>
                     <div>
                       {practitioner.name ? (
-                        <p className="font-display font-bold text-[17px] mb-1" style={{ color: '#F2EFE8' }}>
+                        <p className="font-display text-[19px] mb-1" style={{ color: '#F2EFE8', fontWeight: 400 }}>
                           {practitioner.name}
                         </p>
                       ) : (

@@ -79,13 +79,15 @@ export default async function HomePage() {
                   style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                     style={{ background: 'rgba(200,168,75,0.03)' }} />
-                  <div className="font-display font-bold select-none mb-3"
-                    style={{ fontSize: 'clamp(36px,5vw,64px)', color: 'rgba(242,239,232,0.04)', letterSpacing: '-0.04em', lineHeight: 0.9 }}>
+                  <div className="select-none mb-5"
+                    style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '13px', color: '#C8A84B', letterSpacing: '2px', fontWeight: 400 }}>
                     {n}
                   </div>
-                  <p className="relative font-display" style={{
-                    fontSize: 'clamp(12px,1.3vw,15px)', fontWeight: 500,
-                    color: '#F2EFE8', lineHeight: 1.3, letterSpacing: '-0.01em',
+                  <p className="relative" style={{
+                    fontFamily: "'Cormorant Garamond', serif",
+                    fontSize: 'clamp(16px,1.6vw,22px)', fontWeight: 300,
+                    fontStyle: 'italic',
+                    color: '#F2EFE8', lineHeight: 1.3,
                   }}>
                     {text}
                   </p>
@@ -203,9 +205,9 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-start">
             <div>
               <p className="kicker mb-8">Who it is for</p>
-              <h2 className="heading-section" style={{ fontSize: 'clamp(26px,4.5vw,58px)', color: '#F2EFE8', lineHeight: 1.05 }}>
+              <h2 className="heading-section" style={{ fontSize: 'clamp(26px,4.5vw,52px)', color: '#F2EFE8', lineHeight: 1.12 }}>
                 For those who have done the work — and are ready for{' '}
-                <em className="font-serif font-normal italic" style={{ color: '#C8A84B' }}>
+                <em className="italic" style={{ color: '#C8A84B' }}>
                   what the work doesn't teach.
                 </em>
               </h2>
@@ -232,9 +234,9 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 mb-14 md:mb-16 items-end">
             <div>
               <p className="kicker mb-8">The Insider Series</p>
-              <h2 className="heading-section" style={{ fontSize: 'clamp(28px,5vw,66px)', color: '#F2EFE8' }}>
+              <h2 className="heading-section" style={{ fontSize: 'clamp(28px,5vw,60px)', color: '#F2EFE8' }}>
                 One practitioner.<br />One real decision.<br />
-                <em className="font-serif font-normal italic" style={{ color: '#C8A84B' }}>
+                <em className="italic" style={{ color: '#C8A84B' }}>
                   No version for the classroom.
                 </em>
               </h2>
@@ -280,12 +282,10 @@ export default async function HomePage() {
                 className="flex flex-col gap-3 py-8 md:py-10 px-0 md:px-8 border-b last:border-b-0 md:border-b-0 md:border-r last:border-r-0"
                 style={{ borderColor: 'rgba(255,255,255,0.07)' }}
               >
-                <span className="font-display font-bold block mb-1 text-[10px] tracking-[0.22em]"
-                  style={{ color: 'rgba(200,168,75,0.55)' }}>
+                <span className="block mb-4" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '48px', fontWeight: 300, color: 'rgba(200,168,75,0.12)', lineHeight: 1 }}>
                   {n}
                 </span>
-                <p className="font-display font-medium"
-                  style={{ fontSize: 'clamp(14px,1.5vw,17px)', color: '#F2EFE8', lineHeight: 1.2 }}>
+                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 'clamp(18px,1.6vw,22px)', fontWeight: 400, color: '#F2EFE8', lineHeight: 1.2 }}>
                   {title}
                 </p>
                 <p style={{ fontSize: '13px', color: 'rgba(242,239,232,0.48)', lineHeight: 1.78 }}>

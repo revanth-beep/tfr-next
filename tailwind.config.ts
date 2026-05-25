@@ -31,8 +31,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ['Bricolage Grotesque', 'sans-serif'],
-        serif:   ['Instrument Serif', 'Georgia', 'serif'],
+        display: ['Cormorant Garamond', 'Georgia', 'serif'],
+        serif:   ['Cormorant Garamond', 'Georgia', 'serif'],
         sans:    ['DM Sans', 'sans-serif'],
       },
       fontSize: {
