@@ -7,35 +7,33 @@ export function ScrollReveal() {
   const path = usePathname()
 
   useEffect(() => {
-    const els = Array.from(document.querySelectorAll<HTMLElement>('.reveal:not(.visible)'))
+    let observer: IntersectionObserver | null = null
 
-    // Reveal elements already in the viewport synchronously — no waiting for observer
-    const remaining: HTMLElement[] = []
-    for (const el of els) {
-      const rect = el.getBoundingClientRect()
-      if (rect.top < window.innerHeight - 30) {
-        el.classList.add('visible')
-      } else {
-        remaining.push(el)
-      }
+    // Delay setup so the browser has a chance to paint the initial opacity:0 state.
+    // Without this, classList.add('visible') runs before the first paint and
+    // the browser skips the transition entirely.
+    const t = setTimeout(() => {
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(e => {
+            if (e.isIntersecting) {
+              ;(e.target as HTMLElement).classList.add('visible')
+              observer!.unobserve(e.target)
+            }
+          })
+        },
+        { threshold: 0.08, rootMargin: '0px 0px -20px 0px' },
+      )
+
+      document.querySelectorAll<HTMLElement>('.reveal:not(.visible)').forEach(el => {
+        observer!.observe(el)
+      })
+    }, 120)
+
+    return () => {
+      clearTimeout(t)
+      observer?.disconnect()
     }
-
-    if (!remaining.length) return
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.classList.add('visible')
-            observer.unobserve(e.target)
-          }
-        })
-      },
-      { threshold: 0.06, rootMargin: '0px 0px -30px 0px' },
-    )
-
-    remaining.forEach(el => observer.observe(el))
-    return () => observer.disconnect()
   }, [path])
 
   return null

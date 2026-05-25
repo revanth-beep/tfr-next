@@ -65,42 +65,43 @@ export default async function HomePage() {
           </HeroReveal>
         </div>
 
-        {/* ── What we believe — four beliefs strip */}
-        <div className="border-t mt-2 md:mt-0" style={{ borderColor: 'rgba(200,168,75,0.12)' }}>
-          <div className="container">
-            <div className="grid grid-cols-2 md:grid-cols-4 border-l"
-              style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
-              {[
-                { n: '01', text: 'Finance is not learned in classrooms.' },
-                { n: '02', text: 'The best network knows more than you.' },
-                { n: '03', text: 'Judgment cannot be modelled.' },
-                { n: '04', text: 'Access is the actual asset.' },
-              ].map(({ n, text }, i) => (
-                <div key={n} className="reveal group relative p-5 md:p-8 border-b border-r overflow-hidden"
-                  style={{ borderColor: 'rgba(255,255,255,0.07)', transitionDelay: `${i * 0.1}s` }}>
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                    style={{ background: 'rgba(200,168,75,0.03)' }} />
-                  <div className="select-none mb-5"
-                    style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '13px', color: '#C8A84B', letterSpacing: '2px', fontWeight: 400 }}>
-                    {n}
-                  </div>
-                  <p className="relative" style={{
-                    fontFamily: "'Cormorant Garamond', serif",
-                    fontSize: 'clamp(16px,1.6vw,22px)', fontWeight: 300,
-                    fontStyle: 'italic',
-                    color: '#F2EFE8', lineHeight: 1.3,
-                  }}>
-                    {text}
-                  </p>
-                  <div className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full transition-all duration-500"
-                    style={{ background: '#C8A84B' }} />
+  
+      </section>
+
+      {/* ── What we believe — four beliefs strip (outside overflow:hidden section) */}
+      <div style={{ background: '#09162A', borderTop: '1px solid rgba(200,168,75,0.12)' }}>
+        <div className="container">
+          <div className="grid grid-cols-2 md:grid-cols-4 border-l"
+            style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
+            {[
+              { n: '01', text: 'Finance is not learned in classrooms.' },
+              { n: '02', text: 'The best network knows more than you.' },
+              { n: '03', text: 'Judgment cannot be modelled.' },
+              { n: '04', text: 'Access is the actual asset.' },
+            ].map(({ n, text }, i) => (
+              <div key={n} className="reveal group relative p-5 md:p-8 border-b border-r overflow-hidden"
+                style={{ borderColor: 'rgba(255,255,255,0.07)', transitionDelay: `${i * 0.1}s` }}>
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{ background: 'rgba(200,168,75,0.03)' }} />
+                <div className="select-none mb-5"
+                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '13px', color: '#C8A84B', letterSpacing: '2px', fontWeight: 400 }}>
+                  {n}
                 </div>
-              ))}
-            </div>
+                <p className="relative" style={{
+                  fontFamily: "'Cormorant Garamond', serif",
+                  fontSize: 'clamp(16px,1.6vw,22px)', fontWeight: 300,
+                  fontStyle: 'italic',
+                  color: '#F2EFE8', lineHeight: 1.3,
+                }}>
+                  {text}
+                </p>
+                <div className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full transition-all duration-500"
+                  style={{ background: '#C8A84B' }} />
+              </div>
+            ))}
           </div>
         </div>
-
-      </section>
+      </div>
 
       {/* ═══ FEATURED EVENT ════════════════════════════════════════════════════ */}
       <section id="events" className="section-pad" style={{ background: '#09162A', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
