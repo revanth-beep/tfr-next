@@ -76,7 +76,7 @@ export default async function HomePage() {
                 { n: '03', text: 'Judgment cannot be modelled.' },
                 { n: '04', text: 'Access is the actual asset.' },
               ].map(({ n, text }, i) => (
-                <div key={n} className="reveal group relative p-5 md:p-8 border-b border-r overflow-hidden transition-colors"
+                <div key={n} className="reveal group relative p-5 md:p-8 border-b border-r overflow-hidden"
                   style={{ borderColor: 'rgba(255,255,255,0.07)', transitionDelay: `${i * 0.1}s` }}>
                   <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                     style={{ background: 'rgba(200,168,75,0.03)' }} />

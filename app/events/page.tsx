@@ -78,7 +78,7 @@ export default async function EventsPage() {
                   <Link
                     key={event.id}
                     href={`/events/${event.slug}`}
-                    className="reveal group block transition-all duration-300"
+                    className="reveal group block"
                     style={{ transitionDelay: `${idx * 0.1}s`,
                       border: isFeatured
                         ? '1px solid rgba(200,168,75,0.45)'
