@@ -34,8 +34,6 @@ export default async function HomePage() {
       <section className="relative overflow-hidden" style={{ background: '#09162A' }}>
         <div className="container relative z-10 pt-14 pb-28 md:pt-24 md:pb-24">
           <HeroReveal>
-            <p className="kicker">Live Sessions · By Application Only</p>
-
             <h1 className="heading-display" style={{ fontSize: 'clamp(44px,8vw,108px)', color: '#F2EFE8' }}>
               <span className="block">Practitioner-led.</span>
               <span className="block">Community-driven.</span>
