@@ -15,18 +15,35 @@ function fmt(iso: string) {
 }
 
 const BANNER_H = 44
+const storageKey = (slug: string) => `tfr-banner-dismissed-${slug}`
 
 export function EventFlash({ event }: Props) {
-  const [visible, setVisible] = useState(false)
+  const [visible, setVisible]     = useState(false)
+  const [dismissing, setDismissing] = useState(false)
+  const [dismissed, setDismissed]  = useState(false)
 
   useEffect(() => {
     if (!event) return
+    // Don't show if user already dismissed this specific event's banner
+    if (sessionStorage.getItem(storageKey(event.slug))) {
+      setDismissed(true)
+      return
+    }
     const delay = loaderDone ? 100 : 3800
     const t = setTimeout(() => setVisible(true), delay)
     return () => clearTimeout(t)
   }, [event])
 
-  if (!event) return null
+  function handleDismiss() {
+    setDismissing(true)
+    // Wait for bannerOut animation (0.4s) then remove from DOM
+    setTimeout(() => {
+      if (event) sessionStorage.setItem(storageKey(event.slug), '1')
+      setDismissed(true)
+    }, 420)
+  }
+
+  if (!event || dismissed) return null
 
   return (
     <div
@@ -37,13 +54,17 @@ export function EventFlash({ event }: Props) {
         display: 'flex',
         alignItems: 'center',
         overflow: 'hidden',
-        animation: visible ? 'bannerIn 0.55s cubic-bezier(0.16,1,0.3,1) forwards' : 'none',
-        transform: visible ? undefined : 'translateY(-100%)',
+        animation: dismissing
+          ? 'bannerOut 0.4s cubic-bezier(0.4,0,1,1) forwards'
+          : visible
+            ? 'bannerIn 0.55s cubic-bezier(0.16,1,0.3,1) forwards'
+            : 'none',
+        transform: visible || dismissing ? undefined : 'translateY(-100%)',
       }}
     >
       <div className="container flex items-center justify-between gap-3" style={{ height: '100%' }}>
 
-        {/* Status */}
+        {/* Status dot */}
         <div className="flex items-center gap-2 shrink-0">
           <span className="relative flex shrink-0">
             <span className="animate-ping absolute inline-flex h-1.5 w-1.5 rounded-full opacity-50"
@@ -63,14 +84,15 @@ export function EventFlash({ event }: Props) {
             style={{ fontSize: 'clamp(11px,2vw,13px)', color: '#09162A', letterSpacing: '-0.01em' }}>
             {event.title}
           </p>
-          <span className="hidden sm:block shrink-0" style={{ width: 3, height: 3, background: 'rgba(9,22,42,0.3)', borderRadius: '50%' }} />
+          <span className="hidden sm:block shrink-0"
+            style={{ width: 3, height: 3, background: 'rgba(9,22,42,0.3)', borderRadius: '50%' }} />
           <p className="hidden sm:block text-[11px] shrink-0" style={{ color: 'rgba(9,22,42,0.55)' }}>
             {fmt(event.date)} · Free
           </p>
         </div>
 
-        {/* CTA */}
-        <div className="flex items-center shrink-0">
+        {/* CTA + close */}
+        <div className="flex items-center gap-2 shrink-0">
           <Link
             href={`/events/${event.slug}`}
             className="hidden sm:inline-flex items-center gap-1.5 text-[10px] font-bold tracking-[0.18em] uppercase px-3 py-1.5 transition-opacity hover:opacity-80"
@@ -85,6 +107,17 @@ export function EventFlash({ event }: Props) {
           >
             Register →
           </Link>
+
+          <button
+            onClick={handleDismiss}
+            aria-label="Dismiss banner"
+            className="ml-1 flex items-center justify-center transition-opacity hover:opacity-60"
+            style={{ width: 28, height: 28, color: 'rgba(9,22,42,0.5)', flexShrink: 0 }}
+          >
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M1 1l10 10M11 1L1 11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+            </svg>
+          </button>
         </div>
 
       </div>
