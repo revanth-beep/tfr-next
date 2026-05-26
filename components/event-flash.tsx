@@ -15,7 +15,8 @@ function fmt(iso: string) {
 }
 
 const BANNER_H = 44
-const storageKey = (slug: string) => `tfr-banner-dismissed-${slug}`
+// Module-level: resets on page refresh, persists across client-side navigation
+let bannerDismissed = false
 
 export function EventFlash({ event }: Props) {
   const [visible, setVisible]     = useState(false)
@@ -24,11 +25,7 @@ export function EventFlash({ event }: Props) {
 
   useEffect(() => {
     if (!event) return
-    // Don't show if user already dismissed this specific event's banner
-    if (sessionStorage.getItem(storageKey(event.slug))) {
-      setDismissed(true)
-      return
-    }
+    if (bannerDismissed) { setDismissed(true); return }
     const delay = loaderDone ? 100 : 3800
     const t = setTimeout(() => setVisible(true), delay)
     return () => clearTimeout(t)
@@ -38,7 +35,7 @@ export function EventFlash({ event }: Props) {
     setDismissing(true)
     // Wait for bannerOut animation (0.4s) then remove from DOM
     setTimeout(() => {
-      if (event) sessionStorage.setItem(storageKey(event.slug), '1')
+      bannerDismissed = true
       setDismissed(true)
     }, 420)
   }
