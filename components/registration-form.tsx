@@ -143,18 +143,46 @@ export function RegistrationForm({
         </div>
       )}
 
-      <div>
-        <label className="admin-label">Your Name</label>
-        <div
-          className="px-4 py-3 text-[14px]"
-          style={{
-            background: 'rgba(255,255,255,0.03)',
-            border: '1px solid rgba(255,255,255,0.08)',
-            color: 'rgba(242,239,232,0.55)',
-          }}
-        >
-          {userName || 'Signed in via Google'}
+      {/* Pre-filled from Google — read-only */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label className="admin-label">Name</label>
+          <div
+            className="px-4 py-3 text-[14px]"
+            style={{
+              background: 'rgba(255,255,255,0.03)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              color: 'rgba(242,239,232,0.55)',
+            }}
+          >
+            {userName || 'Signed in via Google'}
+          </div>
         </div>
+        <div>
+          <label className="admin-label">Email</label>
+          <div
+            className="px-4 py-3 text-[14px]"
+            style={{
+              background: 'rgba(255,255,255,0.03)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              color: 'rgba(242,239,232,0.55)',
+            }}
+          >
+            {userEmail || '—'}
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <label htmlFor="phone" className="admin-label">Phone Number</label>
+        <input
+          id="phone"
+          name="phone"
+          type="tel"
+          required
+          className="admin-input"
+          placeholder="+91 98765 43210"
+        />
       </div>
 
       <div>
@@ -170,7 +198,7 @@ export function RegistrationForm({
 
       <div>
         <label htmlFor="yearsInFinance" className="admin-label">Years in Finance</label>
-        <select id="yearsInFinance" name="yearsInFinance" className="admin-input" style={{  }}>
+        <select id="yearsInFinance" name="yearsInFinance" className="admin-input">
           <option value="">Select…</option>
           <option value="0-2">0 – 2 years</option>
           <option value="2-5">2 – 5 years</option>
@@ -190,10 +218,21 @@ export function RegistrationForm({
         />
       </div>
 
+      <div>
+        <label htmlFor="linkedIn" className="admin-label">LinkedIn Profile</label>
+        <input
+          id="linkedIn"
+          name="linkedIn"
+          type="url"
+          className="admin-input"
+          placeholder="linkedin.com/in/yourname"
+        />
+      </div>
+
       {tracks.length > 0 && (
         <div>
           <label htmlFor="track" className="admin-label">Track of Interest</label>
-          <select id="track" name="track" className="admin-input" style={{  }}>
+          <select id="track" name="track" className="admin-input">
             <option value="">Select…</option>
             {tracks.map(t => <option key={t} value={t}>{t}</option>)}
           </select>

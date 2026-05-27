@@ -137,8 +137,8 @@ export default async function AdminDashboard() {
                   </div>
 
                   {/* Registrations */}
-                  <div className="shrink-0 text-right">
-                    <p className="text-[14px] font-bold" style={{ color: '#C8A84B' }}>
+                  <Link href={`/admin/events/${event.id}/registrations`} className="shrink-0 text-right group">
+                    <p className="text-[14px] font-bold group-hover:underline" style={{ color: '#C8A84B' }}>
                       {event._count.registrations}
                       <span className="font-normal text-[12px]" style={{ color: 'rgba(242,239,232,0.3)' }}>
                         /{event.totalSeats}
@@ -147,7 +147,7 @@ export default async function AdminDashboard() {
                     <p className="text-[11px] mt-0.5" style={{ color: 'rgba(242,239,232,0.3)' }}>
                       {seatsLeft} left · {pct}%
                     </p>
-                  </div>
+                  </Link>
 
                   {/* Badges */}
                   <div className="shrink-0 flex items-center gap-2">
@@ -192,6 +192,13 @@ export default async function AdminDashboard() {
                       style={{ color: 'rgba(242,239,232,0.55)' }}
                     >
                       Edit
+                    </Link>
+                    <Link
+                      href={`/admin/events/${event.id}/registrations`}
+                      className="text-[11px] tracking-[0.1em] uppercase"
+                      style={{ color: '#C8A84B' }}
+                    >
+                      Registrations
                     </Link>
                     <DeleteEventButton eventId={event.id} eventTitle={event.title} />
                   </div>

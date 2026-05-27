@@ -21,10 +21,14 @@ export async function registerForEvent(
   }
 
   const eventId        = formData.get('eventId')        as string
+  const phone          = formData.get('phone')          as string
+  const linkedIn       = formData.get('linkedIn')       as string
   const track          = formData.get('track')          as string
   const currentRole    = formData.get('currentRole')    as string
   const yearsInFinance = formData.get('yearsInFinance') as string
   const city           = formData.get('city')           as string
+
+  if (!phone?.trim()) return { error: 'Phone number is required.' }
 
   if (!eventId) return { error: 'Invalid event.' }
 
@@ -45,7 +49,9 @@ export async function registerForEvent(
   await prisma.registration.create({
     data: {
       eventId,
-      userId: session.user.id,
+      userId:         session.user.id,
+      phone:          phone.trim(),
+      linkedIn:       linkedIn?.trim() || null,
       track:          track || null,
       currentRole:    currentRole || null,
       yearsInFinance: yearsInFinance || null,

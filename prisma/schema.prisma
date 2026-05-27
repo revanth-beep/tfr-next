@@ -130,6 +130,8 @@ model Registration {
   user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId  String
 
+  phone          String?
+  linkedIn       String?
   yearsInFinance String?
   currentRole    String?
   city           String?
