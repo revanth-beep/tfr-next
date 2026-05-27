@@ -216,6 +216,30 @@ export default async function AdminDashboard() {
             </div>
           ))}
         </div>
+
+        {/* Homepage content */}
+        <div className="mt-12">
+          <h2 className="font-display font-bold text-[20px] mb-4" style={{ color: '#F2EFE8' }}>
+            Content
+          </h2>
+          <Link
+            href="/admin/homepage"
+            className="border p-6 flex items-center justify-between group"
+            style={{ borderColor: 'rgba(255,255,255,0.08)', background: '#0F0F1A' }}
+          >
+            <div>
+              <p className="font-display font-bold text-[15px]" style={{ color: '#F2EFE8' }}>
+                Homepage Copy
+              </p>
+              <p className="text-[12px] mt-1" style={{ color: 'rgba(242,239,232,0.4)' }}>
+                Edit headlines, belief cards, and all body text on the homepage.
+              </p>
+            </div>
+            <span className="text-[11px] tracking-[0.12em] uppercase" style={{ color: '#C8A84B' }}>
+              Edit →
+            </span>
+          </Link>
+        </div>
       </div>
     </div>
   )
