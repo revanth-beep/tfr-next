@@ -34,7 +34,7 @@ export function EventForm({ event }: EventFormProps) {
 
   const practitioner = event?.practitioner
     ? JSON.parse(event.practitioner as string) as {
-        name?: string; title?: string; company?: string; experience?: string; bio?: string
+        name?: string; title?: string; company?: string; experience?: string; bio?: string; attributes?: string[]
       }
     : null
 
@@ -92,11 +92,14 @@ export function EventForm({ event }: EventFormProps) {
 
         <div>
           <label htmlFor="description" className="admin-label">Description *</label>
+          <p className="text-[11px] mb-1.5" style={{ color: 'rgba(242,239,232,0.35)' }}>
+            Separate paragraphs with a blank line. The first paragraph becomes "What this session covers", the second becomes "Who should be in the room".
+          </p>
           <textarea
-            id="description" name="description" rows={6} required
+            id="description" name="description" rows={8} required
             defaultValue={event?.description}
             className="admin-input resize-y"
-            placeholder="Describe what attendees will experience in this session…"
+            placeholder="What attendees will experience in this session…&#10;&#10;Who this session is designed for…"
           />
         </div>
 
@@ -256,6 +259,19 @@ export function EventForm({ event }: EventFormProps) {
             id="practitionerBio" name="practitionerBio" rows={3}
             defaultValue={practitioner?.bio ?? ''}
             className="admin-input resize-y"
+          />
+        </div>
+
+        <div>
+          <label htmlFor="practitionerAttributes" className="admin-label">Key attributes (one per line)</label>
+          <p className="text-[11px] mb-1.5" style={{ color: 'rgba(242,239,232,0.35)' }}>
+            Bullet points shown below the bio. Each line is one attribute.
+          </p>
+          <textarea
+            id="practitionerAttributes" name="practitionerAttributes" rows={4}
+            defaultValue={(practitioner?.attributes ?? []).join('\n')}
+            className="admin-input resize-y"
+            placeholder={'10+ years in PE/VC investing\nLed 30+ investment decisions\nPreviously at Goldman Sachs'}
           />
         </div>
       </div>

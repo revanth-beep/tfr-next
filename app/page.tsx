@@ -3,6 +3,7 @@ import { prisma } from '@/lib/db'
 import { formatTime } from '@/lib/utils'
 import { HeroReveal } from '@/components/hero-reveal'
 import { Reveal } from '@/components/reveal'
+import { getHomepageContent } from '@/lib/homepage'
 
 async function getFeaturedEvent() {
   try {
@@ -17,7 +18,10 @@ async function getFeaturedEvent() {
 }
 
 export default async function HomePage() {
-  const event = await getFeaturedEvent()
+  const [event, content] = await Promise.all([
+    getFeaturedEvent(),
+    getHomepageContent(),
+  ])
 
   const registered = event?._count?.registrations ?? 0
   const totalSeats = event?.totalSeats ?? 30
@@ -35,15 +39,15 @@ export default async function HomePage() {
         <div className="container relative z-10 pt-14 pb-28 md:pt-24 md:pb-24">
           <HeroReveal>
             <h1 className="heading-display" style={{ fontSize: 'clamp(44px,8vw,108px)', color: '#F2EFE8' }}>
-              <span className="block">Practitioner-led.</span>
-              <span className="block">Community-driven.</span>
-              <span className="block" style={{ color: '#C8A84B' }}>Built for serious finance careers.</span>
+              <span className="block">{content.heroLine1}</span>
+              <span className="block">{content.heroLine2}</span>
+              <span className="block" style={{ color: '#C8A84B' }}>{content.heroLine3}</span>
             </h1>
 
             <p className="font-serif italic" style={{
               fontSize: 'clamp(15px,1.7vw,20px)', color: 'rgba(242,239,232,0.6)', lineHeight: 1.65, maxWidth: '520px',
             }}>
-              The room you were never told about. Now open.
+              {content.heroTagline}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4">
@@ -68,12 +72,12 @@ export default async function HomePage() {
         <div className="container">
           <div className="grid grid-cols-2 md:grid-cols-4 border-l"
             style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
-            {[
-              { n: '01', text: 'Finance is not learned in classrooms.' },
-              { n: '02', text: 'The best network knows more than you.' },
-              { n: '03', text: 'Judgment cannot be modelled.' },
-              { n: '04', text: 'Access is the actual asset.' },
-            ].map(({ n, text }, i) => (
+            {([
+              { n: '01', text: content.belief1 },
+              { n: '02', text: content.belief2 },
+              { n: '03', text: content.belief3 },
+              { n: '04', text: content.belief4 },
+            ] as const).map(({ n, text }, i) => (
               <Reveal key={n} delay={i * 0.1}
                 className="group relative p-5 md:p-8 border-b border-r overflow-hidden"
                 style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
@@ -206,15 +210,15 @@ export default async function HomePage() {
             <Reveal>
               <p className="kicker mb-8">Who it is for</p>
               <h2 className="heading-section" style={{ fontSize: 'clamp(26px,4.5vw,52px)', color: '#F2EFE8', lineHeight: 1.12 }}>
-                For those who have done the work — and are ready for{' '}
+                {content.whoHeadline}{' '}
                 <em className="italic" style={{ color: '#C8A84B' }}>
-                  what the work doesn't teach.
+                  {content.whoHeadlineHighlight}
                 </em>
               </h2>
             </Reveal>
             <Reveal delay={0.22} style={{ paddingTop: '8px' }}>
               <p style={{ fontSize: 'clamp(14px,1.4vw,17px)', color: 'rgba(242,239,232,0.55)', lineHeight: 1.85 }}>
-                If you have ever felt the gap between what finance looks like on paper and how it actually moves — you already understand why The Finance Room exists. This is not for those beginning to learn finance. It is for those who know enough to know what they are still missing.
+                {content.whoBody}
               </p>
             </Reveal>
           </div>
@@ -235,16 +239,17 @@ export default async function HomePage() {
             <Reveal>
               <p className="kicker mb-8">The Insider Series</p>
               <h2 className="heading-section" style={{ fontSize: 'clamp(28px,5vw,60px)', color: '#F2EFE8' }}>
-                One practitioner.<br />One real decision.<br />
-                <em className="italic" style={{ color: '#C8A84B' }}>
-                  No version for the classroom.
+                <span className="block">{content.insiderLine1}</span>
+                <span className="block">{content.insiderLine2}</span>
+                <em className="italic block" style={{ color: '#C8A84B' }}>
+                  {content.insiderLine3}
                 </em>
               </h2>
             </Reveal>
 
             <Reveal delay={0.22} className="flex flex-col justify-end gap-6 pb-2 md:pb-0">
               <p style={{ fontSize: 'clamp(13px,1.3vw,16px)', color: 'rgba(242,239,232,0.5)', lineHeight: 1.85, maxWidth: '420px' }}>
-                Every significant financial decision has a room behind it — where conviction is tested, where deals live or die, and where judgment matters more than any model. The Insider Series is your way in.
+                {content.insiderBody}
               </p>
               <div className="flex items-center gap-4">
                 <Link href="/events" className="btn btn-amber">
@@ -253,30 +258,18 @@ export default async function HomePage() {
                 </Link>
               </div>
               <p className="text-[10px] tracking-[0.16em] uppercase mt-2 mb-4 md:mb-0" style={{ color: 'rgba(242,239,232,0.4)' }}>
-                Free to attend · Live sessions · By application only
+                {content.insiderNote}
               </p>
             </Reveal>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 border-t"
             style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
-            {[
-              {
-                n: '01',
-                title: 'A real decision, not a case study',
-                body: 'Every detail that gets removed to make something teachable is the detail that matters most. Nothing is sanitised here.',
-              },
-              {
-                n: '02',
-                title: 'The layer above the technical',
-                body: 'What shifts a room. What the model missed. The judgment that separates those who understand finance from those who practise it.',
-              },
-              {
-                n: '03',
-                title: 'Access that compounds',
-                body: 'One session is a perspective shift. A year of sessions is a different career trajectory.',
-              },
-            ].map(({ n, title, body }, i) => (
+            {([
+              { n: '01', title: content.insiderPanel1Title, body: content.insiderPanel1Body },
+              { n: '02', title: content.insiderPanel2Title, body: content.insiderPanel2Body },
+              { n: '03', title: content.insiderPanel3Title, body: content.insiderPanel3Body },
+            ] as const).map(({ n, title, body }, i) => (
               <Reveal
                 key={n}
                 delay={i * 0.12}

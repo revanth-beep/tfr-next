@@ -21,12 +21,15 @@ export async function createEvent(prevState: { error?: string }, formData: FormD
 
   const slug = generateSlug(title)
 
+  const attributesRaw = (formData.get('practitionerAttributes') as string) || ''
+  const attributes = attributesRaw.split('\n').map(s => s.trim()).filter(Boolean)
   const practitioner = JSON.stringify({
     name:       formData.get('practitionerName')       as string || null,
     title:      formData.get('practitionerTitle')      as string || null,
     company:    formData.get('practitionerCompany')    as string || null,
     experience: formData.get('practitionerExperience') as string || null,
     bio:        formData.get('practitionerBio')        as string || null,
+    attributes: attributes.length ? attributes : undefined,
   })
 
   const tracks = (formData.get('tracks') as string) || ''
@@ -61,12 +64,15 @@ export async function createEvent(prevState: { error?: string }, formData: FormD
 export async function updateEvent(id: string, prevState: { error?: string }, formData: FormData) {
   requireAdmin()
 
+  const attributesRaw = (formData.get('practitionerAttributes') as string) || ''
+  const attributes = attributesRaw.split('\n').map(s => s.trim()).filter(Boolean)
   const practitioner = JSON.stringify({
     name:       formData.get('practitionerName')       as string || null,
     title:      formData.get('practitionerTitle')      as string || null,
     company:    formData.get('practitionerCompany')    as string || null,
     experience: formData.get('practitionerExperience') as string || null,
     bio:        formData.get('practitionerBio')        as string || null,
+    attributes: attributes.length ? attributes : undefined,
   })
 
   const tracks = (formData.get('tracks') as string) || ''

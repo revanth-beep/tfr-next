@@ -88,6 +88,41 @@ model Event {
   updatedAt DateTime @updatedAt
 }
 
+model HomepageContent {
+  id String @id @default("main")
+
+  // Hero
+  heroLine1   String @default("Practitioner-led.")
+  heroLine2   String @default("Community-driven.")
+  heroLine3   String @default("Built for serious finance careers.")
+  heroTagline String @default("The room you were never told about. Now open.")
+
+  // Beliefs strip
+  belief1 String @default("Finance is not learned in classrooms.")
+  belief2 String @default("The best network knows more than you.")
+  belief3 String @default("Judgment cannot be modelled.")
+  belief4 String @default("Access is the actual asset.")
+
+  // Who it is for
+  whoHeadline          String @default("For those who have done the work — and are ready for")
+  whoHeadlineHighlight String @default("what the work doesn't teach.")
+  whoBody              String @default("If you have ever felt the gap between what finance looks like on paper and how it actually moves — you already understand why The Finance Room exists. This is not for those beginning to learn finance. It is for those who know enough to know what they are still missing.")
+
+  // Insider series
+  insiderLine1 String @default("One practitioner.")
+  insiderLine2 String @default("One real decision.")
+  insiderLine3 String @default("No version for the classroom.")
+  insiderBody  String @default("Every significant financial decision has a room behind it — where conviction is tested, where deals live or die, and where judgment matters more than any model. The Insider Series is your way in.")
+  insiderNote  String @default("Free to attend · Live sessions · By application only")
+
+  insiderPanel1Title String @default("A real decision, not a case study")
+  insiderPanel1Body  String @default("Every detail that gets removed to make something teachable is the detail that matters most. Nothing is sanitised here.")
+  insiderPanel2Title String @default("The layer above the technical")
+  insiderPanel2Body  String @default("What shifts a room. What the model missed. The judgment that separates those who understand finance from those who practise it.")
+  insiderPanel3Title String @default("Access that compounds")
+  insiderPanel3Body  String @default("One session is a perspective shift. A year of sessions is a different career trajectory.")
+}
+
 model Registration {
   id      String @id @default(cuid())
   event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)

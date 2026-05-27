@@ -35,6 +35,9 @@ export default async function AdminDashboard() {
           </span>
         </div>
         <div className="flex items-center gap-4">
+          <Link href="/admin/homepage" className="text-[11px] tracking-[0.12em] uppercase" style={{ color: 'rgba(242,239,232,0.55)' }}>
+            Homepage Content
+          </Link>
           <Link href="/" className="text-[11px] tracking-[0.12em] uppercase" style={{ color: 'rgba(242,239,232,0.4)' }}>
             View site →
           </Link>
