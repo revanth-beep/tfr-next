@@ -43,7 +43,7 @@ export default async function EventsPage() {
           background: 'radial-gradient(ellipse 60% 60% at 50% 0%, rgba(200,168,75,0.07) 0%, transparent 70%)',
         }} />
 
-        <div className="container relative z-10 pt-10 pb-12 md:pt-16 md:pb-16">
+        <div className="container relative z-10 pt-10 pb-10 md:pt-14 md:pb-14 xl:pt-16 xl:pb-16">
           <p className="kicker mb-5">The Insider Series</p>
           <h1 className="heading-display mb-4" style={{ fontSize: 'clamp(36px,5vw,68px)', color: '#F2EFE8' }}>
             Sessions
@@ -87,7 +87,7 @@ export default async function EventsPage() {
                       background: isFeatured ? '#0F1E2E' : '#0D1B2E',
                     }}
                   >
-                    <div className="p-5 md:p-7 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-5 md:gap-6 items-center">
+                    <div className="p-5 md:p-6 xl:p-7 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-5 md:gap-6 items-center">
 
                       <div className="flex flex-col gap-3">
                         <div className="flex flex-wrap items-center gap-2">
@@ -197,7 +197,7 @@ export default async function EventsPage() {
                     background: '#0E1F38',
                   }}
                 >
-                  <div className="p-5 md:p-6 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 items-center">
+                  <div className="p-5 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 items-center">
 
                     <div className="flex flex-col gap-2">
                       <div className="flex flex-wrap items-center gap-2">

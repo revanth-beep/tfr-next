@@ -32,8 +32,10 @@ export function Nav({ upcomingEvent: _ }: NavProps) {
   return (
     <header>
       <div
-        className="transition-all duration-500 px-5 md:px-10"
+        className="transition-all duration-500"
         style={{
+          paddingLeft: 'clamp(20px, 4vw, 64px)',
+          paddingRight: 'clamp(20px, 4vw, 64px)',
           paddingTop: scrolled ? '13px' : '20px',
           paddingBottom: scrolled ? '13px' : '20px',
           background: scrolled ? 'rgba(9,22,42,0.94)' : 'rgba(9,22,42,0.6)',

@@ -57,7 +57,7 @@ export default async function EventPage({ params }: Props) {
     <>
       {/* Hero */}
       <section
-        className="relative pt-10 md:pt-16 pb-16 md:pb-20"
+        className="relative pt-10 md:pt-14 xl:pt-16 pb-14 md:pb-16 xl:pb-20"
         style={{ background: '#09162A' }}
       >
           <div className="container relative z-10">
@@ -114,7 +114,7 @@ export default async function EventPage({ params }: Props) {
       </section>
 
       {/* Main content */}
-      <section style={{ background: '#09162A', paddingBottom: 'clamp(60px, 10vw, 120px)' }}>
+      <section style={{ background: '#09162A', paddingBottom: 'clamp(48px, 7vw, 100px)' }}>
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
 
@@ -321,7 +321,7 @@ export default async function EventPage({ params }: Props) {
 
             {/* Right — sidebar */}
             <div className="lg:col-span-1 order-first lg:order-none">
-              <div className="sticky top-28">
+              <div className="sticky" style={{ top: 'calc(var(--chrome-h) + 24px)' }}>
 
                 {isPast ? (
                   /* ── Completed: recording panel */

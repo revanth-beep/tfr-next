@@ -53,11 +53,7 @@ body::before {
 .container {
   max-width: 1440px;
   margin: 0 auto;
-  padding: 0 40px;
-}
-
-@media (max-width: 768px) {
-  .container { padding: 0 20px; }
+  padding: 0 clamp(20px, 4vw, 64px);
 }
 
 /* ─── Typography ────────────────────────────────────────────────────────────── */
@@ -165,6 +161,7 @@ body::before {
 
 .section-pad { padding: 120px 0; }
 
+@media (max-width: 1366px) { .section-pad { padding: 88px 0; } }
 @media (max-width: 1024px) { .section-pad { padding: 72px 0; } }
 @media (max-width: 768px)  { .section-pad { padding: 48px 0; } }
 

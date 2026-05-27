@@ -36,7 +36,7 @@ export default async function HomePage() {
     <>
       {/* ═══ HERO ══════════════════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden" style={{ background: '#09162A' }}>
-        <div className="container relative z-10 pt-14 pb-28 md:pt-24 md:pb-24">
+        <div className="container relative z-10 pt-12 pb-20 md:pt-20 md:pb-20 xl:pt-24 xl:pb-24">
           <HeroReveal>
             <h1 className="heading-display" style={{ fontSize: 'clamp(44px,8vw,108px)', color: '#F2EFE8' }}>
               <span className="block">{content.heroLine1}</span>
@@ -79,7 +79,7 @@ export default async function HomePage() {
               { n: '04', text: content.belief4 },
             ] as const).map(({ n, text }, i) => (
               <Reveal key={n} delay={i * 0.1}
-                className="group relative p-5 md:p-8 border-b border-r overflow-hidden"
+                className="group relative p-5 md:p-6 xl:p-8 border-b border-r overflow-hidden"
                 style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                   style={{ background: 'rgba(200,168,75,0.03)' }} />
@@ -134,7 +134,7 @@ export default async function HomePage() {
                   </div>
 
                   {/* Content panel */}
-                  <div className="flex flex-1 flex-col p-6 md:p-10" style={{ background: '#0F1E37' }}>
+                  <div className="flex flex-1 flex-col p-6 md:p-8 xl:p-10" style={{ background: '#0F1E37' }}>
                     <div className="flex flex-wrap items-center justify-between gap-3 mb-7">
                       <div className="flex items-center gap-2.5">
                         <span className="relative flex shrink-0">
@@ -206,7 +206,7 @@ export default async function HomePage() {
       {/* ═══ WHO IT IS FOR ═════════════════════════════════════════════════════ */}
       <section className="section-pad" style={{ background: '#0F1E37', borderTop: '1px solid rgba(200,168,75,0.1)', borderBottom: '1px solid rgba(200,168,75,0.07)' }}>
         <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 xl:gap-20 2xl:gap-24 items-start">
             <Reveal>
               <p className="kicker mb-8">Who it is for</p>
               <h2 className="heading-section" style={{ fontSize: 'clamp(26px,4.5vw,52px)', color: '#F2EFE8', lineHeight: 1.12 }}>
@@ -235,7 +235,7 @@ export default async function HomePage() {
 
         <div className="container relative">
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 mb-14 md:mb-16 items-end">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 xl:gap-16 2xl:gap-20 mb-12 md:mb-14 xl:mb-16 items-end">
             <Reveal>
               <p className="kicker mb-8">The Insider Series</p>
               <h2 className="heading-section" style={{ fontSize: 'clamp(28px,5vw,60px)', color: '#F2EFE8' }}>
