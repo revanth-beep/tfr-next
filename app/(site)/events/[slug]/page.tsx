@@ -55,7 +55,7 @@ export default async function EventPage({ params }: Props) {
 
   return (
     <>
-      {/* Hero */}
+      {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section
         className="relative pt-10 md:pt-14 xl:pt-16 pb-14 md:pb-16 xl:pb-20"
         style={{ background: '#09162A' }}
@@ -69,65 +69,74 @@ export default async function EventPage({ params }: Props) {
               <span>←</span> All Events
             </Link>
 
-            {/* Title + practitioner side by side on desktop */}
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 lg:gap-14 lg:items-end">
+            <h1
+              className="heading-section mb-4"
+              style={{ fontSize: 'clamp(32px, 5vw, 68px)', color: '#F2EFE8', maxWidth: '820px' }}
+            >
+              {event.title}
+            </h1>
 
-              {/* Left: title, subtitle, meta */}
-              <div>
-                <h1
-                  className="heading-section mb-4"
-                  style={{ fontSize: 'clamp(32px, 5vw, 68px)', color: '#F2EFE8' }}
-                >
-                  {event.title}
-                </h1>
-                {event.subtitle && (
-                  <p
-                    className="font-serif italic mb-8"
-                    style={{
-                      fontSize: 'clamp(16px, 2vw, 24px)',
-                      color: 'rgba(242,239,232,0.55)',
-                      lineHeight: 1.5,
-                      maxWidth: '600px',
-                    }}
-                  >
-                    {event.subtitle}
-                  </p>
-                )}
-                <div className="flex flex-wrap gap-3 md:gap-6">
-                  {[
-                    { icon: '📅', label: formatDate(new Date(event.date)) },
-                    { icon: '🕐', label: `${formatTime(new Date(event.date))} IST` },
-                    { icon: '💻', label: event.format },
-                    { icon: '⏱',  label: `${event.duration} min` },
-                    ...(!isPast ? [{ icon: '💺', label: full ? 'Full' : `${seatsLeft} seats left` }] : [{ icon: '👥', label: `${registered} attended` }]),
-                  ].map(({ icon, label }) => (
-                    <div key={label} className="flex items-center gap-2">
-                      <span style={{ fontSize: '13px' }}>{icon}</span>
-                      <span className="text-[13px] font-medium" style={{ color: 'rgba(242,239,232,0.65)' }}>
-                        {label}
-                      </span>
-                    </div>
-                  ))}
+            {event.subtitle && (
+              <p
+                className="font-serif italic mb-8"
+                style={{
+                  fontSize: 'clamp(17px, 2vw, 24px)',
+                  color: 'rgba(242,239,232,0.82)',
+                  lineHeight: 1.55,
+                  maxWidth: '640px',
+                }}
+              >
+                {event.subtitle}
+              </p>
+            )}
+
+            {/* Meta strip */}
+            <div className="flex flex-wrap gap-3 md:gap-6">
+              {[
+                { icon: '📅', label: formatDate(new Date(event.date)) },
+                { icon: '🕐', label: `${formatTime(new Date(event.date))} IST` },
+                { icon: '💻', label: event.format },
+                { icon: '⏱',  label: `${event.duration} min` },
+                ...(!isPast
+                  ? [{ icon: '💺', label: full ? 'Full' : `${seatsLeft} seats left` }]
+                  : [{ icon: '👥', label: `${registered} attended` }]),
+              ].map(({ icon, label }) => (
+                <div key={label} className="flex items-center gap-2">
+                  <span style={{ fontSize: '13px' }}>{icon}</span>
+                  <span className="text-[13px] font-medium" style={{ color: 'rgba(242,239,232,0.88)' }}>
+                    {label}
+                  </span>
                 </div>
-              </div>
+              ))}
+            </div>
+          </HeroReveal>
+        </div>
+      </section>
 
-              {/* Right: practitioner card */}
+      {/* ── Main content ─────────────────────────────────────────────────── */}
+      <section style={{ background: '#09162A', paddingBottom: 'clamp(48px, 7vw, 100px)' }}>
+        <div className="container">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+
+            {/* Left — content (2 cols) */}
+            <div className="lg:col-span-2 flex flex-col gap-12">
+
+              {/* ── Practitioner card (always anonymous) ───────────────── */}
               {practitioner && (
                 <div
-                  className="shrink-0 flex flex-col gap-5 p-7 lg:w-[300px]"
+                  className="flex flex-col gap-5 p-7"
                   style={{
                     border: '1px solid rgba(200,168,75,0.3)',
                     borderLeft: '3px solid #C8A84B',
-                    background: 'linear-gradient(135deg, rgba(200,168,75,0.07) 0%, rgba(200,168,75,0.02) 100%)',
+                    background: 'linear-gradient(135deg, rgba(200,168,75,0.08) 0%, rgba(200,168,75,0.02) 100%)',
                   }}
                 >
-                  {/* Kicker */}
                   <p className="text-[9px] tracking-[0.28em] uppercase" style={{ color: '#C8A84B' }}>
                     The Practitioner
                   </p>
 
-                  {/* Avatar + identity */}
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-start gap-5">
+                    {/* Anonymous avatar — always */}
                     <div
                       className="shrink-0 flex items-center justify-center"
                       style={{
@@ -136,78 +145,73 @@ export default async function EventPage({ params }: Props) {
                         border: '1px solid rgba(200,168,75,0.35)',
                       }}
                     >
-                      {practitioner.name ? (
-                        <span className="font-display font-bold text-[26px]" style={{ color: '#C8A84B' }}>
-                          {practitioner.name.charAt(0)}
-                        </span>
-                      ) : (
-                        <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="rgba(200,168,75,0.7)" strokeWidth="1.5">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0" />
-                        </svg>
-                      )}
+                      <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="rgba(200,168,75,0.8)" strokeWidth="1.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0" />
+                      </svg>
                     </div>
-                    <div>
-                      {practitioner.name ? (
-                        <p className="font-display text-[22px] leading-tight" style={{ color: '#F2EFE8', fontWeight: 400 }}>
-                          {practitioner.name}
+
+                    <div className="flex flex-col gap-2">
+                      <p className="font-serif italic text-[15px]" style={{ color: 'rgba(242,239,232,0.65)', lineHeight: 1.5 }}>
+                        Identity disclosed to confirmed attendees
+                      </p>
+                      {(practitioner.title || practitioner.company) && (
+                        <p className="text-[14px]" style={{ color: '#F2EFE8' }}>
+                          {practitioner.title}
+                          {practitioner.company && (
+                            <span style={{ color: 'rgba(242,239,232,0.55)' }}> · {practitioner.company}</span>
+                          )}
                         </p>
-                      ) : (
-                        <p className="font-serif italic text-[13px]" style={{ color: 'rgba(242,239,232,0.4)', lineHeight: 1.5 }}>
-                          Identity disclosed to confirmed attendees
-                        </p>
+                      )}
+                      {practitioner.experience && (
+                        <span
+                          className="text-[11px] tracking-[0.1em] self-start px-2.5 py-1"
+                          style={{
+                            background: 'rgba(200,168,75,0.12)',
+                            border: '1px solid rgba(200,168,75,0.3)',
+                            color: '#C8A84B',
+                          }}
+                        >
+                          {practitioner.experience}
+                        </span>
                       )}
                     </div>
                   </div>
 
-                  {/* Title / company / experience */}
-                  <div
-                    className="flex flex-col gap-1.5 pt-4"
-                    style={{ borderTop: '1px solid rgba(200,168,75,0.15)' }}
-                  >
-                    {practitioner.title && (
-                      <p className="text-[13px]" style={{ color: 'rgba(242,239,232,0.7)', lineHeight: 1.4 }}>
-                        {practitioner.title}
-                        {practitioner.company && (
-                          <span style={{ color: 'rgba(242,239,232,0.35)' }}> · {practitioner.company}</span>
-                        )}
-                      </p>
-                    )}
-                    {practitioner.experience && (
-                      <p
-                        className="text-[11px] tracking-[0.08em] inline-block px-2.5 py-1 self-start"
-                        style={{
-                          background: 'rgba(200,168,75,0.1)',
-                          border: '1px solid rgba(200,168,75,0.25)',
-                          color: '#C8A84B',
-                        }}
-                      >
-                        {practitioner.experience}
-                      </p>
-                    )}
-                  </div>
+                  {/* Bio + attributes */}
+                  {(practitioner.bio || (practitioner.attributes && practitioner.attributes.length > 0)) && (
+                    <div className="flex flex-col gap-3 pt-5" style={{ borderTop: '1px solid rgba(200,168,75,0.12)' }}>
+                      {practitioner.bio && (
+                        <p className="text-[14px]" style={{ color: 'rgba(242,239,232,0.78)', lineHeight: 1.8 }}>
+                          {practitioner.bio}
+                        </p>
+                      )}
+                      {practitioner.attributes && practitioner.attributes.length > 0 && (
+                        <div className="flex flex-col">
+                          {practitioner.attributes.map((attr, i) => (
+                            <div
+                              key={i}
+                              className="flex items-start gap-3 py-2.5 border-b text-[13px]"
+                              style={{ borderColor: 'rgba(255,255,255,0.07)', color: 'rgba(242,239,232,0.8)', lineHeight: 1.65 }}
+                            >
+                              <span style={{ color: '#C8A84B', flexShrink: 0 }}>—</span>
+                              <span>{attr}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               )}
-            </div>
-          </HeroReveal>
-        </div>
-      </section>
 
-      {/* Main content */}
-      <section style={{ background: '#09162A', paddingBottom: 'clamp(48px, 7vw, 100px)' }}>
-        <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-
-            {/* Left — content (2 cols) */}
-            <div className="lg:col-span-2 flex flex-col gap-12">
-
-              {/* Cover note / pull quote */}
+              {/* ── Cover note / pull quote ─────────────────────────────── */}
               {event.coverNote && (
                 <blockquote
                   className="pl-6 font-serif italic"
                   style={{
-                    borderLeft: '2px solid rgba(200,168,75,0.4)',
+                    borderLeft: '2px solid rgba(200,168,75,0.5)',
                     fontSize: 'clamp(18px, 2vw, 24px)',
-                    color: 'rgba(242,239,232,0.72)',
+                    color: 'rgba(242,239,232,0.9)',
                     lineHeight: 1.6,
                   }}
                 >
@@ -215,11 +219,11 @@ export default async function EventPage({ params }: Props) {
                 </blockquote>
               )}
 
-              {/* Two-column: What this session covers / Who should be in the room */}
+              {/* ── Description ────────────────────────────────────────── */}
               {descParas.length >= 2 && (
                 <div
                   className="grid grid-cols-1 sm:grid-cols-2 border-t"
-                  style={{ borderColor: 'rgba(255,255,255,0.07)' }}
+                  style={{ borderColor: 'rgba(255,255,255,0.08)' }}
                 >
                   {[
                     { label: 'What this session covers', para: descParas[0] },
@@ -228,15 +232,12 @@ export default async function EventPage({ params }: Props) {
                     <div
                       key={label}
                       className="py-8 sm:pr-8 sm:border-r last:border-r-0 last:pl-0 sm:last:pl-8 sm:last:pr-0"
-                      style={{ borderColor: 'rgba(255,255,255,0.07)' }}
+                      style={{ borderColor: 'rgba(255,255,255,0.08)' }}
                     >
-                      <h2
-                        className="text-[9px] tracking-[0.28em] uppercase mb-4"
-                        style={{ color: '#C8A84B' }}
-                      >
+                      <h2 className="text-[9px] tracking-[0.28em] uppercase mb-4" style={{ color: '#C8A84B' }}>
                         {label}
                       </h2>
-                      <p style={{ fontSize: 'clamp(13px,1.2vw,15px)', color: 'rgba(242,239,232,0.62)', lineHeight: 1.85 }}>
+                      <p style={{ fontSize: 'clamp(14px, 1.2vw, 16px)', color: 'rgba(242,239,232,0.82)', lineHeight: 1.85 }}>
                         {para}
                       </p>
                     </div>
@@ -244,13 +245,9 @@ export default async function EventPage({ params }: Props) {
                 </div>
               )}
 
-              {/* Remaining description paragraphs */}
               {descParas.length > 2 && (
-                <div
-                  className="border-t pt-8"
-                  style={{ borderColor: 'rgba(255,255,255,0.07)' }}
-                >
-                  <div style={{ fontSize: 'clamp(14px,1.3vw,16px)', color: 'rgba(242,239,232,0.62)', lineHeight: 1.85 }}>
+                <div className="border-t pt-8" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
+                  <div style={{ fontSize: 'clamp(14px, 1.3vw, 16px)', color: 'rgba(242,239,232,0.82)', lineHeight: 1.85 }}>
                     {descParas.slice(2).map((para, i) => (
                       <p key={i} className="mb-4">{para}</p>
                     ))}
@@ -258,30 +255,20 @@ export default async function EventPage({ params }: Props) {
                 </div>
               )}
 
-              {/* Single-paragraph fallback */}
               {descParas.length === 1 && (
                 <div>
-                  <h2
-                    className="text-[11px] tracking-[0.22em] uppercase mb-5"
-                    style={{ color: '#C8A84B' }}
-                  >
+                  <h2 className="text-[11px] tracking-[0.22em] uppercase mb-5" style={{ color: '#C8A84B' }}>
                     About this session
                   </h2>
-                  <p style={{ fontSize: 'clamp(14px,1.3vw,16px)', color: 'rgba(242,239,232,0.62)', lineHeight: 1.85 }}>
+                  <p style={{ fontSize: 'clamp(14px, 1.3vw, 16px)', color: 'rgba(242,239,232,0.82)', lineHeight: 1.85 }}>
                     {descParas[0]}
                   </p>
                 </div>
               )}
 
-              {/* Format breakdown */}
-              <div
-                className="reveal border-t pt-10"
-                style={{ borderColor: 'rgba(255,255,255,0.07)' }}
-              >
-                <h2
-                  className="text-[11px] tracking-[0.22em] uppercase mb-6"
-                  style={{ color: '#C8A84B' }}
-                >
+              {/* ── What to expect ──────────────────────────────────────── */}
+              <div className="border-t pt-10" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
+                <h2 className="text-[11px] tracking-[0.22em] uppercase mb-6" style={{ color: '#C8A84B' }}>
                   What to expect
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -293,18 +280,11 @@ export default async function EventPage({ params }: Props) {
                     { n: '05', text: 'By application only.' },
                     { n: '06', text: 'Built around public or hypothetical situations.' },
                   ].map(({ n, text }) => (
-                    <div
-                      key={n}
-                      className="flex gap-4 py-4 border-b"
-                      style={{ borderColor: 'rgba(255,255,255,0.06)' }}
-                    >
-                      <span
-                        className="shrink-0 text-[10px] tracking-[0.14em] font-bold"
-                        style={{ color: 'rgba(200,168,75,0.5)', paddingTop: '2px' }}
-                      >
+                    <div key={n} className="flex gap-4 py-4 border-b" style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
+                      <span className="shrink-0 text-[10px] tracking-[0.14em] font-bold" style={{ color: 'rgba(200,168,75,0.6)', paddingTop: '2px' }}>
                         {n}
                       </span>
-                      <span className="text-[14px]" style={{ color: 'rgba(242,239,232,0.65)', lineHeight: 1.65 }}>
+                      <span className="text-[14px]" style={{ color: 'rgba(242,239,232,0.85)', lineHeight: 1.65 }}>
                         {text}
                       </span>
                     </div>
@@ -312,49 +292,13 @@ export default async function EventPage({ params }: Props) {
                 </div>
               </div>
 
-              {/* Practitioner bio + attributes (only if there's deeper content) */}
-              {practitioner && (practitioner.bio || (practitioner.attributes && practitioner.attributes.length > 0)) && (
-                <div
-                  className="border-t pt-10"
-                  style={{ borderColor: 'rgba(255,255,255,0.07)' }}
-                >
-                  <h2
-                    className="text-[11px] tracking-[0.22em] uppercase mb-5"
-                    style={{ color: '#C8A84B' }}
-                  >
-                    About the practitioner
-                  </h2>
-                  <div className="flex flex-col gap-4">
-                    {practitioner.bio && (
-                      <p className="text-[14px]" style={{ color: 'rgba(242,239,232,0.55)', lineHeight: 1.8 }}>
-                        {practitioner.bio}
-                      </p>
-                    )}
-                    {practitioner.attributes && practitioner.attributes.length > 0 && (
-                      <div className="flex flex-col border-t pt-4" style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
-                        {practitioner.attributes.map((attr, i) => (
-                          <div
-                            key={i}
-                            className="flex items-start gap-3 py-3 border-b text-[13px]"
-                            style={{ borderColor: 'rgba(255,255,255,0.07)', color: 'rgba(242,239,232,0.55)', lineHeight: 1.65 }}
-                          >
-                            <span style={{ color: '#C8A84B', flexShrink: 0 }}>—</span>
-                            <span>{attr}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
             </div>
 
-            {/* Right — sidebar */}
+            {/* ── Right — sidebar ──────────────────────────────────────── */}
             <div className="lg:col-span-1 order-first lg:order-none">
               <div className="sticky" style={{ top: 'calc(var(--chrome-h) + 24px)' }}>
 
                 {isPast ? (
-                  /* ── Completed: recording panel */
                   <div
                     className="border p-8 flex flex-col gap-6"
                     style={{ borderColor: 'rgba(124,185,217,0.35)', background: 'rgba(124,185,217,0.06)' }}
@@ -364,11 +308,10 @@ export default async function EventPage({ params }: Props) {
                         style={{ color: '#F2EFE8', border: '1px solid rgba(242,239,232,0.3)', background: 'rgba(255,255,255,0.07)' }}>
                         Session concluded
                       </span>
-                      <p className="text-[13px] leading-relaxed mt-3" style={{ color: 'rgba(124,185,217,0.85)' }}>
+                      <p className="text-[13px] leading-relaxed mt-3" style={{ color: 'rgba(124,185,217,0.92)' }}>
                         {formatDate(new Date(event.date))} · {event.duration} min · {registered} attended
                       </p>
                     </div>
-
                     {event.recordingUrl ? (
                       <a
                         href={event.recordingUrl}
@@ -380,13 +323,12 @@ export default async function EventPage({ params }: Props) {
                         <span>↗</span>
                       </a>
                     ) : (
-                      <p className="text-[12px] font-serif italic" style={{ color: 'rgba(124,185,217,0.6)' }}>
+                      <p className="text-[12px] font-serif italic" style={{ color: 'rgba(124,185,217,0.75)' }}>
                         Recording not available.
                       </p>
                     )}
                   </div>
                 ) : (
-                  /* ── Upcoming: registration sidebar */
                   <div
                     className="border p-8 flex flex-col gap-8"
                     style={{ borderColor: 'rgba(200,168,75,0.2)', background: 'rgba(200,168,75,0.03)' }}
@@ -398,7 +340,7 @@ export default async function EventPage({ params }: Props) {
 
                       <div className="mb-4">
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-[13px]" style={{ color: 'rgba(242,239,232,0.55)' }}>
+                          <span className="text-[13px]" style={{ color: 'rgba(242,239,232,0.8)' }}>
                             {seatsLeft} of {event.totalSeats} seats remaining
                           </span>
                           {seatsLeft <= 5 && seatsLeft > 0 && (
@@ -408,18 +350,18 @@ export default async function EventPage({ params }: Props) {
                             </span>
                           )}
                         </div>
-                        <div className="h-1 w-full rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.07)' }}>
+                        <div className="h-1 w-full rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.1)' }}>
                           <div className="h-full" style={{ width: `${pct}%`, background: pct > 80 ? '#C84B4B' : '#C8A84B' }} />
                         </div>
                       </div>
 
                       <div className="flex items-center gap-2 flex-wrap mb-1">
-                        <span className="text-[12px]" style={{ color: 'rgba(242,239,232,0.45)' }}>
+                        <span className="text-[13px]" style={{ color: 'rgba(242,239,232,0.75)' }}>
                           {formatDate(new Date(event.date))} at {formatTime(new Date(event.date))} IST
                         </span>
                       </div>
                       <span className="inline-block text-[11px] tracking-[0.14em] uppercase px-2 py-1"
-                        style={{ background: 'rgba(255,255,255,0.05)', color: 'rgba(242,239,232,0.5)' }}>
+                        style={{ background: 'rgba(255,255,255,0.06)', color: 'rgba(242,239,232,0.7)' }}>
                         {event.format} · {event.duration} min
                       </span>
                     </div>
