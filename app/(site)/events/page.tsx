@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { prisma } from '@/lib/db'
 import { formatDate, formatTime } from '@/lib/utils'
 import { Reveal } from '@/components/reveal'
+import { getHomepageContent } from '@/lib/homepage'
 
 async function getAllEvents() {
   try {
@@ -16,7 +17,7 @@ async function getAllEvents() {
 }
 
 export default async function EventsPage() {
-  const allEvents = await getAllEvents()
+  const [allEvents, content] = await Promise.all([getAllEvents(), getHomepageContent()])
   const now = new Date()
 
   const upcoming = allEvents.filter(e => new Date(e.date) >= now)
@@ -44,13 +45,12 @@ export default async function EventsPage() {
         }} />
 
         <div className="container relative z-10 pt-10 pb-10 md:pt-14 md:pb-14 xl:pt-16 xl:pb-16">
-          <p className="kicker mb-5">The Insider Series</p>
+          <p className="kicker mb-5">{content.eventsPageKicker}</p>
           <h1 className="heading-display mb-4" style={{ fontSize: 'clamp(36px,5vw,68px)', color: '#F2EFE8' }}>
-            Sessions
+            {content.eventsPageTitle}
           </h1>
-          <p style={{ fontSize: 'clamp(13px,1.3vw,16px)', color: 'rgba(242,239,232,0.5)', lineHeight: 1.7, maxWidth: '440px' }}>
-            One senior practitioner. One real decision. A small, vetted group who
-            can engage at that level. No recordings. No version for the classroom.
+          <p style={{ fontSize: 'clamp(13px,1.3vw,16px)', color: 'rgba(242,239,232,0.78)', lineHeight: 1.7, maxWidth: '440px' }}>
+            {content.eventsPageDescription}
           </p>
         </div>
       </section>
@@ -117,13 +117,13 @@ export default async function EventsPage() {
                         </h2>
 
                         {event.subtitle && (
-                          <p className="font-serif italic text-[13px]" style={{ color: 'rgba(242,239,232,0.55)' }}>
+                          <p className="font-serif italic text-[13px]" style={{ color: 'rgba(242,239,232,0.78)' }}>
                             {event.subtitle}
                           </p>
                         )}
 
                         <div className="flex flex-wrap items-center gap-3 text-[12px]"
-                          style={{ color: 'rgba(242,239,232,0.55)' }}>
+                          style={{ color: 'rgba(242,239,232,0.75)' }}>
                           <span>{formatDate(new Date(event.date))}</span>
                           <span style={{ opacity: 0.4 }}>·</span>
                           <span>{formatTime(new Date(event.date))} IST</span>
@@ -221,13 +221,13 @@ export default async function EventsPage() {
                       </h2>
 
                       {event.subtitle && (
-                        <p className="font-serif italic text-[13px]" style={{ color: 'rgba(242,239,232,0.5)' }}>
+                        <p className="font-serif italic text-[13px]" style={{ color: 'rgba(242,239,232,0.75)' }}>
                           {event.subtitle}
                         </p>
                       )}
 
-                      <div className="flex flex-wrap items-center gap-3 text-[11px]"
-                        style={{ color: 'rgba(124,185,217,0.75)' }}>
+                      <div className="flex flex-wrap items-center gap-3 text-[12px]"
+                        style={{ color: 'rgba(124,185,217,0.85)' }}>
                         <span>{formatDate(new Date(event.date))}</span>
                         <span style={{ opacity: 0.5 }}>·</span>
                         <span>{event._count.registrations} attended</span>

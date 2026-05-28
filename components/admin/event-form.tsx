@@ -210,7 +210,7 @@ export function EventForm({ event }: EventFormProps) {
           Practitioner
         </h3>
         <p className="text-[12px]" style={{ color: 'rgba(242,239,232,0.4)' }}>
-          Name is optional — leave blank to show "Identity disclosed to confirmed attendees."
+          Name is shown publicly when set. Leave blank to show the identity label from CMS.
         </p>
 
         <div className="grid grid-cols-2 gap-4">
@@ -272,6 +272,28 @@ export function EventForm({ event }: EventFormProps) {
             defaultValue={(practitioner?.attributes ?? []).join('\n')}
             className="admin-input resize-y"
             placeholder={'10+ years in PE/VC investing\nLed 30+ investment decisions\nPreviously at Goldman Sachs'}
+          />
+        </div>
+      </div>
+
+      {/* What to expect */}
+      <div
+        className="border p-6 flex flex-col gap-5"
+        style={{ borderColor: 'rgba(255,255,255,0.08)' }}
+      >
+        <h3 className="text-[11px] tracking-[0.2em] uppercase" style={{ color: '#C8A84B' }}>
+          What to Expect
+        </h3>
+        <p className="text-[12px]" style={{ color: 'rgba(242,239,232,0.4)' }}>
+          One bullet per line. Leave blank to use the default list.
+        </p>
+        <div>
+          <label htmlFor="whatToExpect" className="admin-label">Bullet points (one per line)</label>
+          <textarea
+            id="whatToExpect" name="whatToExpect" rows={6}
+            defaultValue={(event as any)?.whatToExpect ?? ''}
+            className="admin-input resize-y"
+            placeholder={'One practitioner per session\nA small, vetted group\nA real scenario — your judgment tested\n60 minutes. No recordings.\nBy application only.'}
           />
         </div>
       </div>

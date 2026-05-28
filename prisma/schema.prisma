@@ -78,6 +78,7 @@ model Event {
 
   coverNote    String?
   recordingUrl String?
+  whatToExpect String?
 
   isPublished Boolean @default(false)
   isFeatured  Boolean @default(false)
@@ -121,6 +122,19 @@ model HomepageContent {
   insiderPanel2Body  String @default("What shifts a room. What the model missed. The judgment that separates those who understand finance from those who practise it.")
   insiderPanel3Title String @default("Access that compounds")
   insiderPanel3Body  String @default("One session is a perspective shift. A year of sessions is a different career trajectory.")
+
+  // Events list page
+  eventsPageKicker      String @default("The Insider Series")
+  eventsPageTitle       String @default("Sessions")
+  eventsPageDescription String @default("One senior practitioner. One real decision. A small, vetted group who can engage at that level. No recordings. No version for the classroom.")
+
+  // Event detail page labels
+  eventLabelCovers      String @default("What this session covers")
+  eventLabelWho         String @default("Who should be in the room")
+  eventLabelAbout       String @default("About this session")
+  eventLabelExpect      String @default("What to expect")
+  eventLabelPractitioner String @default("The Practitioner")
+  eventLabelIdentity    String @default("Identity disclosed to confirmed attendees")
 }
 
 model Registration {

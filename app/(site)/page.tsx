@@ -45,7 +45,7 @@ export default async function HomePage() {
             </h1>
 
             <p className="font-serif italic" style={{
-              fontSize: 'clamp(15px,1.7vw,20px)', color: 'rgba(242,239,232,0.6)', lineHeight: 1.65, maxWidth: '520px',
+              fontSize: 'clamp(15px,1.7vw,20px)', color: 'rgba(242,239,232,0.82)', lineHeight: 1.65, maxWidth: '520px',
             }}>
               {content.heroTagline}
             </p>
@@ -155,7 +155,7 @@ export default async function HomePage() {
                       {event.title}
                     </h2>
                     {event.subtitle && (
-                      <p className="font-serif italic" style={{ fontSize: 'clamp(13px,1.4vw,17px)', color: 'rgba(242,239,232,0.48)', lineHeight: 1.65 }}>
+                      <p className="font-serif italic" style={{ fontSize: 'clamp(14px,1.3vw,16px)', color: 'rgba(242,239,232,0.82)', lineHeight: 1.65 }}>
                         {event.subtitle}
                       </p>
                     )}
@@ -164,7 +164,7 @@ export default async function HomePage() {
 
                     <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-6"
                       style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-                      <div className="flex flex-wrap items-center gap-3" style={{ fontSize: '12px', color: 'rgba(242,239,232,0.45)' }}>
+                      <div className="flex flex-wrap items-center gap-3" style={{ fontSize: '12px', color: 'rgba(242,239,232,0.72)' }}>
                         <span>{formatTime(new Date(event.date))} IST</span>
                         <span style={{ width: 3, height: 3, background: 'rgba(242,239,232,0.2)', borderRadius: '50%', display: 'inline-block' }} />
                         <span>{event.duration} min</span>
@@ -217,7 +217,7 @@ export default async function HomePage() {
               </h2>
             </Reveal>
             <Reveal delay={0.22} style={{ paddingTop: '8px' }}>
-              <p style={{ fontSize: 'clamp(14px,1.4vw,17px)', color: 'rgba(242,239,232,0.55)', lineHeight: 1.85 }}>
+              <p style={{ fontSize: 'clamp(14px,1.4vw,17px)', color: 'rgba(242,239,232,0.82)', lineHeight: 1.85 }}>
                 {content.whoBody}
               </p>
             </Reveal>
@@ -248,7 +248,7 @@ export default async function HomePage() {
             </Reveal>
 
             <Reveal delay={0.22} className="flex flex-col justify-end gap-6 pb-2 md:pb-0">
-              <p style={{ fontSize: 'clamp(13px,1.3vw,16px)', color: 'rgba(242,239,232,0.5)', lineHeight: 1.85, maxWidth: '420px' }}>
+              <p style={{ fontSize: 'clamp(14px,1.3vw,16px)', color: 'rgba(242,239,232,0.82)', lineHeight: 1.85, maxWidth: '420px' }}>
                 {content.insiderBody}
               </p>
               <div className="flex items-center gap-4">
@@ -257,7 +257,7 @@ export default async function HomePage() {
                   <span>→</span>
                 </Link>
               </div>
-              <p className="text-[10px] tracking-[0.16em] uppercase mt-2 mb-4 md:mb-0" style={{ color: 'rgba(242,239,232,0.4)' }}>
+              <p className="text-[10px] tracking-[0.16em] uppercase mt-2 mb-4 md:mb-0" style={{ color: 'rgba(242,239,232,0.65)' }}>
                 {content.insiderNote}
               </p>
             </Reveal>
@@ -282,7 +282,7 @@ export default async function HomePage() {
                 <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 'clamp(18px,1.6vw,22px)', fontWeight: 400, color: '#F2EFE8', lineHeight: 1.2 }}>
                   {title}
                 </p>
-                <p style={{ fontSize: '13px', color: 'rgba(242,239,232,0.48)', lineHeight: 1.78 }}>
+                <p style={{ fontSize: '14px', color: 'rgba(242,239,232,0.82)', lineHeight: 1.78 }}>
                   {body}
                 </p>
               </Reveal>

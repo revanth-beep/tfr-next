@@ -23,6 +23,15 @@ export type HomepageContent = {
   insiderPanel2Body: string
   insiderPanel3Title: string
   insiderPanel3Body: string
+  eventsPageKicker: string
+  eventsPageTitle: string
+  eventsPageDescription: string
+  eventLabelCovers: string
+  eventLabelWho: string
+  eventLabelAbout: string
+  eventLabelExpect: string
+  eventLabelPractitioner: string
+  eventLabelIdentity: string
 }
 
 export const HOMEPAGE_DEFAULTS: HomepageContent = {
@@ -52,6 +61,17 @@ export const HOMEPAGE_DEFAULTS: HomepageContent = {
   insiderPanel2Body:  'What shifts a room. What the model missed. The judgment that separates those who understand finance from those who practise it.',
   insiderPanel3Title: 'Access that compounds',
   insiderPanel3Body:  'One session is a perspective shift. A year of sessions is a different career trajectory.',
+
+  eventsPageKicker: 'The Insider Series',
+  eventsPageTitle: 'Sessions',
+  eventsPageDescription: 'One senior practitioner. One real decision. A small, vetted group who can engage at that level. No recordings. No version for the classroom.',
+
+  eventLabelCovers: 'What this session covers',
+  eventLabelWho: 'Who should be in the room',
+  eventLabelAbout: 'About this session',
+  eventLabelExpect: 'What to expect',
+  eventLabelPractitioner: 'The Practitioner',
+  eventLabelIdentity: 'Identity disclosed to confirmed attendees',
 }
 
 export async function getHomepageContent(): Promise<HomepageContent> {

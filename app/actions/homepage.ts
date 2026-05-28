@@ -47,6 +47,17 @@ export async function updateHomepageContent(
     insiderPanel2Body:  str(formData, 'insiderPanel2Body'),
     insiderPanel3Title: str(formData, 'insiderPanel3Title'),
     insiderPanel3Body:  str(formData, 'insiderPanel3Body'),
+
+    eventsPageKicker:      str(formData, 'eventsPageKicker'),
+    eventsPageTitle:       str(formData, 'eventsPageTitle'),
+    eventsPageDescription: str(formData, 'eventsPageDescription'),
+
+    eventLabelCovers:       str(formData, 'eventLabelCovers'),
+    eventLabelWho:          str(formData, 'eventLabelWho'),
+    eventLabelAbout:        str(formData, 'eventLabelAbout'),
+    eventLabelExpect:       str(formData, 'eventLabelExpect'),
+    eventLabelPractitioner: str(formData, 'eventLabelPractitioner'),
+    eventLabelIdentity:     str(formData, 'eventLabelIdentity'),
   }
 
   await prisma.homepageContent.upsert({
@@ -56,6 +67,7 @@ export async function updateHomepageContent(
   })
 
   revalidatePath('/')
+  revalidatePath('/events')
   revalidatePath('/admin/homepage')
   redirect('/admin/homepage')
 }

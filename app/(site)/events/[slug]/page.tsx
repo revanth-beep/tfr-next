@@ -6,6 +6,7 @@ import { formatDate, formatTime, getSeatsRemaining } from '@/lib/utils'
 import { RegistrationForm } from '@/components/registration-form'
 import { HeroReveal } from '@/components/hero-reveal'
 import Link from 'next/link'
+import { getHomepageContent } from '@/lib/homepage'
 
 interface Props {
   params: { slug: string }
@@ -21,12 +22,13 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export default async function EventPage({ params }: Props) {
-  const [event, session] = await Promise.all([
+  const [event, session, content] = await Promise.all([
     prisma.event.findUnique({
       where: { slug: params.slug },
       include: { _count: { select: { registrations: true } } },
     }),
     getServerSession(authOptions),
+    getHomepageContent(),
   ])
 
   if (!event || !event.isPublished) notFound()
@@ -44,6 +46,19 @@ export default async function EventPage({ params }: Props) {
   const seatsLeft  = getSeatsRemaining(event.totalSeats, registered)
   const full       = seatsLeft <= 0
   const pct        = Math.round((registered / event.totalSeats) * 100)
+
+  const whatToExpectItems = (event as any).whatToExpect
+    ? ((event as any).whatToExpect as string)
+        .split('\n').map((t: string) => t.trim()).filter(Boolean)
+        .map((text: string, i: number) => ({ n: String(i + 1).padStart(2, '0'), text }))
+    : [
+        { n: '01', text: 'One practitioner per session' },
+        { n: '02', text: `A small group — never more than ${event.totalSeats}` },
+        { n: '03', text: 'A real scenario. Your judgment, tested.' },
+        { n: '04', text: `${event.duration} minutes. No recordings.` },
+        { n: '05', text: 'By application only.' },
+        { n: '06', text: 'Built around public or hypothetical situations.' },
+      ]
 
   let isRegistered = false
   if (!isPast && session?.user?.id) {
@@ -131,8 +146,8 @@ export default async function EventPage({ params }: Props) {
                     background: 'linear-gradient(135deg, rgba(200,168,75,0.08) 0%, rgba(200,168,75,0.02) 100%)',
                   }}
                 >
-                  <p className="text-[9px] tracking-[0.28em] uppercase" style={{ color: '#C8A84B' }}>
-                    The Practitioner
+                  <p className="text-[10px] tracking-[0.24em] uppercase" style={{ color: '#C8A84B' }}>
+                    {content.eventLabelPractitioner}
                   </p>
 
                   <div className="flex items-start gap-5">
@@ -151,14 +166,20 @@ export default async function EventPage({ params }: Props) {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                      <p className="font-serif italic text-[15px]" style={{ color: 'rgba(242,239,232,0.65)', lineHeight: 1.5 }}>
-                        Identity disclosed to confirmed attendees
-                      </p>
+                      {practitioner.name ? (
+                        <p className="font-display font-bold text-[20px]" style={{ color: '#F2EFE8' }}>
+                          {practitioner.name}
+                        </p>
+                      ) : (
+                        <p className="font-serif italic text-[15px]" style={{ color: 'rgba(242,239,232,0.82)', lineHeight: 1.5 }}>
+                          {content.eventLabelIdentity}
+                        </p>
+                      )}
                       {(practitioner.title || practitioner.company) && (
                         <p className="text-[14px]" style={{ color: '#F2EFE8' }}>
                           {practitioner.title}
                           {practitioner.company && (
-                            <span style={{ color: 'rgba(242,239,232,0.55)' }}> · {practitioner.company}</span>
+                            <span style={{ color: 'rgba(242,239,232,0.75)' }}> · {practitioner.company}</span>
                           )}
                         </p>
                       )}
@@ -190,8 +211,8 @@ export default async function EventPage({ params }: Props) {
                           {practitioner.attributes.map((attr, i) => (
                             <div
                               key={i}
-                              className="flex items-start gap-3 py-2.5 border-b text-[13px]"
-                              style={{ borderColor: 'rgba(255,255,255,0.07)', color: 'rgba(242,239,232,0.8)', lineHeight: 1.65 }}
+                              className="flex items-start gap-3 py-2.5 border-b text-[14px]"
+                              style={{ borderColor: 'rgba(255,255,255,0.07)', color: 'rgba(242,239,232,0.85)', lineHeight: 1.65 }}
                             >
                               <span style={{ color: '#C8A84B', flexShrink: 0 }}>—</span>
                               <span>{attr}</span>
@@ -226,18 +247,18 @@ export default async function EventPage({ params }: Props) {
                   style={{ borderColor: 'rgba(255,255,255,0.08)' }}
                 >
                   {[
-                    { label: 'What this session covers', para: descParas[0] },
-                    { label: 'Who should be in the room', para: descParas[1] },
+                    { label: content.eventLabelCovers, para: descParas[0] },
+                    { label: content.eventLabelWho, para: descParas[1] },
                   ].map(({ label, para }) => (
                     <div
                       key={label}
                       className="py-8 sm:pr-8 sm:border-r last:border-r-0 last:pl-0 sm:last:pl-8 sm:last:pr-0"
                       style={{ borderColor: 'rgba(255,255,255,0.08)' }}
                     >
-                      <h2 className="text-[9px] tracking-[0.28em] uppercase mb-4" style={{ color: '#C8A84B' }}>
+                      <h2 className="text-[10px] tracking-[0.24em] uppercase mb-4" style={{ color: '#C8A84B' }}>
                         {label}
                       </h2>
-                      <p style={{ fontSize: 'clamp(14px, 1.2vw, 16px)', color: 'rgba(242,239,232,0.82)', lineHeight: 1.85 }}>
+                      <p style={{ fontSize: 'clamp(14px, 1.3vw, 16px)', color: 'rgba(242,239,232,0.82)', lineHeight: 1.85 }}>
                         {para}
                       </p>
                     </div>
@@ -257,8 +278,8 @@ export default async function EventPage({ params }: Props) {
 
               {descParas.length === 1 && (
                 <div>
-                  <h2 className="text-[11px] tracking-[0.22em] uppercase mb-5" style={{ color: '#C8A84B' }}>
-                    About this session
+                  <h2 className="text-[10px] tracking-[0.24em] uppercase mb-5" style={{ color: '#C8A84B' }}>
+                    {content.eventLabelAbout}
                   </h2>
                   <p style={{ fontSize: 'clamp(14px, 1.3vw, 16px)', color: 'rgba(242,239,232,0.82)', lineHeight: 1.85 }}>
                     {descParas[0]}
@@ -268,18 +289,11 @@ export default async function EventPage({ params }: Props) {
 
               {/* ── What to expect ──────────────────────────────────────── */}
               <div className="border-t pt-10" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
-                <h2 className="text-[11px] tracking-[0.22em] uppercase mb-6" style={{ color: '#C8A84B' }}>
-                  What to expect
+                <h2 className="text-[10px] tracking-[0.24em] uppercase mb-6" style={{ color: '#C8A84B' }}>
+                  {content.eventLabelExpect}
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {[
-                    { n: '01', text: 'One practitioner per session' },
-                    { n: '02', text: `A small group — never more than ${event.totalSeats}` },
-                    { n: '03', text: 'A real scenario. Your judgment, tested.' },
-                    { n: '04', text: `${event.duration} minutes. No recordings.` },
-                    { n: '05', text: 'By application only.' },
-                    { n: '06', text: 'Built around public or hypothetical situations.' },
-                  ].map(({ n, text }) => (
+                  {whatToExpectItems.map(({ n, text }) => (
                     <div key={n} className="flex gap-4 py-4 border-b" style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
                       <span className="shrink-0 text-[10px] tracking-[0.14em] font-bold" style={{ color: 'rgba(200,168,75,0.6)', paddingTop: '2px' }}>
                         {n}

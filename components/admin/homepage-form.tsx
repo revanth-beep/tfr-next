@@ -118,6 +118,29 @@ export function HomepageForm({ content }: { content: HomepageContent }) {
         </div>
       </Section>
 
+      {/* Events list page */}
+      <Section title="Events Page — Header">
+        <Field id="eventsPageKicker" label="Kicker (small label above title)" value={content.eventsPageKicker} />
+        <Field id="eventsPageTitle" label="Page title" value={content.eventsPageTitle} />
+        <Field id="eventsPageDescription" label="Description paragraph" value={content.eventsPageDescription} multiline rows={3} />
+      </Section>
+
+      {/* Event detail labels */}
+      <Section title="Event Detail Page — Section Labels">
+        <p className="text-[12px]" style={{ color: 'rgba(242,239,232,0.4)' }}>
+          These labels appear as section headings on every individual event page.
+        </p>
+        <div className="grid grid-cols-2 gap-4">
+          <Field id="eventLabelCovers"       label="'What this session covers'" value={content.eventLabelCovers} />
+          <Field id="eventLabelWho"          label="'Who should be in the room'" value={content.eventLabelWho} />
+          <Field id="eventLabelAbout"        label="'About this session'" value={content.eventLabelAbout} />
+          <Field id="eventLabelExpect"       label="'What to expect'" value={content.eventLabelExpect} />
+          <Field id="eventLabelPractitioner" label="Practitioner card label" value={content.eventLabelPractitioner} />
+          <Field id="eventLabelIdentity"     label="Hidden-identity text" value={content.eventLabelIdentity}
+            hint="Shown when no name is set for the practitioner." />
+        </div>
+      </Section>
+
       <div className="flex gap-4">
         <SaveButton />
         <a href="/admin" className="btn btn-ghost-dark"><span>Back to events</span></a>
