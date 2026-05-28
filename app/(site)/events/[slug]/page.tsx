@@ -111,51 +111,76 @@ export default async function EventPage({ params }: Props) {
                 </div>
               </div>
 
-              {/* Right: practitioner compact card */}
+              {/* Right: practitioner card */}
               {practitioner && (
                 <div
-                  className="border p-6 flex gap-4 items-start lg:w-[280px] shrink-0"
-                  style={{ borderColor: 'rgba(200,168,75,0.2)', background: 'rgba(200,168,75,0.04)' }}
+                  className="shrink-0 flex flex-col gap-5 p-7 lg:w-[300px]"
+                  style={{
+                    border: '1px solid rgba(200,168,75,0.3)',
+                    borderLeft: '3px solid #C8A84B',
+                    background: 'linear-gradient(135deg, rgba(200,168,75,0.07) 0%, rgba(200,168,75,0.02) 100%)',
+                  }}
                 >
-                  <div
-                    className="shrink-0 flex items-center justify-center"
-                    style={{
-                      width: 48, height: 48,
-                      background: 'rgba(200,168,75,0.1)',
-                      border: '1px solid rgba(200,168,75,0.25)',
-                    }}
-                  >
-                    {practitioner.name ? (
-                      <span className="font-display font-bold text-[18px]" style={{ color: '#C8A84B' }}>
-                        {practitioner.name.charAt(0)}
-                      </span>
-                    ) : (
-                      <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="rgba(200,168,75,0.6)" strokeWidth="1.5">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0" />
-                      </svg>
-                    )}
+                  {/* Kicker */}
+                  <p className="text-[9px] tracking-[0.28em] uppercase" style={{ color: '#C8A84B' }}>
+                    The Practitioner
+                  </p>
+
+                  {/* Avatar + identity */}
+                  <div className="flex items-center gap-4">
+                    <div
+                      className="shrink-0 flex items-center justify-center"
+                      style={{
+                        width: 64, height: 64,
+                        background: 'rgba(200,168,75,0.12)',
+                        border: '1px solid rgba(200,168,75,0.35)',
+                      }}
+                    >
+                      {practitioner.name ? (
+                        <span className="font-display font-bold text-[26px]" style={{ color: '#C8A84B' }}>
+                          {practitioner.name.charAt(0)}
+                        </span>
+                      ) : (
+                        <svg width="26" height="26" fill="none" viewBox="0 0 24 24" stroke="rgba(200,168,75,0.7)" strokeWidth="1.5">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0" />
+                        </svg>
+                      )}
+                    </div>
+                    <div>
+                      {practitioner.name ? (
+                        <p className="font-display text-[22px] leading-tight" style={{ color: '#F2EFE8', fontWeight: 400 }}>
+                          {practitioner.name}
+                        </p>
+                      ) : (
+                        <p className="font-serif italic text-[13px]" style={{ color: 'rgba(242,239,232,0.4)', lineHeight: 1.5 }}>
+                          Identity disclosed to confirmed attendees
+                        </p>
+                      )}
+                    </div>
                   </div>
-                  <div className="min-w-0">
-                    <p className="text-[9px] tracking-[0.22em] uppercase mb-2" style={{ color: '#C8A84B' }}>
-                      The Practitioner
-                    </p>
-                    {practitioner.name ? (
-                      <p className="font-display text-[17px] leading-tight mb-1" style={{ color: '#F2EFE8', fontWeight: 400 }}>
-                        {practitioner.name}
-                      </p>
-                    ) : (
-                      <p className="font-serif italic text-[13px] mb-1" style={{ color: 'rgba(242,239,232,0.4)' }}>
-                        Identity disclosed to confirmed attendees
-                      </p>
-                    )}
+
+                  {/* Title / company / experience */}
+                  <div
+                    className="flex flex-col gap-1.5 pt-4"
+                    style={{ borderTop: '1px solid rgba(200,168,75,0.15)' }}
+                  >
                     {practitioner.title && (
-                      <p className="text-[12px] leading-snug" style={{ color: 'rgba(242,239,232,0.55)' }}>
+                      <p className="text-[13px]" style={{ color: 'rgba(242,239,232,0.7)', lineHeight: 1.4 }}>
                         {practitioner.title}
-                        {practitioner.company && <span style={{ color: 'rgba(242,239,232,0.3)' }}> · {practitioner.company}</span>}
+                        {practitioner.company && (
+                          <span style={{ color: 'rgba(242,239,232,0.35)' }}> · {practitioner.company}</span>
+                        )}
                       </p>
                     )}
                     {practitioner.experience && (
-                      <p className="text-[11px] mt-2" style={{ color: 'rgba(200,168,75,0.65)' }}>
+                      <p
+                        className="text-[11px] tracking-[0.08em] inline-block px-2.5 py-1 self-start"
+                        style={{
+                          background: 'rgba(200,168,75,0.1)',
+                          border: '1px solid rgba(200,168,75,0.25)',
+                          color: '#C8A84B',
+                        }}
+                      >
                         {practitioner.experience}
                       </p>
                     )}
