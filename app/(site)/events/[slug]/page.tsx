@@ -60,7 +60,7 @@ export default async function EventPage({ params }: Props) {
         className="relative pt-10 md:pt-14 xl:pt-16 pb-14 md:pb-16 xl:pb-20"
         style={{ background: '#09162A' }}
       >
-          <div className="container relative z-10">
+        <div className="container relative z-10">
           <HeroReveal>
             <Link
               href="/events"
@@ -69,45 +69,99 @@ export default async function EventPage({ params }: Props) {
               <span>←</span> All Events
             </Link>
 
-            <h1
-              className="heading-section mb-4"
-              style={{ fontSize: 'clamp(32px, 5vw, 68px)', color: '#F2EFE8', maxWidth: '800px' }}
-            >
-              {event.title}
-            </h1>
-            {event.subtitle && (
-              <p
-                className="font-serif italic mb-8"
-                style={{
-                  fontSize: 'clamp(16px, 2vw, 24px)',
-                  color: 'rgba(242,239,232,0.55)',
-                  lineHeight: 1.5,
-                  maxWidth: '640px',
-                }}
-              >
-                {event.subtitle}
-              </p>
-            )}
+            {/* Title + practitioner side by side on desktop */}
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 lg:gap-14 lg:items-end">
 
-            {/* Meta strip */}
-            <div className="flex flex-wrap gap-3 md:gap-6">
-            {[
-              { icon: '📅', label: formatDate(new Date(event.date)) },
-              { icon: '🕐', label: `${formatTime(new Date(event.date))} IST` },
-              { icon: '💻', label: event.format },
-              { icon: '⏱',  label: `${event.duration} min` },
-              ...(!isPast ? [{ icon: '💺', label: full ? 'Full' : `${seatsLeft} seats left` }] : [{ icon: '👥', label: `${registered} attended` }]),
-            ].map(({ icon, label }) => (
-              <div key={label} className="flex items-center gap-2">
-                <span style={{ fontSize: '13px' }}>{icon}</span>
-                <span
-                  className="text-[13px] font-medium"
-                  style={{ color: 'rgba(242,239,232,0.65)' }}
+              {/* Left: title, subtitle, meta */}
+              <div>
+                <h1
+                  className="heading-section mb-4"
+                  style={{ fontSize: 'clamp(32px, 5vw, 68px)', color: '#F2EFE8' }}
                 >
-                  {label}
-                </span>
+                  {event.title}
+                </h1>
+                {event.subtitle && (
+                  <p
+                    className="font-serif italic mb-8"
+                    style={{
+                      fontSize: 'clamp(16px, 2vw, 24px)',
+                      color: 'rgba(242,239,232,0.55)',
+                      lineHeight: 1.5,
+                      maxWidth: '600px',
+                    }}
+                  >
+                    {event.subtitle}
+                  </p>
+                )}
+                <div className="flex flex-wrap gap-3 md:gap-6">
+                  {[
+                    { icon: '📅', label: formatDate(new Date(event.date)) },
+                    { icon: '🕐', label: `${formatTime(new Date(event.date))} IST` },
+                    { icon: '💻', label: event.format },
+                    { icon: '⏱',  label: `${event.duration} min` },
+                    ...(!isPast ? [{ icon: '💺', label: full ? 'Full' : `${seatsLeft} seats left` }] : [{ icon: '👥', label: `${registered} attended` }]),
+                  ].map(({ icon, label }) => (
+                    <div key={label} className="flex items-center gap-2">
+                      <span style={{ fontSize: '13px' }}>{icon}</span>
+                      <span className="text-[13px] font-medium" style={{ color: 'rgba(242,239,232,0.65)' }}>
+                        {label}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
+
+              {/* Right: practitioner compact card */}
+              {practitioner && (
+                <div
+                  className="border p-6 flex gap-4 items-start lg:w-[280px] shrink-0"
+                  style={{ borderColor: 'rgba(200,168,75,0.2)', background: 'rgba(200,168,75,0.04)' }}
+                >
+                  <div
+                    className="shrink-0 flex items-center justify-center"
+                    style={{
+                      width: 48, height: 48,
+                      background: 'rgba(200,168,75,0.1)',
+                      border: '1px solid rgba(200,168,75,0.25)',
+                    }}
+                  >
+                    {practitioner.name ? (
+                      <span className="font-display font-bold text-[18px]" style={{ color: '#C8A84B' }}>
+                        {practitioner.name.charAt(0)}
+                      </span>
+                    ) : (
+                      <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="rgba(200,168,75,0.6)" strokeWidth="1.5">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0" />
+                      </svg>
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-[9px] tracking-[0.22em] uppercase mb-2" style={{ color: '#C8A84B' }}>
+                      The Practitioner
+                    </p>
+                    {practitioner.name ? (
+                      <p className="font-display text-[17px] leading-tight mb-1" style={{ color: '#F2EFE8', fontWeight: 400 }}>
+                        {practitioner.name}
+                      </p>
+                    ) : (
+                      <p className="font-serif italic text-[13px] mb-1" style={{ color: 'rgba(242,239,232,0.4)' }}>
+                        Identity disclosed to confirmed attendees
+                      </p>
+                    )}
+                    {practitioner.title && (
+                      <p className="text-[12px] leading-snug" style={{ color: 'rgba(242,239,232,0.55)' }}>
+                        {practitioner.title}
+                        {practitioner.company && <span style={{ color: 'rgba(242,239,232,0.3)' }}> · {practitioner.company}</span>}
+                      </p>
+                    )}
+                    {practitioner.experience && (
+                      <p className="text-[11px] mt-2" style={{ color: 'rgba(200,168,75,0.65)' }}>
+                        {practitioner.experience}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
           </HeroReveal>
         </div>
@@ -233,87 +287,38 @@ export default async function EventPage({ params }: Props) {
                 </div>
               </div>
 
-              {/* Practitioner */}
-              {practitioner && (
+              {/* Practitioner bio + attributes (only if there's deeper content) */}
+              {practitioner && (practitioner.bio || (practitioner.attributes && practitioner.attributes.length > 0)) && (
                 <div
                   className="border-t pt-10"
                   style={{ borderColor: 'rgba(255,255,255,0.07)' }}
                 >
                   <h2
-                    className="text-[11px] tracking-[0.22em] uppercase mb-6"
+                    className="text-[11px] tracking-[0.22em] uppercase mb-5"
                     style={{ color: '#C8A84B' }}
                   >
-                    The practitioner
+                    About the practitioner
                   </h2>
-                  <div
-                    className="flex gap-6 p-8 border"
-                    style={{
-                      borderColor: 'rgba(200,168,75,0.15)',
-                      background: 'rgba(200,168,75,0.04)',
-                    }}
-                  >
-                    <div
-                      className="shrink-0 flex items-center justify-center"
-                      style={{
-                        width: 64, height: 64,
-                        background: 'rgba(200,168,75,0.1)',
-                        border: '1px solid rgba(200,168,75,0.25)',
-                      }}
-                    >
-                      {practitioner.name ? (
-                        <span
-                          className="font-display font-bold text-[20px]"
-                          style={{ color: '#C8A84B' }}
-                        >
-                          {practitioner.name.charAt(0)}
-                        </span>
-                      ) : (
-                        <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="rgba(200,168,75,0.6)" strokeWidth="1.5">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0" />
-                        </svg>
-                      )}
-                    </div>
-                    <div>
-                      {practitioner.name ? (
-                        <p className="font-display text-[19px] mb-1" style={{ color: '#F2EFE8', fontWeight: 400 }}>
-                          {practitioner.name}
-                        </p>
-                      ) : (
-                        <p className="font-serif italic text-[14px] mb-1" style={{ color: 'rgba(242,239,232,0.45)' }}>
-                          Identity disclosed to confirmed attendees
-                        </p>
-                      )}
-                      {practitioner.title && (
-                        <p className="text-[13px] mb-1" style={{ color: 'rgba(242,239,232,0.6)' }}>
-                          {practitioner.title}
-                          {practitioner.company && ` · ${practitioner.company}`}
-                        </p>
-                      )}
-                      {practitioner.experience && (
-                        <p className="text-[12px] mb-3" style={{ color: 'rgba(200,168,75,0.7)' }}>
-                          {practitioner.experience}
-                        </p>
-                      )}
-                      {practitioner.bio && (
-                        <p className="text-[13.5px] mb-5" style={{ color: 'rgba(242,239,232,0.52)', lineHeight: 1.72 }}>
-                          {practitioner.bio}
-                        </p>
-                      )}
-                      {practitioner.attributes && practitioner.attributes.length > 0 && (
-                        <div className="flex flex-col border-t" style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
-                          {practitioner.attributes.map((attr, i) => (
-                            <div
-                              key={i}
-                              className="flex items-start gap-3 py-3 border-b text-[13px]"
-                              style={{ borderColor: 'rgba(255,255,255,0.07)', color: 'rgba(242,239,232,0.55)', lineHeight: 1.65 }}
-                            >
-                              <span style={{ color: '#C8A84B', flexShrink: 0 }}>—</span>
-                              <span>{attr}</span>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
+                  <div className="flex flex-col gap-4">
+                    {practitioner.bio && (
+                      <p className="text-[14px]" style={{ color: 'rgba(242,239,232,0.55)', lineHeight: 1.8 }}>
+                        {practitioner.bio}
+                      </p>
+                    )}
+                    {practitioner.attributes && practitioner.attributes.length > 0 && (
+                      <div className="flex flex-col border-t pt-4" style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
+                        {practitioner.attributes.map((attr, i) => (
+                          <div
+                            key={i}
+                            className="flex items-start gap-3 py-3 border-b text-[13px]"
+                            style={{ borderColor: 'rgba(255,255,255,0.07)', color: 'rgba(242,239,232,0.55)', lineHeight: 1.65 }}
+                          >
+                            <span style={{ color: '#C8A84B', flexShrink: 0 }}>—</span>
+                            <span>{attr}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               )}
