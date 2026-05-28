@@ -217,7 +217,7 @@ export default async function HomePage() {
               </h2>
             </Reveal>
             <Reveal delay={0.22} style={{ paddingTop: '8px' }}>
-              <p style={{ fontSize: 'clamp(14px,1.4vw,17px)', color: 'rgba(242,239,232,0.82)', lineHeight: 1.85 }}>
+              <p style={{ fontSize: 'clamp(14px,1.3vw,16px)', color: 'rgba(242,239,232,0.82)', lineHeight: 1.85 }}>
                 {content.whoBody}
               </p>
             </Reveal>

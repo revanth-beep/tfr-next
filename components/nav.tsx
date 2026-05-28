@@ -155,8 +155,8 @@ export function Nav({ upcomingEvent: _ }: NavProps) {
                 key={href}
                 href={href}
                 onClick={() => setMenuOpen(false)}
-                className="text-[13px] tracking-[0.1em] uppercase"
-                style={{ color: 'rgba(242,239,232,0.6)' }}
+                className="text-[12px] tracking-[0.12em] uppercase"
+                style={{ color: 'rgba(242,239,232,0.75)' }}
               >
                 {label}
               </Link>
@@ -166,7 +166,7 @@ export function Nav({ upcomingEvent: _ }: NavProps) {
               href="https://instagram.com/thefinanceroom"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-[12px] tracking-[0.12em] uppercase"
+              className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase"
               style={{ color: '#F2EFE8' }}
               onClick={() => setMenuOpen(false)}
             >
@@ -178,7 +178,7 @@ export function Nav({ upcomingEvent: _ }: NavProps) {
               <button
                 onClick={() => { signOut(); setMenuOpen(false) }}
                 className="text-left text-[11px] tracking-[0.14em] uppercase"
-                style={{ color: 'rgba(242,239,232,0.35)' }}
+                style={{ color: 'rgba(242,239,232,0.5)' }}
               >
                 Sign out
               </button>

@@ -49,7 +49,7 @@ export default async function EventsPage() {
           <h1 className="heading-display mb-4" style={{ fontSize: 'clamp(36px,5vw,68px)', color: '#F2EFE8' }}>
             {content.eventsPageTitle}
           </h1>
-          <p style={{ fontSize: 'clamp(13px,1.3vw,16px)', color: 'rgba(242,239,232,0.78)', lineHeight: 1.7, maxWidth: '440px' }}>
+          <p style={{ fontSize: 'clamp(14px,1.3vw,16px)', color: 'rgba(242,239,232,0.82)', lineHeight: 1.7, maxWidth: '440px' }}>
             {content.eventsPageDescription}
           </p>
         </div>
@@ -117,7 +117,7 @@ export default async function EventsPage() {
                         </h2>
 
                         {event.subtitle && (
-                          <p className="font-serif italic text-[13px]" style={{ color: 'rgba(242,239,232,0.78)' }}>
+                          <p className="font-serif italic text-[14px]" style={{ color: 'rgba(242,239,232,0.82)' }}>
                             {event.subtitle}
                           </p>
                         )}
@@ -221,7 +221,7 @@ export default async function EventsPage() {
                       </h2>
 
                       {event.subtitle && (
-                        <p className="font-serif italic text-[13px]" style={{ color: 'rgba(242,239,232,0.75)' }}>
+                        <p className="font-serif italic text-[14px]" style={{ color: 'rgba(242,239,232,0.82)' }}>
                           {event.subtitle}
                         </p>
                       )}
