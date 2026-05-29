@@ -8,9 +8,9 @@ import { getHomepageContent } from '@/lib/homepage'
 async function getFeaturedEvent() {
   try {
     return await prisma.event.findFirst({
-      where: { isPublished: true, isFeatured: true, date: { gte: new Date() } },
+      where: { isPublished: true, date: { gte: new Date() } },
       include: { _count: { select: { registrations: true } } },
-      orderBy: { date: 'asc' },
+      orderBy: [{ isFeatured: 'desc' }, { date: 'asc' }],
     })
   } catch {
     return null
@@ -38,13 +38,13 @@ export default async function HomePage() {
       <section className="relative overflow-hidden" style={{ background: '#09162A' }}>
         <div className="container relative z-10 pt-12 pb-20 md:pt-20 md:pb-20 xl:pt-24 xl:pb-24">
           <HeroReveal>
-            <h1 className="heading-display" style={{ fontSize: 'clamp(44px,8vw,108px)', color: '#F2EFE8' }}>
+            <h1 className="heading-display mb-7 md:mb-9" style={{ fontSize: 'clamp(44px,8vw,108px)', color: '#F2EFE8' }}>
               <span className="block">{content.heroLine1}</span>
               <span className="block">{content.heroLine2}</span>
               <span className="block" style={{ color: '#C8A84B' }}>{content.heroLine3}</span>
             </h1>
 
-            <p className="font-serif italic" style={{
+            <p className="font-serif italic mb-10 md:mb-12" style={{
               fontSize: 'clamp(15px,1.7vw,20px)', color: 'rgba(242,239,232,0.82)', lineHeight: 1.65, maxWidth: '520px',
             }}>
               {content.heroTagline}

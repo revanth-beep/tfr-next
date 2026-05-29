@@ -10,9 +10,9 @@ import { prisma } from '@/lib/db'
 async function getUpcomingEvent() {
   try {
     const event = await prisma.event.findFirst({
-      where: { isPublished: true, isFeatured: true, date: { gte: new Date() } },
+      where: { isPublished: true, date: { gte: new Date() } },
       select: { title: true, slug: true, date: true },
-      orderBy: { date: 'asc' },
+      orderBy: [{ isFeatured: 'desc' }, { date: 'asc' }],
     })
     if (!event) return null
     return { title: event.title, slug: event.slug, date: event.date.toISOString() }
