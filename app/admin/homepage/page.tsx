@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { getHomepageContent } from '@/lib/homepage'
 import { HomepageForm } from '@/components/admin/homepage-form'
 import { adminLogout } from '@/app/actions/admin'
