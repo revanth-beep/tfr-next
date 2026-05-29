@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { markLoaderDone } from './loader-state'
+import { markLoaderDone, markHeroReady } from './loader-state'
 
 type Phase = 'intro' | 'opening' | 'done'
 
@@ -13,6 +13,7 @@ export function Loader() {
     setMounted(true)
     const t1 = setTimeout(() => {
       setPhase('opening')
+      markHeroReady()
       window.dispatchEvent(new CustomEvent('tfr:hero-ready'))
     }, 2300)
     const t2 = setTimeout(() => {
