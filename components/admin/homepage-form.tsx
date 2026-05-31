@@ -125,6 +125,14 @@ export function HomepageForm({ content }: { content: HomepageContent }) {
         <Field id="eventsPageDescription" label="Description paragraph" value={content.eventsPageDescription} multiline rows={3} />
       </Section>
 
+      {/* Social links */}
+      <Section title="Social Links">
+        <Field id="instagramUrl" label="Instagram URL" value={content.instagramUrl}
+          hint="Used in the nav CTA and footer." />
+        <Field id="linkedinUrl" label="LinkedIn URL" value={content.linkedinUrl}
+          hint="Used in the footer." />
+      </Section>
+
       {/* Event detail labels */}
       <Section title="Event Detail Page — Section Labels">
         <p className="text-[12px]" style={{ color: 'rgba(242,239,232,0.4)' }}>

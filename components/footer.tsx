@@ -1,6 +1,14 @@
 import Link from 'next/link'
 
-export function Footer() {
+interface FooterProps {
+  instagramUrl?: string
+  linkedinUrl?: string
+}
+
+export function Footer({
+  instagramUrl = 'https://instagram.com/thefinanceroom',
+  linkedinUrl  = 'https://linkedin.com/company/thefinanceroom',
+}: FooterProps) {
   return (
     <footer
       className="border-t"
@@ -35,7 +43,7 @@ export function Footer() {
 
           <div className="flex items-center gap-6">
             <a
-              href="https://instagram.com/thefinanceroom"
+              href={instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="text-[11px] tracking-[0.1em] uppercase text-cream-dim hover:text-amber transition-colors"
@@ -43,7 +51,7 @@ export function Footer() {
               Instagram
             </a>
             <a
-              href="https://linkedin.com/company/thefinanceroom"
+              href={linkedinUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="text-[11px] tracking-[0.1em] uppercase text-cream-dim hover:text-amber transition-colors"

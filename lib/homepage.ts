@@ -32,6 +32,8 @@ export type HomepageContent = {
   eventLabelExpect: string
   eventLabelPractitioner: string
   eventLabelIdentity: string
+  instagramUrl: string
+  linkedinUrl: string
   colorBackground: string
   colorGold: string
   colorText: string
@@ -77,6 +79,8 @@ export const HOMEPAGE_DEFAULTS: HomepageContent = {
   eventLabelExpect: 'What to expect',
   eventLabelPractitioner: 'The Practitioner',
   eventLabelIdentity: 'Identity disclosed to confirmed attendees',
+  instagramUrl: 'https://instagram.com/thefinanceroom',
+  linkedinUrl:  'https://linkedin.com/company/thefinanceroom',
   colorBackground: '#09162A',
   colorGold: '#C8A84B',
   colorText: '#F2EFE8',

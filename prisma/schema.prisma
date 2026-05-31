@@ -136,6 +136,10 @@ model HomepageContent {
   eventLabelPractitioner String @default("The Practitioner")
   eventLabelIdentity    String @default("Identity disclosed to confirmed attendees")
 
+  // Social links
+  instagramUrl String @default("https://instagram.com/thefinanceroom")
+  linkedinUrl  String @default("https://linkedin.com/company/thefinanceroom")
+
   // Brand colors
   colorBackground String @default("#09162A")
   colorGold       String @default("#C8A84B")

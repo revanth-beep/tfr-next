@@ -6,6 +6,7 @@ import { useSession, signOut } from 'next-auth/react'
 
 interface NavProps {
   upcomingEvent?: { title: string; slug: string; date: string } | null
+  instagramUrl?: string
 }
 
 function InstagramIcon() {
@@ -18,7 +19,7 @@ function InstagramIcon() {
   )
 }
 
-export function Nav({ upcomingEvent: _ }: NavProps) {
+export function Nav({ upcomingEvent: _, instagramUrl = 'https://instagram.com/thefinanceroom' }: NavProps) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const { data: session } = useSession()
@@ -99,7 +100,7 @@ export function Nav({ upcomingEvent: _ }: NavProps) {
             ) : (
               /* Instagram CTA — highlighted */
               <a
-                href="https://instagram.com/thefinanceroom"
+                href={instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 transition-all duration-200"
@@ -163,7 +164,7 @@ export function Nav({ upcomingEvent: _ }: NavProps) {
             ))}
 
             <a
-              href="https://instagram.com/thefinanceroom"
+              href={instagramUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase"

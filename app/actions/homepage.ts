@@ -52,6 +52,9 @@ export async function updateHomepageContent(
     eventsPageTitle:       str(formData, 'eventsPageTitle'),
     eventsPageDescription: str(formData, 'eventsPageDescription'),
 
+    instagramUrl: str(formData, 'instagramUrl'),
+    linkedinUrl:  str(formData, 'linkedinUrl'),
+
     eventLabelCovers:       str(formData, 'eventLabelCovers'),
     eventLabelWho:          str(formData, 'eventLabelWho'),
     eventLabelAbout:        str(formData, 'eventLabelAbout'),

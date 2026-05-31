@@ -6,6 +6,7 @@ import { Loader } from '@/components/loader'
 import { PageTransition } from '@/components/page-transition'
 import { ChromeOffset } from '@/components/chrome-offset'
 import { prisma } from '@/lib/db'
+import { getHomepageContent } from '@/lib/homepage'
 
 async function getUpcomingEvent() {
   try {
@@ -22,7 +23,8 @@ async function getUpcomingEvent() {
 }
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
-  const upcomingEvent = await getUpcomingEvent()
+  const [upcomingEvent, content] = await Promise.all([getUpcomingEvent(), getHomepageContent()])
+  const { instagramUrl, linkedinUrl } = content
 
   return (
     <Providers>
@@ -31,12 +33,12 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       <ChromeOffset />
       <div id="site-chrome" className="fixed top-0 left-0 right-0 z-50">
         <EventFlash event={upcomingEvent} />
-        <Nav upcomingEvent={upcomingEvent} />
+        <Nav upcomingEvent={upcomingEvent} instagramUrl={instagramUrl} />
       </div>
       <main>
         <PageTransition>{children}</PageTransition>
       </main>
-      <Footer />
+      <Footer instagramUrl={instagramUrl} linkedinUrl={linkedinUrl} />
       <script dangerouslySetInnerHTML={{ __html: PROGRESS_SCRIPT }} />
     </Providers>
   )
