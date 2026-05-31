@@ -73,7 +73,7 @@ export default async function EventPage({ params }: Props) {
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section
         className="relative pt-10 md:pt-14 xl:pt-16 pb-14 md:pb-16 xl:pb-20"
-        style={{ background: '#09162A' }}
+        style={{ background: 'var(--color-bg)' }}
       >
         <div className="container relative z-10">
           <HeroReveal>
@@ -86,7 +86,7 @@ export default async function EventPage({ params }: Props) {
 
             <h1
               className="heading-section mb-4"
-              style={{ fontSize: 'clamp(32px, 5vw, 68px)', color: '#F2EFE8', maxWidth: '820px' }}
+              style={{ fontSize: 'clamp(32px, 5vw, 68px)', color: 'var(--color-text)', maxWidth: '820px' }}
             >
               {event.title}
             </h1>
@@ -129,7 +129,7 @@ export default async function EventPage({ params }: Props) {
       </section>
 
       {/* ── Main content ─────────────────────────────────────────────────── */}
-      <section style={{ background: '#09162A', paddingBottom: 'clamp(48px, 7vw, 100px)' }}>
+      <section style={{ background: 'var(--color-bg)', paddingBottom: 'clamp(48px, 7vw, 100px)' }}>
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
 
@@ -142,11 +142,11 @@ export default async function EventPage({ params }: Props) {
                   className="flex flex-col gap-5 p-7"
                   style={{
                     border: '1px solid rgba(200,168,75,0.3)',
-                    borderLeft: '3px solid #C8A84B',
+                    borderLeft: '3px solid var(--color-gold)',
                     background: 'linear-gradient(135deg, rgba(200,168,75,0.08) 0%, rgba(200,168,75,0.02) 100%)',
                   }}
                 >
-                  <p className="text-[10px] tracking-[0.24em] uppercase" style={{ color: '#C8A84B' }}>
+                  <p className="text-[10px] tracking-[0.24em] uppercase" style={{ color: 'var(--color-gold)' }}>
                     {content.eventLabelPractitioner}
                   </p>
 
@@ -167,7 +167,7 @@ export default async function EventPage({ params }: Props) {
 
                     <div className="flex flex-col gap-2">
                       {practitioner.name ? (
-                        <p className="font-display font-bold text-[20px]" style={{ color: '#F2EFE8' }}>
+                        <p className="font-display font-bold text-[20px]" style={{ color: 'var(--color-text)' }}>
                           {practitioner.name}
                         </p>
                       ) : (
@@ -176,7 +176,7 @@ export default async function EventPage({ params }: Props) {
                         </p>
                       )}
                       {(practitioner.title || practitioner.company) && (
-                        <p className="text-[14px]" style={{ color: '#F2EFE8' }}>
+                        <p className="text-[14px]" style={{ color: 'var(--color-text)' }}>
                           {practitioner.title}
                           {practitioner.company && (
                             <span style={{ color: 'rgba(242,239,232,0.75)' }}> · {practitioner.company}</span>
@@ -189,7 +189,7 @@ export default async function EventPage({ params }: Props) {
                           style={{
                             background: 'rgba(200,168,75,0.12)',
                             border: '1px solid rgba(200,168,75,0.3)',
-                            color: '#C8A84B',
+                            color: 'var(--color-gold)',
                           }}
                         >
                           {practitioner.experience}
@@ -214,7 +214,7 @@ export default async function EventPage({ params }: Props) {
                               className="flex items-start gap-3 py-2.5 border-b text-[14px]"
                               style={{ borderColor: 'rgba(255,255,255,0.07)', color: 'rgba(242,239,232,0.85)', lineHeight: 1.65 }}
                             >
-                              <span style={{ color: '#C8A84B', flexShrink: 0 }}>—</span>
+                              <span style={{ color: 'var(--color-gold)', flexShrink: 0 }}>—</span>
                               <span>{attr}</span>
                             </div>
                           ))}
@@ -255,7 +255,7 @@ export default async function EventPage({ params }: Props) {
                       className="py-8 sm:pr-8 sm:border-r last:border-r-0 last:pl-0 sm:last:pl-8 sm:last:pr-0"
                       style={{ borderColor: 'rgba(255,255,255,0.08)' }}
                     >
-                      <h2 className="text-[10px] tracking-[0.24em] uppercase mb-4" style={{ color: '#C8A84B' }}>
+                      <h2 className="text-[10px] tracking-[0.24em] uppercase mb-4" style={{ color: 'var(--color-gold)' }}>
                         {label}
                       </h2>
                       <p style={{ fontSize: 'clamp(14px, 1.3vw, 16px)', color: 'rgba(242,239,232,0.82)', lineHeight: 1.85 }}>
@@ -278,7 +278,7 @@ export default async function EventPage({ params }: Props) {
 
               {descParas.length === 1 && (
                 <div>
-                  <h2 className="text-[10px] tracking-[0.24em] uppercase mb-5" style={{ color: '#C8A84B' }}>
+                  <h2 className="text-[10px] tracking-[0.24em] uppercase mb-5" style={{ color: 'var(--color-gold)' }}>
                     {content.eventLabelAbout}
                   </h2>
                   <p style={{ fontSize: 'clamp(14px, 1.3vw, 16px)', color: 'rgba(242,239,232,0.82)', lineHeight: 1.85 }}>
@@ -289,7 +289,7 @@ export default async function EventPage({ params }: Props) {
 
               {/* ── What to expect ──────────────────────────────────────── */}
               <div className="border-t pt-10" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
-                <h2 className="text-[10px] tracking-[0.24em] uppercase mb-6" style={{ color: '#C8A84B' }}>
+                <h2 className="text-[10px] tracking-[0.24em] uppercase mb-6" style={{ color: 'var(--color-gold)' }}>
                   {content.eventLabelExpect}
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -319,7 +319,7 @@ export default async function EventPage({ params }: Props) {
                   >
                     <div>
                       <span className="text-[9px] tracking-[0.24em] uppercase px-2.5 py-1 mb-4 inline-block"
-                        style={{ color: '#F2EFE8', border: '1px solid rgba(242,239,232,0.3)', background: 'rgba(255,255,255,0.07)' }}>
+                        style={{ color: 'var(--color-text)', border: '1px solid rgba(242,239,232,0.3)', background: 'rgba(255,255,255,0.07)' }}>
                         Session concluded
                       </span>
                       <p className="text-[13px] leading-relaxed mt-3" style={{ color: 'rgba(124,185,217,0.92)' }}>
@@ -348,7 +348,7 @@ export default async function EventPage({ params }: Props) {
                     style={{ borderColor: 'rgba(200,168,75,0.2)', background: 'rgba(200,168,75,0.03)' }}
                   >
                     <div>
-                      <p className="text-[10px] tracking-[0.22em] uppercase mb-3" style={{ color: '#C8A84B' }}>
+                      <p className="text-[10px] tracking-[0.22em] uppercase mb-3" style={{ color: 'var(--color-gold)' }}>
                         Reserve your seat
                       </p>
 
@@ -359,13 +359,13 @@ export default async function EventPage({ params }: Props) {
                           </span>
                           {seatsLeft <= 5 && seatsLeft > 0 && (
                             <span className="text-[9px] tracking-[0.18em] uppercase px-2 py-0.5"
-                              style={{ background: 'rgba(200,168,75,0.12)', color: '#C8A84B', border: '1px solid rgba(200,168,75,0.25)' }}>
+                              style={{ background: 'rgba(200,168,75,0.12)', color: 'var(--color-gold)', border: '1px solid rgba(200,168,75,0.25)' }}>
                               Almost full
                             </span>
                           )}
                         </div>
                         <div className="h-1 w-full rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.1)' }}>
-                          <div className="h-full" style={{ width: `${pct}%`, background: pct > 80 ? '#C84B4B' : '#C8A84B' }} />
+                          <div className="h-full" style={{ width: `${pct}%`, background: pct > 80 ? '#C84B4B' : 'var(--color-gold)' }} />
                         </div>
                       </div>
 

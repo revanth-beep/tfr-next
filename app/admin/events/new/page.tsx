@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function NewEventPage() {
   return (
-    <div className="min-h-screen" style={{ background: '#09162A' }}>
+    <div className="min-h-screen" style={{ background: 'var(--color-bg)' }}>
       <div
         className="border-b px-12 py-5 flex items-center gap-4"
         style={{ background: '#0F0F1A', borderColor: 'rgba(255,255,255,0.08)' }}
@@ -17,7 +17,7 @@ export default function NewEventPage() {
         </span>
       </div>
       <div className="max-w-5xl mx-auto px-12 py-12">
-        <h1 className="font-display font-bold text-[28px] mb-10" style={{ color: '#F2EFE8' }}>
+        <h1 className="font-display font-bold text-[28px] mb-10" style={{ color: 'var(--color-text)' }}>
           Create Event
         </h1>
         <EventForm />

@@ -14,7 +14,7 @@ export default async function EditEventPage({ params }: Props) {
   if (!event) notFound()
 
   return (
-    <div className="min-h-screen" style={{ background: '#09162A' }}>
+    <div className="min-h-screen" style={{ background: 'var(--color-bg)' }}>
       <div
         className="border-b px-12 py-5 flex items-center gap-4"
         style={{ background: '#0F0F1A', borderColor: 'rgba(255,255,255,0.08)' }}
@@ -30,7 +30,7 @@ export default async function EditEventPage({ params }: Props) {
       <div className="max-w-5xl mx-auto px-12 py-12">
         <div className="flex items-start justify-between mb-10">
           <div>
-            <h1 className="font-display font-bold text-[28px]" style={{ color: '#F2EFE8' }}>
+            <h1 className="font-display font-bold text-[28px]" style={{ color: 'var(--color-text)' }}>
               Edit Event
             </h1>
             <p className="text-[13px] mt-1" style={{ color: 'rgba(242,239,232,0.4)' }}>

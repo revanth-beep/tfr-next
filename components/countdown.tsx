@@ -37,7 +37,7 @@ export function Countdown({ targetDate }: CountdownProps) {
     return (
       <span
         className="text-[11px] tracking-[0.2em] uppercase"
-        style={{ color: '#C8A84B' }}
+        style={{ color: 'var(--color-gold)' }}
       >
         Event live
       </span>
@@ -58,7 +58,7 @@ export function Countdown({ targetDate }: CountdownProps) {
           <div className="text-center">
             <div
               className="font-display font-bold tabular-nums"
-              style={{ fontSize: '28px', color: '#C8A84B', lineHeight: 1 }}
+              style={{ fontSize: '28px', color: 'var(--color-gold)', lineHeight: 1 }}
             >
               {String(value).padStart(2, '0')}
             </div>

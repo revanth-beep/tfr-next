@@ -13,7 +13,7 @@ export default async function AdminDashboard() {
   })
 
   return (
-    <div className="min-h-screen" style={{ background: '#09162A' }}>
+    <div className="min-h-screen" style={{ background: 'var(--color-bg)' }}>
       {/* Admin header */}
       <div
         className="border-b px-12 py-5 flex items-center justify-between"
@@ -40,6 +40,9 @@ export default async function AdminDashboard() {
           <Link href="/admin/homepage" className="text-[11px] tracking-[0.12em] uppercase" style={{ color: 'rgba(242,239,232,0.55)' }}>
             Homepage Content
           </Link>
+          <Link href="/admin/colors" className="text-[11px] tracking-[0.12em] uppercase" style={{ color: 'rgba(242,239,232,0.55)' }}>
+            Brand Colors
+          </Link>
           <Link href="/" className="text-[11px] tracking-[0.12em] uppercase" style={{ color: 'rgba(242,239,232,0.4)' }}>
             View site →
           </Link>
@@ -59,7 +62,7 @@ export default async function AdminDashboard() {
         {/* Page header */}
         <div className="flex items-center justify-between mb-10">
           <div>
-            <h1 className="font-display font-bold text-[28px]" style={{ color: '#F2EFE8' }}>
+            <h1 className="font-display font-bold text-[28px]" style={{ color: 'var(--color-text)' }}>
               Events
             </h1>
             <p className="text-[13px] mt-1" style={{ color: 'rgba(242,239,232,0.4)' }}>
@@ -107,7 +110,7 @@ export default async function AdminDashboard() {
                     className="shrink-0 w-2 h-2 rounded-full"
                     style={{
                       background: event.isPublished
-                        ? (event.isFeatured ? '#C8A84B' : 'rgba(80,200,120,0.8)')
+                        ? (event.isFeatured ? 'var(--color-gold)' : 'rgba(80,200,120,0.8)')
                         : 'rgba(255,255,255,0.2)',
                     }}
                     title={
@@ -121,7 +124,7 @@ export default async function AdminDashboard() {
                   <div className="flex-1 min-w-0">
                     <p
                       className="font-display font-bold text-[16px] truncate"
-                      style={{ color: '#F2EFE8' }}
+                      style={{ color: 'var(--color-text)' }}
                     >
                       {event.title}
                     </p>
@@ -140,7 +143,7 @@ export default async function AdminDashboard() {
 
                   {/* Registrations */}
                   <Link href={`/admin/events/${event.id}/registrations`} className="shrink-0 text-right group">
-                    <p className="text-[14px] font-bold group-hover:underline" style={{ color: '#C8A84B' }}>
+                    <p className="text-[14px] font-bold group-hover:underline" style={{ color: 'var(--color-gold)' }}>
                       {event._count.registrations}
                       <span className="font-normal text-[12px]" style={{ color: 'rgba(242,239,232,0.3)' }}>
                         /{event.totalSeats}
@@ -158,7 +161,7 @@ export default async function AdminDashboard() {
                         className="text-[9px] tracking-[0.18em] uppercase px-2 py-0.5"
                         style={{
                           background: 'rgba(200,168,75,0.1)',
-                          color: '#C8A84B',
+                          color: 'var(--color-gold)',
                           border: '1px solid rgba(200,168,75,0.2)',
                         }}
                       >
@@ -198,7 +201,7 @@ export default async function AdminDashboard() {
                     <Link
                       href={`/admin/events/${event.id}/registrations`}
                       className="text-[11px] tracking-[0.1em] uppercase"
-                      style={{ color: '#C8A84B' }}
+                      style={{ color: 'var(--color-gold)' }}
                     >
                       Registrations
                     </Link>
@@ -213,7 +216,7 @@ export default async function AdminDashboard() {
         {/* Legend */}
         <div className="mt-8 flex items-center gap-6">
           {[
-            { color: '#C8A84B', label: 'Featured' },
+            { color: 'var(--color-gold)', label: 'Featured' },
             { color: 'rgba(80,200,120,0.8)', label: 'Published' },
             { color: 'rgba(255,255,255,0.2)', label: 'Draft' },
           ].map(({ color, label }) => (
@@ -226,28 +229,47 @@ export default async function AdminDashboard() {
           ))}
         </div>
 
-        {/* Homepage content */}
+        {/* CMS sections */}
         <div className="mt-12">
-          <h2 className="font-display font-bold text-[20px] mb-4" style={{ color: '#F2EFE8' }}>
+          <h2 className="font-display font-bold text-[20px] mb-4" style={{ color: 'var(--color-text)' }}>
             Content
           </h2>
-          <Link
-            href="/admin/homepage"
-            className="border p-6 flex items-center justify-between group"
-            style={{ borderColor: 'rgba(255,255,255,0.08)', background: '#0F0F1A' }}
-          >
-            <div>
-              <p className="font-display font-bold text-[15px]" style={{ color: '#F2EFE8' }}>
-                Homepage Copy
-              </p>
-              <p className="text-[12px] mt-1" style={{ color: 'rgba(242,239,232,0.4)' }}>
-                Edit headlines, belief cards, and all body text on the homepage.
-              </p>
-            </div>
-            <span className="text-[11px] tracking-[0.12em] uppercase" style={{ color: '#C8A84B' }}>
-              Edit →
-            </span>
-          </Link>
+          <div className="flex flex-col gap-3">
+            <Link
+              href="/admin/homepage"
+              className="border p-6 flex items-center justify-between group"
+              style={{ borderColor: 'rgba(255,255,255,0.08)', background: '#0F0F1A' }}
+            >
+              <div>
+                <p className="font-display font-bold text-[15px]" style={{ color: 'var(--color-text)' }}>
+                  Homepage Copy
+                </p>
+                <p className="text-[12px] mt-1" style={{ color: 'rgba(242,239,232,0.4)' }}>
+                  Edit headlines, belief cards, and all body text on the homepage.
+                </p>
+              </div>
+              <span className="text-[11px] tracking-[0.12em] uppercase" style={{ color: 'var(--color-gold)' }}>
+                Edit →
+              </span>
+            </Link>
+            <Link
+              href="/admin/colors"
+              className="border p-6 flex items-center justify-between group"
+              style={{ borderColor: 'rgba(255,255,255,0.08)', background: '#0F0F1A' }}
+            >
+              <div>
+                <p className="font-display font-bold text-[15px]" style={{ color: 'var(--color-text)' }}>
+                  Brand Colors
+                </p>
+                <p className="text-[12px] mt-1" style={{ color: 'rgba(242,239,232,0.4)' }}>
+                  Edit the site-wide color palette — background, accent, text, and cards.
+                </p>
+              </div>
+              <span className="text-[11px] tracking-[0.12em] uppercase" style={{ color: 'var(--color-gold)' }}>
+                Edit →
+              </span>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

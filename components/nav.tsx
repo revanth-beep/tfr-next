@@ -66,7 +66,7 @@ export function Nav({ upcomingEvent: _ }: NavProps) {
                 href={href}
                 className="text-[11px] font-medium tracking-[0.12em] uppercase transition-colors duration-200"
                 style={{ color: 'rgba(242,239,232,0.55)' }}
-                onMouseEnter={e => (e.currentTarget.style.color = '#F2EFE8')}
+                onMouseEnter={e => (e.currentTarget.style.color = 'var(--color-text)')}
                 onMouseLeave={e => (e.currentTarget.style.color = 'rgba(242,239,232,0.55)')}
               >
                 {label}
@@ -104,7 +104,7 @@ export function Nav({ upcomingEvent: _ }: NavProps) {
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 transition-all duration-200"
                 style={{
-                  color: '#F2EFE8',
+                  color: 'var(--color-text)',
                   fontSize: '11px',
                   fontWeight: 500,
                   letterSpacing: '0.12em',
@@ -134,8 +134,8 @@ export function Nav({ upcomingEvent: _ }: NavProps) {
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
-            <span className={`block w-5 h-px transition-all duration-300 origin-center ${menuOpen ? 'rotate-45 translate-y-[3px]' : ''}`} style={{ background: '#F2EFE8' }} />
-            <span className={`block w-5 h-px transition-all duration-300 origin-center ${menuOpen ? '-rotate-45 -translate-y-[3px]' : ''}`} style={{ background: '#F2EFE8' }} />
+            <span className={`block w-5 h-px transition-all duration-300 origin-center ${menuOpen ? 'rotate-45 translate-y-[3px]' : ''}`} style={{ background: 'var(--color-text)' }} />
+            <span className={`block w-5 h-px transition-all duration-300 origin-center ${menuOpen ? '-rotate-45 -translate-y-[3px]' : ''}`} style={{ background: 'var(--color-text)' }} />
           </button>
         </div>
       </div>
@@ -167,7 +167,7 @@ export function Nav({ upcomingEvent: _ }: NavProps) {
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-[11px] tracking-[0.12em] uppercase"
-              style={{ color: '#F2EFE8' }}
+              style={{ color: 'var(--color-text)' }}
               onClick={() => setMenuOpen(false)}
             >
               <InstagramIcon />

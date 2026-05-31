@@ -53,7 +53,7 @@ export function RegistrationForm({
       >
         <p
           className="font-display font-bold text-[18px] mb-2"
-          style={{ color: '#F2EFE8' }}
+          style={{ color: 'var(--color-text)' }}
         >
           This session is full.
         </p>
@@ -78,14 +78,14 @@ export function RegistrationForm({
             className="w-12 h-12 flex items-center justify-center"
             style={{ background: 'rgba(200,168,75,0.12)', border: '1px solid rgba(200,168,75,0.3)' }}
           >
-            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#C8A84B" strokeWidth="2">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="var(--color-gold)" strokeWidth="2">
               <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 12.75l6 6 9-13.5" />
             </svg>
           </div>
         </div>
         <p
           className="font-display font-bold text-[20px] mb-2"
-          style={{ color: '#F2EFE8' }}
+          style={{ color: 'var(--color-text)' }}
         >
           Your seat is reserved.
         </p>

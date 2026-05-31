@@ -24,7 +24,7 @@ export default async function EventRegistrationsPage({ params }: Props) {
   const regs = event.registrations
 
   return (
-    <div className="min-h-screen" style={{ background: '#09162A' }}>
+    <div className="min-h-screen" style={{ background: 'var(--color-bg)' }}>
       {/* Header */}
       <div
         className="border-b px-12 py-5 flex items-center gap-4"
@@ -49,7 +49,7 @@ export default async function EventRegistrationsPage({ params }: Props) {
         {/* Page header */}
         <div className="flex items-center justify-between mb-10">
           <div>
-            <h1 className="font-display font-bold text-[28px] mb-1" style={{ color: '#F2EFE8' }}>
+            <h1 className="font-display font-bold text-[28px] mb-1" style={{ color: 'var(--color-text)' }}>
               Registrations
             </h1>
             <p className="text-[13px]" style={{ color: 'rgba(242,239,232,0.4)' }}>
@@ -57,7 +57,7 @@ export default async function EventRegistrationsPage({ params }: Props) {
             </p>
           </div>
           <div className="text-right">
-            <p className="font-display font-bold text-[28px]" style={{ color: '#C8A84B' }}>
+            <p className="font-display font-bold text-[28px]" style={{ color: 'var(--color-gold)' }}>
               {regs.length}
               <span className="font-normal text-[16px] ml-1" style={{ color: 'rgba(242,239,232,0.3)' }}>
                 / {event.totalSeats}
@@ -89,7 +89,7 @@ export default async function EventRegistrationsPage({ params }: Props) {
                   ].map(h => (
                     <th key={h}
                       className="pb-3 pr-6 text-[9px] tracking-[0.22em] uppercase whitespace-nowrap"
-                      style={{ color: '#C8A84B', fontWeight: 600 }}
+                      style={{ color: 'var(--color-gold)', fontWeight: 600 }}
                     >
                       {h}
                     </th>
@@ -105,7 +105,7 @@ export default async function EventRegistrationsPage({ params }: Props) {
                     <td className="py-4 pr-6 text-[12px]" style={{ color: 'rgba(242,239,232,0.3)' }}>
                       {idx + 1}
                     </td>
-                    <td className="py-4 pr-6 text-[13px] whitespace-nowrap" style={{ color: '#F2EFE8' }}>
+                    <td className="py-4 pr-6 text-[13px] whitespace-nowrap" style={{ color: 'var(--color-text)' }}>
                       {reg.user.name ?? '—'}
                     </td>
                     <td className="py-4 pr-6 text-[12px]" style={{ color: 'rgba(242,239,232,0.6)' }}>
@@ -133,7 +133,7 @@ export default async function EventRegistrationsPage({ params }: Props) {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="underline underline-offset-2"
-                          style={{ color: '#C8A84B' }}
+                          style={{ color: 'var(--color-gold)' }}
                         >
                           View ↗
                         </a>

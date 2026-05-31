@@ -35,13 +35,13 @@ export default async function HomePage() {
   return (
     <>
       {/* ═══ HERO ══════════════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden" style={{ background: '#09162A' }}>
+      <section className="relative overflow-hidden" style={{ background: 'var(--color-bg)' }}>
         <div className="container relative z-10 pt-12 pb-20 md:pt-20 md:pb-20 xl:pt-24 xl:pb-24">
           <HeroReveal>
-            <h1 className="heading-display mb-7 md:mb-9" style={{ fontSize: 'clamp(44px,8vw,108px)', color: '#F2EFE8' }}>
+            <h1 className="heading-display mb-7 md:mb-9" style={{ fontSize: 'clamp(44px,8vw,108px)', color: 'var(--color-text)' }}>
               <span className="block">{content.heroLine1}</span>
               <span className="block">{content.heroLine2}</span>
-              <span className="block" style={{ color: '#C8A84B' }}>{content.heroLine3}</span>
+              <span className="block" style={{ color: 'var(--color-gold)' }}>{content.heroLine3}</span>
             </h1>
 
             <p className="font-serif italic mb-10 md:mb-12" style={{
@@ -68,7 +68,7 @@ export default async function HomePage() {
       </section>
 
       {/* ═══ BELIEFS STRIP ══════════════════════════════════════════════════════ */}
-      <div style={{ background: '#09162A', borderTop: '1px solid rgba(200,168,75,0.12)' }}>
+      <div style={{ background: 'var(--color-bg)', borderTop: '1px solid rgba(200,168,75,0.12)' }}>
         <div className="container">
           <div className="grid grid-cols-2 md:grid-cols-4 border-l"
             style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
@@ -84,19 +84,19 @@ export default async function HomePage() {
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                   style={{ background: 'rgba(200,168,75,0.03)' }} />
                 <div className="select-none mb-5"
-                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '13px', color: '#C8A84B', letterSpacing: '2px', fontWeight: 400 }}>
+                  style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '13px', color: 'var(--color-gold)', letterSpacing: '2px', fontWeight: 400 }}>
                   {n}
                 </div>
                 <p className="relative" style={{
                   fontFamily: "'Cormorant Garamond', serif",
                   fontSize: 'clamp(16px,1.6vw,22px)', fontWeight: 300,
                   fontStyle: 'italic',
-                  color: '#F2EFE8', lineHeight: 1.3,
+                  color: 'var(--color-text)', lineHeight: 1.3,
                 }}>
                   {text}
                 </p>
                 <div className="absolute bottom-0 left-0 h-[2px] w-0 group-hover:w-full transition-all duration-500"
-                  style={{ background: '#C8A84B' }} />
+                  style={{ background: 'var(--color-gold)' }} />
               </Reveal>
             ))}
           </div>
@@ -104,7 +104,7 @@ export default async function HomePage() {
       </div>
 
       {/* ═══ FEATURED EVENT ════════════════════════════════════════════════════ */}
-      <section id="events" className="section-pad" style={{ background: '#09162A', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+      <section id="events" className="section-pad" style={{ background: 'var(--color-bg)', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
         <div className="container">
           <p className="kicker mb-10">Upcoming Session</p>
 
@@ -115,9 +115,9 @@ export default async function HomePage() {
 
                   {/* Date panel */}
                   <div className="shrink-0 border-b md:border-b-0 md:border-r"
-                    style={{ background: '#C8A84B', borderColor: 'rgba(9,22,42,0.15)' }}>
+                    style={{ background: 'var(--color-gold)', borderColor: 'rgba(9,22,42,0.15)' }}>
                     <div className="flex items-center gap-5 px-8 py-5 md:hidden">
-                      <span className="font-display font-bold" style={{ fontSize: '52px', lineHeight: 1, color: '#09162A' }}>
+                      <span className="font-display font-bold" style={{ fontSize: '52px', lineHeight: 1, color: 'var(--color-bg)' }}>
                         {eventDay}
                       </span>
                       <div>
@@ -128,30 +128,30 @@ export default async function HomePage() {
                     <div className="hidden md:flex flex-col items-center justify-center text-center px-10"
                       style={{ minWidth: 184, minHeight: 260 }}>
                       <p className="text-[12px] font-bold tracking-[0.26em] uppercase mb-3" style={{ color: 'rgba(9,22,42,0.75)' }}>{eventMonth}</p>
-                      <p className="font-display font-bold" style={{ fontSize: '80px', lineHeight: 0.88, color: '#09162A' }}>{eventDay}</p>
+                      <p className="font-display font-bold" style={{ fontSize: '80px', lineHeight: 0.88, color: 'var(--color-bg)' }}>{eventDay}</p>
                       <p className="text-[12px] tracking-[0.16em] mt-3" style={{ color: 'rgba(9,22,42,0.6)' }}>{eventYear}</p>
                     </div>
                   </div>
 
                   {/* Content panel */}
-                  <div className="flex flex-1 flex-col p-6 md:p-8 xl:p-10" style={{ background: '#0F1E37' }}>
+                  <div className="flex flex-1 flex-col p-6 md:p-8 xl:p-10" style={{ background: 'var(--color-card)' }}>
                     <div className="flex flex-wrap items-center justify-between gap-3 mb-7">
                       <div className="flex items-center gap-2.5">
                         <span className="relative flex shrink-0">
-                          <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full opacity-40" style={{ background: '#C8A84B' }} />
-                          <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: '#C8A84B' }} />
+                          <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full opacity-40" style={{ background: 'var(--color-gold)' }} />
+                          <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: 'var(--color-gold)' }} />
                         </span>
-                        <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#C8A84B' }}>
+                        <span style={{ fontSize: '9px', fontWeight: 700, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'var(--color-gold)' }}>
                           Registrations Open
                         </span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span style={{ fontSize: '9px', letterSpacing: '0.18em', textTransform: 'uppercase', padding: '4px 10px', border: '1px solid rgba(200,168,75,0.35)', color: '#C8A84B' }}>Free</span>
+                        <span style={{ fontSize: '9px', letterSpacing: '0.18em', textTransform: 'uppercase', padding: '4px 10px', border: '1px solid rgba(200,168,75,0.35)', color: 'var(--color-gold)' }}>Free</span>
                         <span style={{ fontSize: '9px', letterSpacing: '0.18em', textTransform: 'uppercase', padding: '4px 10px', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(242,239,232,0.38)' }}>Live</span>
                       </div>
                     </div>
 
-                    <h2 className="heading-section mb-3" style={{ fontSize: 'clamp(22px,3.8vw,48px)', color: '#F2EFE8' }}>
+                    <h2 className="heading-section mb-3" style={{ fontSize: 'clamp(22px,3.8vw,48px)', color: 'var(--color-text)' }}>
                       {event.title}
                     </h2>
                     {event.subtitle && (
@@ -170,8 +170,8 @@ export default async function HomePage() {
                         <span>{event.duration} min</span>
                         {seatsLeft > 0 && seatsLeft <= 10 ? (
                           <>
-                            <span style={{ width: 3, height: 3, background: '#C8A84B', opacity: 0.7, borderRadius: '50%', display: 'inline-block' }} />
-                            <span style={{ color: '#C8A84B' }}>Only {seatsLeft} seats left</span>
+                            <span style={{ width: 3, height: 3, background: 'var(--color-gold)', opacity: 0.7, borderRadius: '50%', display: 'inline-block' }} />
+                            <span style={{ color: 'var(--color-gold)' }}>Only {seatsLeft} seats left</span>
                           </>
                         ) : seatsLeft > 10 ? (
                           <>
@@ -204,14 +204,14 @@ export default async function HomePage() {
       </section>
 
       {/* ═══ WHO IT IS FOR ═════════════════════════════════════════════════════ */}
-      <section className="section-pad" style={{ background: '#0F1E37', borderTop: '1px solid rgba(200,168,75,0.1)', borderBottom: '1px solid rgba(200,168,75,0.07)' }}>
+      <section className="section-pad" style={{ background: 'var(--color-card)', borderTop: '1px solid rgba(200,168,75,0.1)', borderBottom: '1px solid rgba(200,168,75,0.07)' }}>
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 xl:gap-20 2xl:gap-24 items-start">
             <Reveal>
               <p className="kicker mb-8">Who it is for</p>
-              <h2 className="heading-section" style={{ fontSize: 'clamp(26px,4.5vw,52px)', color: '#F2EFE8', lineHeight: 1.12 }}>
+              <h2 className="heading-section" style={{ fontSize: 'clamp(26px,4.5vw,52px)', color: 'var(--color-text)', lineHeight: 1.12 }}>
                 {content.whoHeadline}{' '}
-                <em className="italic" style={{ color: '#C8A84B' }}>
+                <em className="italic" style={{ color: 'var(--color-gold)' }}>
                   {content.whoHeadlineHighlight}
                 </em>
               </h2>
@@ -227,7 +227,7 @@ export default async function HomePage() {
 
       {/* ═══ INSIDER SERIES ════════════════════════════════════════════════════ */}
       <section id="insider" className="relative section-pad overflow-hidden"
-        style={{ background: '#0B1628', borderTop: '1px solid rgba(200,168,75,0.15)', borderBottom: '1px solid rgba(200,168,75,0.1)' }}>
+        style={{ background: 'var(--color-bg)', borderTop: '1px solid rgba(200,168,75,0.15)', borderBottom: '1px solid rgba(200,168,75,0.1)' }}>
 
         <div className="absolute inset-0 pointer-events-none" style={{
           background: 'radial-gradient(ellipse 70% 55% at 50% -5%, rgba(200,168,75,0.09) 0%, transparent 70%)',
@@ -238,10 +238,10 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 xl:gap-16 2xl:gap-20 mb-12 md:mb-14 xl:mb-16 items-end">
             <Reveal>
               <p className="kicker mb-8">The Insider Series</p>
-              <h2 className="heading-section" style={{ fontSize: 'clamp(28px,5vw,60px)', color: '#F2EFE8' }}>
+              <h2 className="heading-section" style={{ fontSize: 'clamp(28px,5vw,60px)', color: 'var(--color-text)' }}>
                 <span className="block">{content.insiderLine1}</span>
                 <span className="block">{content.insiderLine2}</span>
-                <em className="italic block" style={{ color: '#C8A84B' }}>
+                <em className="italic block" style={{ color: 'var(--color-gold)' }}>
                   {content.insiderLine3}
                 </em>
               </h2>
@@ -279,7 +279,7 @@ export default async function HomePage() {
                 <span className="block mb-4" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '48px', fontWeight: 300, color: 'rgba(200,168,75,0.12)', lineHeight: 1 }}>
                   {n}
                 </span>
-                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 'clamp(18px,1.6vw,22px)', fontWeight: 400, color: '#F2EFE8', lineHeight: 1.2 }}>
+                <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: 'clamp(18px,1.6vw,22px)', fontWeight: 400, color: 'var(--color-text)', lineHeight: 1.2 }}>
                   {title}
                 </p>
                 <p style={{ fontSize: '14px', color: 'rgba(242,239,232,0.82)', lineHeight: 1.78 }}>

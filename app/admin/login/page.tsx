@@ -24,7 +24,7 @@ export default function AdminLoginPage({
   return (
     <div
       className="min-h-screen flex items-center justify-center"
-      style={{ background: '#09162A' }}
+      style={{ background: 'var(--color-bg)' }}
     >
       <div
         className="w-full max-w-sm p-10 border"
@@ -42,7 +42,7 @@ export default function AdminLoginPage({
           />
           <h1
             className="font-display font-bold text-[22px]"
-            style={{ color: '#F2EFE8' }}
+            style={{ color: 'var(--color-text)' }}
           >
             Admin
           </h1>

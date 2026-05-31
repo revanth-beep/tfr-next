@@ -135,6 +135,13 @@ model HomepageContent {
   eventLabelExpect      String @default("What to expect")
   eventLabelPractitioner String @default("The Practitioner")
   eventLabelIdentity    String @default("Identity disclosed to confirmed attendees")
+
+  // Brand colors
+  colorBackground String @default("#09162A")
+  colorGold       String @default("#C8A84B")
+  colorText       String @default("#F2EFE8")
+  colorSteelBlue  String @default("#7CB9D9")
+  colorCard       String @default("#0F1E37")
 }
 
 model Registration {

@@ -21,7 +21,7 @@ const WORDS = [
 export function Ticker() {
   const doubled = [...WORDS, ...WORDS]
   return (
-    <div className="overflow-hidden py-[11px]" style={{ background: '#C8A84B' }}>
+    <div className="overflow-hidden py-[11px]" style={{ background: 'var(--color-gold)' }}>
       <div className="flex whitespace-nowrap animate-marq">
         {doubled.map((word, i) => (
           <span key={i} className="flex items-center">
@@ -33,7 +33,7 @@ export function Ticker() {
                 fontWeight: 500,
                 letterSpacing: '0.3em',
                 textTransform: 'uppercase',
-                color: '#09162A',
+                color: 'var(--color-bg)',
               }}
             >
               {word}

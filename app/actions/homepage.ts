@@ -58,6 +58,12 @@ export async function updateHomepageContent(
     eventLabelExpect:       str(formData, 'eventLabelExpect'),
     eventLabelPractitioner: str(formData, 'eventLabelPractitioner'),
     eventLabelIdentity:     str(formData, 'eventLabelIdentity'),
+
+    colorBackground: str(formData, 'colorBackground'),
+    colorGold:       str(formData, 'colorGold'),
+    colorText:       str(formData, 'colorText'),
+    colorSteelBlue:  str(formData, 'colorSteelBlue'),
+    colorCard:       str(formData, 'colorCard'),
   }
 
   await prisma.homepageContent.upsert({

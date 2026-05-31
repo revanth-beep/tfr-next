@@ -47,7 +47,7 @@ export function EventFlash({ event }: Props) {
       aria-label="Upcoming session announcement"
       style={{
         height: `${BANNER_H}px`,
-        background: '#C8A84B',
+        background: 'var(--color-gold)',
         display: 'flex',
         alignItems: 'center',
         overflow: 'hidden',
@@ -65,9 +65,9 @@ export function EventFlash({ event }: Props) {
         <div className="flex items-center gap-2 shrink-0">
           <span className="relative flex shrink-0">
             <span className="animate-ping absolute inline-flex h-1.5 w-1.5 rounded-full opacity-50"
-              style={{ background: '#09162A' }} />
+              style={{ background: 'var(--color-bg)' }} />
             <span className="relative inline-flex rounded-full h-1.5 w-1.5"
-              style={{ background: '#09162A' }} />
+              style={{ background: 'var(--color-bg)' }} />
           </span>
           <span className="hidden sm:block text-[9px] font-bold tracking-[0.26em] uppercase"
             style={{ color: 'rgba(9,22,42,0.5)' }}>
@@ -78,7 +78,7 @@ export function EventFlash({ event }: Props) {
         {/* Event info */}
         <div className="flex-1 flex items-center justify-center gap-2.5 min-w-0">
           <p className="font-display font-bold truncate"
-            style={{ fontSize: 'clamp(11px,2vw,13px)', color: '#09162A', letterSpacing: '-0.01em' }}>
+            style={{ fontSize: 'clamp(11px,2vw,13px)', color: 'var(--color-bg)', letterSpacing: '-0.01em' }}>
             {event.title}
           </p>
           <span className="hidden sm:block shrink-0"
@@ -93,7 +93,7 @@ export function EventFlash({ event }: Props) {
           <Link
             href={`/events/${event.slug}`}
             className="hidden sm:inline-flex items-center gap-1.5 text-[10px] font-bold tracking-[0.18em] uppercase px-3 py-1.5 transition-opacity hover:opacity-80"
-            style={{ background: '#09162A', color: '#C8A84B' }}
+            style={{ background: 'var(--color-bg)', color: 'var(--color-gold)' }}
           >
             Reserve Seat →
           </Link>

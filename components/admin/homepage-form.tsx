@@ -39,7 +39,7 @@ function Field({
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="border p-6 flex flex-col gap-5" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
-      <h3 className="text-[11px] tracking-[0.2em] uppercase" style={{ color: '#C8A84B' }}>{title}</h3>
+      <h3 className="text-[11px] tracking-[0.2em] uppercase" style={{ color: 'var(--color-gold)' }}>{title}</h3>
       {children}
     </div>
   )

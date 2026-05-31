@@ -24,13 +24,13 @@ export default async function EventsPage() {
   const past     = allEvents.filter(e => new Date(e.date) < now).reverse()
 
   return (
-    <div style={{ background: '#09162A', minHeight: '100vh' }}>
+    <div style={{ background: 'var(--color-bg)', minHeight: '100vh' }}>
 
       {/* ── Page header ───────────────────────────────────────── */}
       <section
         className="relative overflow-hidden"
         style={{
-          background: 'linear-gradient(180deg, #0D1535 0%, #0A1428 100%)',
+          background: 'var(--color-bg)',
           borderBottom: '1px solid rgba(255,255,255,0.07)',
         }}
       >
@@ -46,7 +46,7 @@ export default async function EventsPage() {
 
         <div className="container relative z-10 pt-10 pb-10 md:pt-14 md:pb-14 xl:pt-16 xl:pb-16">
           <p className="kicker mb-5">{content.eventsPageKicker}</p>
-          <h1 className="heading-display mb-4" style={{ fontSize: 'clamp(36px,5vw,68px)', color: '#F2EFE8' }}>
+          <h1 className="heading-display mb-4" style={{ fontSize: 'clamp(36px,5vw,68px)', color: 'var(--color-text)' }}>
             {content.eventsPageTitle}
           </h1>
           <p style={{ fontSize: 'clamp(14px,1.3vw,16px)', color: 'rgba(242,239,232,0.82)', lineHeight: 1.7, maxWidth: '440px' }}>
@@ -84,7 +84,7 @@ export default async function EventsPage() {
                       border: isFeatured
                         ? '1px solid rgba(200,168,75,0.45)'
                         : '1px solid rgba(255,255,255,0.12)',
-                      background: isFeatured ? '#0F1E2E' : '#0D1B2E',
+                      background: isFeatured ? 'var(--color-card)' : 'var(--color-card)',
                     }}
                   >
                     <div className="p-5 md:p-6 xl:p-7 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-5 md:gap-6 items-center">
@@ -93,10 +93,10 @@ export default async function EventsPage() {
                         <div className="flex flex-wrap items-center gap-2">
                           {isFeatured && (
                             <span className="inline-flex items-center gap-1.5 text-[9px] tracking-[0.22em] uppercase px-2.5 py-1"
-                              style={{ background: 'rgba(200,168,75,0.18)', color: '#C8A84B', border: '1px solid rgba(200,168,75,0.4)' }}>
+                              style={{ background: 'rgba(200,168,75,0.18)', color: 'var(--color-gold)', border: '1px solid rgba(200,168,75,0.4)' }}>
                               <span className="relative flex">
-                                <span className="animate-ping absolute inline-flex h-1.5 w-1.5 rounded-full opacity-60" style={{ background: '#C8A84B' }} />
-                                <span className="relative inline-flex rounded-full h-1.5 w-1.5" style={{ background: '#C8A84B' }} />
+                                <span className="animate-ping absolute inline-flex h-1.5 w-1.5 rounded-full opacity-60" style={{ background: 'var(--color-gold)' }} />
+                                <span className="relative inline-flex rounded-full h-1.5 w-1.5" style={{ background: 'var(--color-gold)' }} />
                               </span>
                               Next up
                             </span>
@@ -111,7 +111,7 @@ export default async function EventsPage() {
 
                         <h2
                           className="font-display"
-                          style={{ fontSize: 'clamp(19px,2.2vw,28px)', color: '#F2EFE8', letterSpacing: '-0.01em' }}
+                          style={{ fontSize: 'clamp(19px,2.2vw,28px)', color: 'var(--color-text)', letterSpacing: '-0.01em' }}
                         >
                           {event.title}
                         </h2>
@@ -135,7 +135,7 @@ export default async function EventsPage() {
                           <div className="flex-1 max-w-[160px] h-px overflow-hidden" style={{ background: 'rgba(255,255,255,0.1)' }}>
                             <div className="h-full" style={{
                               width: `${pct}%`,
-                              background: pct > 80 ? '#E05A5A' : '#C8A84B',
+                              background: pct > 80 ? '#E05A5A' : 'var(--color-gold)',
                             }} />
                           </div>
                           <span className="text-[11px]" style={{ color: seats === 0 ? '#E05A5A' : 'rgba(242,239,232,0.55)' }}>
@@ -177,7 +177,7 @@ export default async function EventsPage() {
             <div className="flex items-end justify-between mb-5 md:mb-7 pb-4"
               style={{ borderBottom: '1px solid rgba(124,185,217,0.15)' }}>
               <h2 className="font-display"
-                style={{ fontSize: 'clamp(20px,2.5vw,30px)', color: '#D6EAFA', letterSpacing: '-0.01em' }}>
+                style={{ fontSize: 'clamp(20px,2.5vw,30px)', color: 'var(--color-steel)', letterSpacing: '-0.01em' }}>
                 Past Sessions
               </h2>
               <span className="text-[11px] tracking-[0.16em] uppercase pb-0.5"
@@ -194,7 +194,7 @@ export default async function EventsPage() {
                   delay={idx * 0.08}
                   style={{
                     border: '1px solid rgba(242,239,232,0.1)',
-                    background: '#0E1F38',
+                    background: 'var(--color-card)',
                   }}
                 >
                   <div className="p-5 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 items-center">
@@ -202,7 +202,7 @@ export default async function EventsPage() {
                     <div className="flex flex-col gap-2">
                       <div className="flex flex-wrap items-center gap-2">
                         <span className="text-[9px] tracking-[0.2em] uppercase px-2 py-0.5"
-                          style={{ color: '#7CB9D9', background: 'rgba(124,185,217,0.12)', border: '1px solid rgba(124,185,217,0.35)' }}>
+                          style={{ color: 'var(--color-steel)', background: 'rgba(124,185,217,0.12)', border: '1px solid rgba(124,185,217,0.35)' }}>
                           Completed
                         </span>
                         {event.topic && (
@@ -215,7 +215,7 @@ export default async function EventsPage() {
 
                       <h2
                         className="font-display"
-                        style={{ fontSize: 'clamp(16px,2vw,22px)', color: '#F2EFE8', letterSpacing: '-0.01em' }}
+                        style={{ fontSize: 'clamp(16px,2vw,22px)', color: 'var(--color-text)', letterSpacing: '-0.01em' }}
                       >
                         {event.title}
                       </h2>
@@ -251,7 +251,7 @@ export default async function EventsPage() {
                       <Link
                         href={`/events/${event.slug}`}
                         className="text-[10px] tracking-[0.16em] uppercase px-3 py-2 inline-flex items-center justify-center gap-2"
-                        style={{ color: '#F2EFE8', border: '1px solid rgba(242,239,232,0.25)', background: 'rgba(255,255,255,0.05)' }}
+                        style={{ color: 'var(--color-text)', border: '1px solid rgba(242,239,232,0.25)', background: 'rgba(255,255,255,0.05)' }}
                       >
                         View Session Details →
                       </Link>

@@ -5,7 +5,7 @@ export function Footer() {
     <footer
       className="border-t"
       style={{
-        background: '#09162A',
+        background: 'var(--color-bg)',
         borderColor: 'rgba(255,255,255,0.06)',
       }}
     >

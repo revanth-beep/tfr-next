@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { getHomepageContent } from '@/lib/homepage'
 
 export const metadata: Metadata = {
   title: 'The Finance Room',
@@ -11,9 +12,16 @@ export const metadata: Metadata = {
   },
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const { colorBackground, colorGold, colorText, colorSteelBlue, colorCard } = await getHomepageContent()
+
+  const colorVars = `html{--color-bg:${colorBackground};--color-gold:${colorGold};--color-text:${colorText};--color-steel:${colorSteelBlue};--color-card:${colorCard};}`
+
   return (
     <html lang="en">
+      <head>
+        <style dangerouslySetInnerHTML={{ __html: colorVars }} />
+      </head>
       <body>{children}</body>
     </html>
   )

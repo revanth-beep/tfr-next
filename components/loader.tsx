@@ -35,7 +35,7 @@ export function Loader() {
       {/* Top panel */}
       <div style={{
         position: 'absolute', left: 0, right: 0, top: 0, height: '51%',
-        background: '#09162A',
+        background: 'var(--color-bg)',
         transform: opening ? 'translateY(-100%)' : 'translateY(0)',
         transition: opening ? 'transform 1.1s cubic-bezier(0.16,1,0.3,1)' : 'none',
         willChange: 'transform',
@@ -44,7 +44,7 @@ export function Loader() {
       {/* Bottom panel */}
       <div style={{
         position: 'absolute', left: 0, right: 0, bottom: 0, height: '51%',
-        background: '#09162A',
+        background: 'var(--color-bg)',
         transform: opening ? 'translateY(100%)' : 'translateY(0)',
         transition: opening ? 'transform 1.1s cubic-bezier(0.16,1,0.3,1)' : 'none',
         willChange: 'transform',
@@ -68,7 +68,7 @@ export function Loader() {
       <div style={{
         position: 'absolute', top: '50%', left: '52px',
         width: 5, height: 5, borderRadius: '50%',
-        background: '#C8A84B',
+        background: 'var(--color-gold)',
         transform: 'translateY(-50%)',
         opacity: opening ? 0 : undefined,
         transition: opening ? 'opacity 0.2s ease-in' : 'none',
@@ -79,7 +79,7 @@ export function Loader() {
       <div style={{
         position: 'absolute', top: '50%', right: '52px',
         width: 5, height: 5, borderRadius: '50%',
-        background: '#C8A84B',
+        background: 'var(--color-gold)',
         transform: 'translateY(-50%)',
         opacity: opening ? 0 : undefined,
         transition: opening ? 'opacity 0.2s ease-in' : 'none',

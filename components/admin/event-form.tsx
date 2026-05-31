@@ -66,7 +66,7 @@ export function EventForm({ event }: EventFormProps) {
         className="border p-6 flex flex-col gap-5"
         style={{ borderColor: 'rgba(255,255,255,0.08)' }}
       >
-        <h3 className="text-[11px] tracking-[0.2em] uppercase" style={{ color: '#C8A84B' }}>
+        <h3 className="text-[11px] tracking-[0.2em] uppercase" style={{ color: 'var(--color-gold)' }}>
           Basic Info
         </h3>
 
@@ -141,7 +141,7 @@ export function EventForm({ event }: EventFormProps) {
         className="border p-6 flex flex-col gap-5"
         style={{ borderColor: 'rgba(255,255,255,0.08)' }}
       >
-        <h3 className="text-[11px] tracking-[0.2em] uppercase" style={{ color: '#C8A84B' }}>
+        <h3 className="text-[11px] tracking-[0.2em] uppercase" style={{ color: 'var(--color-gold)' }}>
           Schedule & Format
         </h3>
 
@@ -206,7 +206,7 @@ export function EventForm({ event }: EventFormProps) {
         className="border p-6 flex flex-col gap-5"
         style={{ borderColor: 'rgba(255,255,255,0.08)' }}
       >
-        <h3 className="text-[11px] tracking-[0.2em] uppercase" style={{ color: '#C8A84B' }}>
+        <h3 className="text-[11px] tracking-[0.2em] uppercase" style={{ color: 'var(--color-gold)' }}>
           Practitioner
         </h3>
         <p className="text-[12px]" style={{ color: 'rgba(242,239,232,0.4)' }}>
@@ -281,7 +281,7 @@ export function EventForm({ event }: EventFormProps) {
         className="border p-6 flex flex-col gap-5"
         style={{ borderColor: 'rgba(255,255,255,0.08)' }}
       >
-        <h3 className="text-[11px] tracking-[0.2em] uppercase" style={{ color: '#C8A84B' }}>
+        <h3 className="text-[11px] tracking-[0.2em] uppercase" style={{ color: 'var(--color-gold)' }}>
           What to Expect
         </h3>
         <p className="text-[12px]" style={{ color: 'rgba(242,239,232,0.4)' }}>
@@ -303,7 +303,7 @@ export function EventForm({ event }: EventFormProps) {
         className="border p-6 flex flex-col gap-4"
         style={{ borderColor: 'rgba(255,255,255,0.08)' }}
       >
-        <h3 className="text-[11px] tracking-[0.2em] uppercase" style={{ color: '#C8A84B' }}>
+        <h3 className="text-[11px] tracking-[0.2em] uppercase" style={{ color: 'var(--color-gold)' }}>
           Post-session
         </h3>
         <p className="text-[12px]" style={{ color: 'rgba(242,239,232,0.4)' }}>
@@ -324,7 +324,7 @@ export function EventForm({ event }: EventFormProps) {
         className="border p-6 flex flex-col gap-4"
         style={{ borderColor: 'rgba(255,255,255,0.08)' }}
       >
-        <h3 className="text-[11px] tracking-[0.2em] uppercase" style={{ color: '#C8A84B' }}>
+        <h3 className="text-[11px] tracking-[0.2em] uppercase" style={{ color: 'var(--color-gold)' }}>
           Visibility
         </h3>
 
@@ -347,7 +347,7 @@ export function EventForm({ event }: EventFormProps) {
               style={{  }}
             />
             <div>
-              <p className="text-[14px]" style={{ color: '#F2EFE8' }}>{label}</p>
+              <p className="text-[14px]" style={{ color: 'var(--color-text)' }}>{label}</p>
               <p className="text-[12px]" style={{ color: 'rgba(242,239,232,0.4)' }}>{sub}</p>
             </div>
           </label>

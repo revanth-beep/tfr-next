@@ -7,20 +7,29 @@
 /* ─── Base ─────────────────────────────────────────────────────────────────── */
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 16px; scroll-behavior: smooth; --chrome-h: 76px; }
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  --chrome-h: 76px;
+  --color-bg: #09162A;
+  --color-gold: #C8A84B;
+  --color-text: #F2EFE8;
+  --color-steel: #7CB9D9;
+  --color-card: #0F1E37;
+}
 main { padding-top: var(--chrome-h); }
 
 body {
   font-family: 'DM Sans', sans-serif;
   font-weight: 300;
-  background: #09162A;
-  color: #F2EFE8;
+  background: var(--color-bg);
+  color: var(--color-text);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-::selection { background: #C8A84B; color: #09162A; }
+::selection { background: var(--color-gold); color: var(--color-bg); }
 
 /* ─── Grain overlay ────────────────────────────────────────────────────────── */
 
@@ -36,7 +45,7 @@ body::before {
 
 #pb {
   position: fixed; top: 0; left: 0; height: 2px;
-  background: #C8A84B; z-index: 600;
+  background: var(--color-gold); z-index: 600;
   transform-origin: left; transform: scaleX(0);
   transition: transform 0.1s linear;
 }
@@ -44,7 +53,7 @@ body::before {
 /* ─── Scrollbar ────────────────────────────────────────────────────────────── */
 
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #09162A; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
 ::-webkit-scrollbar-thumb { background: rgba(200,168,75,.3); border-radius: 2px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(200,168,75,.6); }
 
@@ -78,7 +87,7 @@ body::before {
   font-weight: 600;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: #C8A84B;
+  color: var(--color-gold);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -88,7 +97,7 @@ body::before {
   content: '';
   width: 24px;
   height: 1px;
-  background: #C8A84B;
+  background: var(--color-gold);
   flex-shrink: 0;
 }
 
@@ -123,19 +132,19 @@ body::before {
 .btn:hover::before { transform: translateX(0); }
 
 .btn-amber {
-  color: #09162A;
-  background: #C8A84B;
-  border-color: #C8A84B;
+  color: var(--color-bg);
+  background: var(--color-gold);
+  border-color: var(--color-gold);
 }
 .btn-amber::before { background: #D4BA6A; }
 
 .btn-ghost {
-  color: #C8A84B;
+  color: var(--color-gold);
   background: transparent;
   border-color: rgba(200,168,75,.4);
 }
-.btn-ghost::before { background: #C8A84B; }
-.btn-ghost:hover { color: #09162A; }
+.btn-ghost::before { background: var(--color-gold); }
+.btn-ghost:hover { color: var(--color-bg); }
 
 .btn-ghost-dark {
   color: rgba(242,239,232,0.7);
@@ -143,7 +152,7 @@ body::before {
   border-color: rgba(255,255,255,0.12);
 }
 .btn-ghost-dark::before { background: rgba(255,255,255,0.06); }
-.btn-ghost-dark:hover { color: #F2EFE8; letter-spacing: 0.22em; }
+.btn-ghost-dark:hover { color: var(--color-text); letter-spacing: 0.22em; }
 
 /* ─── Cards ─────────────────────────────────────────────────────────────────── */
 

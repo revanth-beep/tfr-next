@@ -32,6 +32,11 @@ export type HomepageContent = {
   eventLabelExpect: string
   eventLabelPractitioner: string
   eventLabelIdentity: string
+  colorBackground: string
+  colorGold: string
+  colorText: string
+  colorSteelBlue: string
+  colorCard: string
 }
 
 export const HOMEPAGE_DEFAULTS: HomepageContent = {
@@ -72,6 +77,11 @@ export const HOMEPAGE_DEFAULTS: HomepageContent = {
   eventLabelExpect: 'What to expect',
   eventLabelPractitioner: 'The Practitioner',
   eventLabelIdentity: 'Identity disclosed to confirmed attendees',
+  colorBackground: '#09162A',
+  colorGold: '#C8A84B',
+  colorText: '#F2EFE8',
+  colorSteelBlue: '#7CB9D9',
+  colorCard: '#0F1E37',
 }
 
 export async function getHomepageContent(): Promise<HomepageContent> {
