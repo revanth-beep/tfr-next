@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import { prisma } from '@/lib/db'
 import { formatDate } from '@/lib/utils'
 import Link from 'next/link'
+import { ExportButton } from '@/components/export-button'
 
 interface Props {
   params: { id: string }
@@ -56,16 +57,19 @@ export default async function EventRegistrationsPage({ params }: Props) {
               {event.title} · {formatDate(new Date(event.date))}
             </p>
           </div>
-          <div className="text-right">
-            <p className="font-display font-bold text-[28px]" style={{ color: 'var(--color-gold)' }}>
-              {regs.length}
-              <span className="font-normal text-[16px] ml-1" style={{ color: 'rgba(242,239,232,0.3)' }}>
-                / {event.totalSeats}
-              </span>
-            </p>
-            <p className="text-[11px] tracking-[0.14em] uppercase" style={{ color: 'rgba(242,239,232,0.35)' }}>
-              Registered
-            </p>
+          <div className="flex flex-col items-end gap-3">
+            <div className="text-right">
+              <p className="font-display font-bold text-[28px]" style={{ color: 'var(--color-gold)' }}>
+                {regs.length}
+                <span className="font-normal text-[16px] ml-1" style={{ color: 'rgba(242,239,232,0.3)' }}>
+                  / {event.totalSeats}
+                </span>
+              </p>
+              <p className="text-[11px] tracking-[0.14em] uppercase" style={{ color: 'rgba(242,239,232,0.35)' }}>
+                Registered
+              </p>
+            </div>
+            {regs.length > 0 && <ExportButton eventId={params.id} />}
           </div>
         </div>
 
