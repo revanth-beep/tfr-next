@@ -77,16 +77,65 @@ export function Nav({ upcomingEvent: _, instagramUrl = 'https://instagram.com/th
 
           {/* Right side */}
           <div className="hidden md:flex items-center gap-4">
-            {session ? (
+            {/* Always-visible Follow us */}
+            <a
+              href={instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 transition-all duration-200"
+              style={{
+                color: 'var(--color-text)',
+                fontSize: '11px',
+                fontWeight: 500,
+                letterSpacing: '0.12em',
+                textTransform: 'uppercase',
+                padding: '7px 14px',
+                border: '1px solid rgba(255,255,255,0.14)',
+                background: 'rgba(255,255,255,0.04)',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'
+                e.currentTarget.style.background = 'rgba(255,255,255,0.07)'
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.14)'
+                e.currentTarget.style.background = 'rgba(255,255,255,0.04)'
+              }}
+            >
+              <InstagramIcon />
+              <span>Follow us</span>
+            </a>
+
+            {/* Session state */}
+            {session && (
               <div className="flex items-center gap-3">
-                {session.user?.image && (
+                {session.user?.image ? (
                   <img
                     src={session.user.image}
                     alt={session.user.name ?? ''}
                     className="w-7 h-7 rounded-full"
                     style={{ border: '1px solid rgba(255,255,255,0.15)', opacity: 0.85 }}
+                    onError={e => {
+                      const el = e.currentTarget
+                      el.style.display = 'none'
+                      const fallback = el.nextElementSibling as HTMLElement | null
+                      if (fallback) fallback.style.display = 'flex'
+                    }}
                   />
-                )}
+                ) : null}
+                <div
+                  className="w-7 h-7 rounded-full items-center justify-center shrink-0"
+                  style={{
+                    display: session.user?.image ? 'none' : 'flex',
+                    background: 'rgba(200,168,75,0.2)',
+                    border: '1px solid rgba(200,168,75,0.35)',
+                    color: 'var(--color-gold)',
+                    fontSize: '11px',
+                    fontWeight: 600,
+                  }}
+                >
+                  {(session.user?.name ?? session.user?.email ?? 'U')[0].toUpperCase()}
+                </div>
                 <button
                   onClick={() => signOut()}
                   className="text-[11px] tracking-[0.14em] uppercase transition-colors"
@@ -97,35 +146,6 @@ export function Nav({ upcomingEvent: _, instagramUrl = 'https://instagram.com/th
                   Sign out
                 </button>
               </div>
-            ) : (
-              /* Instagram CTA — highlighted */
-              <a
-                href={instagramUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 transition-all duration-200"
-                style={{
-                  color: 'var(--color-text)',
-                  fontSize: '11px',
-                  fontWeight: 500,
-                  letterSpacing: '0.12em',
-                  textTransform: 'uppercase',
-                  padding: '7px 14px',
-                  border: '1px solid rgba(255,255,255,0.14)',
-                  background: 'rgba(255,255,255,0.04)',
-                }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.3)'
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.07)'
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.14)'
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.04)'
-                }}
-              >
-                <InstagramIcon />
-                <span>Follow us</span>
-              </a>
             )}
           </div>
 

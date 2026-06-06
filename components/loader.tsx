@@ -10,7 +10,19 @@ export function Loader() {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    // Already shown this session — skip the animation entirely
+    if (sessionStorage.getItem('tfr:loader-shown')) {
+      markHeroReady()
+      markLoaderDone()
+      window.dispatchEvent(new CustomEvent('tfr:hero-ready'))
+      setPhase('done')
+      setMounted(true)
+      return
+    }
+
+    sessionStorage.setItem('tfr:loader-shown', '1')
     setMounted(true)
+
     const t1 = setTimeout(() => {
       setPhase('opening')
       markHeroReady()

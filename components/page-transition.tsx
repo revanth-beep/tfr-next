@@ -9,7 +9,12 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   // Navigation: loaderDone is already true → reveal immediately
   // First load: heroReady starts false → wait for tfr:hero-ready (loader opens)
-  const [ready, setReady] = useState(loaderDone || heroReady)
+  const [ready, setReady] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return loaderDone || heroReady || !!sessionStorage.getItem('tfr:loader-shown')
+    }
+    return false
+  })
 
   useEffect(() => {
     if (loaderDone || heroReady) { setReady(true); return }
